@@ -55,7 +55,7 @@ class User extends Model implements Authenticatable {
 	public static function validate($all) {
 		$rules = self::$rulesForCreation;
 
-		if ( self::currenUserIsAdmin() ) {
+		if ( self::currentUserIsAdmin() ) {
 			$rules = self::$rulesForAdmin;
 		}
 
