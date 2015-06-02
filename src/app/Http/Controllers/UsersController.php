@@ -10,8 +10,6 @@ use App\User;
 class UsersController extends Controller {
 
 	public function __construct() {
-
-		//$this->middleware('authUser', ['only' => ['logout']]);
 		$this->middleware('csrf', ['only' => ['store', 'postLogin', 'update', 'destroy']]);
 	}
 
