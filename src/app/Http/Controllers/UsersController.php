@@ -30,6 +30,10 @@ class UsersController extends Controller {
 	 */
 	public function getLogin()
 	{
+		if ( Auth::check() ) {
+			return redirect()->route('articles.index');
+		}
+
 		return view('users.login');
 	}
 
