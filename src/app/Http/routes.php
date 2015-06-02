@@ -60,7 +60,9 @@ Route::get('users/logout', [
 //	Categories
 // ---------------------------------
 //
-Route::resource('categories', 'CategoriesController');
+Route::resource('categories', 'CategoriesController', ['except' => 'show']);
+
+Route::resource('dashboard', 'DashboardController');
 
 //Route::get('categories', [
 //	'as' => 'categories', 

@@ -31,8 +31,8 @@
 
 
 		        <ul class="nav navbar-nav navbar-right">
+	        		<?php $route = Route::currentRouteName(); ?>
 		        	@if (!Auth::check())
-		        		<?php $route = Route::currentRouteName(); ?>
 		          		<li>
 			          		<a href="{{route('users.getLogin')}}" 
 			          			class="{{($route == 'users.getLogin') ? 'active' : ''}}">
@@ -47,7 +47,8 @@
 		          		</li>
 		          	@else
 		          		<li>
-		          			<a href="#">Panel</a>
+		          			<a href="{{route('dashboard.index')}}"
+		          			class="{{($route == 'dashboard.index') ? 'active' : ''}}">Panel</a>
 		          		</li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{Auth::user()->getFullName()}} <span class="caret"></span></a>
