@@ -5,8 +5,15 @@ use App\Http\Controllers\Controller;
 
 use Request;
 use Auth;
+use App\User;
 
 class UsersController extends Controller {
+
+	public function __construct() {
+
+		//$this->middleware('authUser', ['only' => ['logout']]);
+		$this->middleware('csrf', ['only' => ['store', 'postLogin', 'update', 'destroy']]);
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -48,8 +55,6 @@ class UsersController extends Controller {
 
         	return redirect()->back()->with('error', 'Credenciales inválidas');
         }
-
-		// redirecciona al home
 	}
 
 	/**
@@ -72,7 +77,7 @@ class UsersController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		return view('users.create');
 	}
 
 	/**
@@ -82,7 +87,23 @@ class UsersController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		$data = Request::all();
+
+		$validator = User::validate($data);
+
+		if ( $validator->fails() )
+		{
+			return redirect()
+				->back()
+				->with('data', $data)
+				->with('errors', $validator->errors()->all());
+		}
+
+		$user = User::create($data);
+
+		return redirect()
+				->route('users.getLogin')
+				->with('success','Bienvenido! '.$user->getFullName().' Ahora debes iniciar sesión.');
 	}
 
 	/**
