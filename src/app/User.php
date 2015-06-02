@@ -119,7 +119,7 @@ class User extends Model implements Authenticatable {
 		return $this->firstName . ' ' . $this->lastName;
 	}
 
-	public static function currenUserIsAdmin() {
+	public static function currentUserIsAdmin() {
 
 		// Verify if user authenticated, is admin.
 
