@@ -6,7 +6,7 @@
 	</head>
 	<body>
 
-		<nav class="navbar navbar-default navbar-fixed-top">
+		<nav class="navbar navbar-inverse navbar-fixed-top">
 		  <div class="container-fluid">
 		      <!-- Brand and toggle get grouped for better mobile display -->
 		      <div class="navbar-header">
@@ -32,9 +32,17 @@
 
 		        <ul class="nav navbar-nav navbar-right">
 		        	@if (!Auth::check())
+		        		<?php $route = Route::currentRouteName(); ?>
 		          		<li>
-			          		<a href="{{route('users.getLogin')}}">
+			          		<a href="{{route('users.getLogin')}}" 
+			          			class="{{($route == 'users.getLogin') ? 'active' : ''}}">
 			          			Iniciar Sesión
+			          		</a>
+		          		</li>
+		          		<li>
+			          		<a href="{{route('users.create')}}"
+			          			class="{{($route == 'users.create') ? 'active' : ''}}">
+			          			Registrarse
 			          		</a>
 		          		</li>
 		          	@else
