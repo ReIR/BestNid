@@ -9,6 +9,11 @@ use App\User;
 
 class DashboardController extends Controller {
 
+	public function __construct() {
+
+		$this->middleware('authUser');
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
