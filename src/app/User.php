@@ -123,6 +123,6 @@ class User extends Model implements Authenticatable {
 
 		// Verify if user authenticated, is admin.
 
-		return ( (Auth::check()) && (Auth::user()->rol === 'admin') );
+		return ( (Auth::check()) && (Auth::user()->role === 'admin') );
 	}
 }

@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('/', function(){
+	return view('dashboard.index');
+});
+
 // ---------------------------------
 //	Pattern's validators
 // ---------------------------------
@@ -21,9 +25,9 @@ Route::pattern('id', '[0-9]+'); // [0-9] sólo numeros; + al menos uno
 //	Root
 // ---------------------------------
 //
-Route::get('/', function(){
-	return redirect()->route('articles.index');
-});
+//Route::get('/', function(){
+//	return redirect()->route('articles.index');
+//});
 
 // ---------------------------------
 //	Articles

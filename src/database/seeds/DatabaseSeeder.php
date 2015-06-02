@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder {
 			'password' => 'b3stn1d*',
 			'firstName' => 'Admin',
 			'lastName' => 'Admin',
-			'rol' => 'admin'
+			'role' => 'admin'
 		]);
 
 		$user = User::create([

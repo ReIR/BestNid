@@ -3,7 +3,7 @@
 @section('title', 'Administración')
 
 @section('content')
-	@if ( User::currentUserIsAdmin() )
+	@if ( \App\User::currentUserIsAdmin() )
 		Hola, soy administrador!
 	@else
 		Hola, soy usuario!
