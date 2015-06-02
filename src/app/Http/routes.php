@@ -50,6 +50,21 @@ Route::get('users/logout', [
 	'uses' => 'UsersController@logout'
 ]);
 
+// ---------------------------------
+//	Categories
+// ---------------------------------
+//
+Route::resource('categories', 'CategoriesController');
+
+//Route::get('categories', [
+//	'as' => 'categories', 
+//	'uses' => 'CategoriesController@index'
+//]);
+
+//Route::get('categories/create', [
+//	'as' => 'categories.create', 
+//	'uses' => 'CategoriesController@create'
+//]);
 //Route::controllers([
 //	'auth' => 'Auth\AuthController',
 //	'password' => 'Auth\PasswordController',
