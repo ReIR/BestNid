@@ -15,6 +15,28 @@ Route::get('/', ['as' => 'home', function(){
 	return redirect()->route('articles.index');
 }]);
 
+
+// ---------------------------------
+//	Admin Section
+// ---------------------------------
+//
+Route::group(['prefix' => 'admin'], function(){
+
+	Route::get('/', ['as' => 'admin.index', 'uses' => 'Admin\AdminController@index']);
+
+	// ---------------------------------
+	//	Articles
+	// ---------------------------------
+	//
+	Route::resource('articles', 'Admin\ArticlesController');
+
+	// ---------------------------------
+	//	Categories
+	// ---------------------------------
+	//
+	Route::resource('categories', 'Admin\CategoriesController', ['except' => 'show']);
+});
+
 // ---------------------------------
 //	Pattern's validators
 // ---------------------------------
@@ -55,14 +77,6 @@ Route::get('users/logout', [
 	'as' => 'users.logout', 
 	'uses' => 'UsersController@logout'
 ]);
-
-// ---------------------------------
-//	Categories
-// ---------------------------------
-//
-Route::resource('categories', 'CategoriesController', ['except' => 'show']);
-
-Route::resource('dashboard', 'DashboardController');
 
 //Route::get('categories', [
 //	'as' => 'categories', 

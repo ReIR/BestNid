@@ -1,10 +1,10 @@
 @extends('layouts.default')
 
-@section('title', 'Alta categoría')
+@section('title', 'Actualización categoría')
 
 @section('content')
-	<h1>Alta categoría</h1>
-	{!! Form::open(array('route' => 'categories.store', 'method' => 'POST')) !!}
+	<h1>Actualización categoría</h1>
+	{!! Form::open(array('route' => 'categories.update', 'method' => 'POST')) !!}
 		{!! Form::text('name', '', array('placeholder' => 'Nombre')) !!}
 		{!! Form::submit('Enviar', array('class' => 'button')) !!}
 	{!! Form::close() !!}

@@ -10,12 +10,6 @@ use Validator;
 
 class ArticlesController extends Controller {
 
-
-	public function __construct() {
-
-		$this->middleware('authUser', ['only' => ['create']]);
-	}
-
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -48,45 +42,6 @@ class ArticlesController extends Controller {
 	}
 
 	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		return view('articles.create');
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		$all = Request::all();
-
-		$validator = Validator::make($all, 
-			['name' => ['required', 'min:5', 'max:50']]
-		);
-
-		if ( $validator->fails() ) 
-		{
-			$errors = $validator->errors()->all();
-
-			return redirect()
-				->back()
-				->with('errors', $errors);
-		}
-
-		Article::create($all);
-
-		return redirect()
-				->route('articles.index')
-				->with('success', 'Se guardó correctamente');
-	}
-
-	/**
 	 * Display the specified resource.
 	 *
 	 * @param  int  $id
@@ -102,6 +57,26 @@ class ArticlesController extends Controller {
 
 		return view('articles.show')
 					->with('article', $article);
+	}
+
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return Response
+	 */
+	public function create()
+	{
+		//
+	}
+
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @return Response
+	 */
+	public function store()
+	{
+		//
 	}
 
 	/**
@@ -134,11 +109,7 @@ class ArticlesController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		Article::destroy($id);
-
-		return redirect()
-				->route('articles.index')
-				->with('success', 'El artículo fue borrado.');
+		//
 	}
 
 }

@@ -25,8 +25,8 @@
 		      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav">
 							<li>
-								<a href="{{route('dashboard.index')}}"
-								class="{{($route == 'dashboard.index') ? 'active' : ''}}">Administración</a>
+								<a href="{{route('admin.index')}}"
+								class="{{($route == 'admin.index') ? 'active' : ''}}">Administración</a>
 							</li>
 						</ul>
 				
@@ -67,14 +67,14 @@
 		    </div><!-- /.container-fluid -->
 		</nav>
 
-    	<div class="container-fluid">
-    		
-    		@section('notifications')
-    			@include('partials.notifications')
-    		@show
+  	<div class="container-fluid">
+  		
+  		@section('notifications')
+  			@include('partials.notifications')
+  		@show
 
-            @yield('content')
-        </div>
+      @yield('content')
+    </div>
 		<script src="{{ asset('js/jquery.min.js')}}"></script>
 		<script src="{{ asset('js/bootstrap.js')}}"></script>
 	</body>
