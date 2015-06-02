@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function(){
+Route::get('/', ['as' => 'home', function(){
 	return redirect()->route('articles.index');
-});
+}]);
 
 // ---------------------------------
 //	Pattern's validators
