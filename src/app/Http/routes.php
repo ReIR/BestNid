@@ -33,7 +33,7 @@ Route::resource('articles', 'ArticlesController');
 //	Users
 // ---------------------------------
 //
-Route::resource('users', 'UsersController', ['only' => ['create']]);
+Route::resource('users', 'UsersController', ['only' => ['create', 'store']]);
 
 Route::get('users/login', [
 	'as' => 'users.getLogin', 

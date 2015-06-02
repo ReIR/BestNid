@@ -17,14 +17,23 @@ class DatabaseSeeder extends Seeder {
 	{
 		Model::unguard();
 
+		$admin = User::create([
+			'username' => 'admin',
+			'email' => 'admin@bestnid.com',
+			'password' => Hash::make('b3stn1d*'),
+			'firstName' => 'Admin',
+			'lastName' => 'Admin',
+			'rol' => 'admin'
+		]);
+		
 		$user = User::create([
-			'username' => 'user1',
-			'email' => 'user1@email.com',
+			'username' => 'user',
+			'email' => 'user@email.com',
 			'password' => Hash::make('123'),
-			'birthdate' => date('now'),
 			'firstName' => 'User',
 			'lastName' => 'Uno'
 		]);
+
 
 		// 1ra forma
 		Article::create([
