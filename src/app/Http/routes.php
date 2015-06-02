@@ -21,7 +21,9 @@ Route::pattern('id', '[0-9]+'); // [0-9] sólo numeros; + al menos uno
 //	Root
 // ---------------------------------
 //
-Route::get('/', 'WelcomeController@index');
+Route::get('/', function(){
+	return redirect()->route('articles.index');
+});
 
 // ---------------------------------
 //	Articles
