@@ -55,7 +55,7 @@ Route::pattern('id', '[0-9]+'); // [0-9] sólo numeros; + al menos uno
 //	Articles
 // ---------------------------------
 //
-Route::resource('articles', 'ArticlesController');
+Route::resource('articles', 'ArticlesController', ['only' => ['index', 'show']]);
 
 // ---------------------------------
 //	Users
@@ -64,27 +64,27 @@ Route::resource('articles', 'ArticlesController');
 Route::resource('users', 'UsersController', ['only' => ['create', 'store']]);
 
 Route::get('users/login', [
-	'as' => 'users.getLogin', 
+	'as' => 'users.getLogin',
 	'uses' => 'UsersController@getLogin'
 ]);
 
 Route::post('users/login', [
-	'as' => 'users.postLogin', 
+	'as' => 'users.postLogin',
 	'uses' => 'UsersController@postLogin'
 ]);
 
 Route::get('users/logout', [
-	'as' => 'users.logout', 
+	'as' => 'users.logout',
 	'uses' => 'UsersController@logout'
 ]);
 
 //Route::get('categories', [
-//	'as' => 'categories', 
+//	'as' => 'categories',
 //	'uses' => 'CategoriesController@index'
 //]);
 
 //Route::get('categories/create', [
-//	'as' => 'categories.create', 
+//	'as' => 'categories.create',
 //	'uses' => 'CategoriesController@create'
 //]);
 //Route::controllers([
