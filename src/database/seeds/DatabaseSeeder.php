@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder {
 			'title' => 'Mercedes Benz',
 			'description' => 'Acá está mi auto re pillo.',
 			'image' => 'mercedes_benz.png',
-			'endDate' => (new DateTime())->format('Y-m-d H:i:s'),
+			'endDate' => (new DateTime('2015-08-18'))->format('Y-m-d H:i:s'),
 
 			'user_id' => $user->id,
 			'category_id' => $category1->id
@@ -59,7 +59,7 @@ class DatabaseSeeder extends Seeder {
 			'title' => 'Audi R8',
 			'description' => 'Mi auto es mucho mejor.',
 			'image' => 'audi.png',
-			'endDate' => (new DateTime())->format('Y-m-d H:i:s'),
+			'endDate' => (new DateTime('2015-09-21'))->format('Y-m-d H:i:s'),
 
 			'user_id' => $user->id,
 			'category_id' => $category1->id
@@ -70,7 +70,7 @@ class DatabaseSeeder extends Seeder {
 			'title' => 'BMW nuevito',
 			'description' => 'Casi 0km.',
 			'image' => 'bmw.png',
-			'endDate' => (new DateTime())->format('Y-m-d H:i:s'),
+			'endDate' => (new DateTime('2016-03-8'))->format('Y-m-d H:i:s'),
 
 			'user_id' => $user->id,
 			'category_id' => $category1->id
@@ -80,7 +80,7 @@ class DatabaseSeeder extends Seeder {
 			'title' => 'Mi falcon',
 			'description' => 'Todavia anda.',
 			'image' => 'falcon.png',
-			'endDate' => (new DateTime())->format('Y-m-d H:i:s'),
+			'endDate' => (new DateTime('2015-12-24'))->format('Y-m-d H:i:s'),
 
 			'user_id' => $user->id,
 			'category_id' => $category1->id
@@ -91,7 +91,7 @@ class DatabaseSeeder extends Seeder {
 			'title' => 'Palo de amasar',
 			'description' => 'Instrumento de represión de masas.',
 			'image' => 'palo_de_amasar.png',
-			'endDate' => (new DateTime())->format('Y-m-d H:i:s'),
+			'endDate' => (new DateTime('2016-1-1'))->format('Y-m-d H:i:s'),
 
 			'user_id' => $user->id,
 			'category_id' => $category2->id

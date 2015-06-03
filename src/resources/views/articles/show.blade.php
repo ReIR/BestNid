@@ -22,28 +22,35 @@
 
 				<h3><small>La subasta termina en</small></h3>
 
-				<h4>{{$article->endDate}}</h4>
+				<div id='endDate'class="col-xs-12 pull-right text-danger"></div>
 
-				<p>{{$article->description}}</p>
+				<div class="col-xs-12">
+					<p>{{$article->description}}</p>
+				</div>
 
 				{{-- Related Articles --}}
 				@if($related)
 					<h3>Más de la categoría {{$article->category->name}}</h3>
+					{{-- Related articles Row --}}
 					<div class="row">
-						@foreach ($related as $relatedArticle)
-							<div class="col-sm-4">
+						<div class="col-sm-12">
+							@foreach ($related as $relatedArticle)
+								{{-- A related Article --}}
+								<div class="col-xs-4 col-sm-4 col-md-4">
+									<div class="thumbnail">
+										<a href="{{route('articles.show', ['id' => $relatedArticle->id])}}">
+											<img src="{{$relatedArticle->getImageURL()}}">
+										</a>
+									</div>
+								</div>
+							@endforeach
+							{{-- Search by category link --}}
+							<div class="col-xs-4 col-md-4">
 								<div class="thumbnail">
-									<a href="{{route('articles.show', ['id' => $relatedArticle->id])}}">
-										<img src="{{$relatedArticle->getImageURL()}}">
+									<a href="{{ route('articles.index')}}?cat={{$article->category->name}}">
+										<img src="{{ asset('images/more.png') }}">
 									</a>
 								</div>
-							</div>
-						@endforeach
-						<div class="col-sm-4">
-							<div class="thumbnail">
-								<a href="{{ route('articles.index')}}?cat={{$article->category->name}}">
-									<img src="{{ asset('images/more.png') }}">
-								</a>
 							</div>
 						</div>
 					</div>
@@ -53,10 +60,15 @@
 	</div>
 
 	{{-- Q&A row  --}}
-	<div class="row">
+	<div class="row" style="padding-top: 40px;">
 		<div class="col-lg-12">
-			<h3>Preguntas al subastador</h3>
-
+			<h4 class="btn btn-danger">
+				Preguntas al subastador <span class="badge">1</span>
+			</h4>
+		</div>
+	</div>
+	<div class="row" style="padding-top: 40px;">
+		<div class="col-lg-12">
 			{{-- Questions --}}
 			<div class="media">
 				<div class="media-left">
@@ -69,4 +81,10 @@
 			</div>		{{-- End of Question --}}
 		</div>	{{-- End of Q&A row --}}
 	</div>
+
+	{{-- Countdown requirements --}}
+	<div id='endDateIn' style='display:none;'>{{$article->endDate}}</div>
+	<script src="{{asset('js/jquery.min.js')}}" charset="utf-8"></script>
+	<script src="{{asset('js/jquery.countdown.min.js')}}" charset="utf-8"></script>
+	<script src="{{asset('js/article.countdown.js')}}" charset="utf-8"></script>
 @stop
