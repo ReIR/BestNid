@@ -46,6 +46,10 @@ class Article extends Model {
 	}
 
 	public function scopeOfCategory($query, $category) {
+		return $query->where('category_id', '=', $category);
+	}
+
+	public function scopeOfNamedCategory($query, $category) {
 			return $query->join('categories', 'articles.category_id', '=', 'categories.id')
 				->where('categories.name', '=', $category);
 	}

@@ -56,6 +56,38 @@ class DatabaseSeeder extends Seeder {
 		]);
 
 		Article::create([
+			'title' => 'Audi R8',
+			'description' => 'Mi auto es mucho mejor.',
+			'image' => 'audi.png',
+			'endDate' => (new DateTime())->format('Y-m-d H:i:s'),
+
+			'user_id' => $user->id,
+			'category_id' => $category1->id
+		]);
+
+
+		Article::create([
+			'title' => 'BMW nuevito',
+			'description' => 'Casi 0km.',
+			'image' => 'bmw.png',
+			'endDate' => (new DateTime())->format('Y-m-d H:i:s'),
+
+			'user_id' => $user->id,
+			'category_id' => $category1->id
+		]);
+
+		Article::create([
+			'title' => 'Mi falcon',
+			'description' => 'Todavia anda.',
+			'image' => 'falcon.png',
+			'endDate' => (new DateTime())->format('Y-m-d H:i:s'),
+
+			'user_id' => $user->id,
+			'category_id' => $category1->id
+		]);
+
+
+		Article::create([
 			'title' => 'Palo de amasar',
 			'description' => 'Instrumento de represión de masas.',
 			'image' => 'palo_de_amasar.png',
