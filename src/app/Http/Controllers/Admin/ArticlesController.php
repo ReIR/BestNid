@@ -1,21 +1,19 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
-//use Illuminate\Http\Request;
-
-use App\Category;
-use Session;
-use Validator;
 use Request;
 
-class CategoriesController extends Controller {
+use App\Article;
+use Session;
+use Validator;
+
+class ArticlesController extends Controller {
 
 
 	public function __construct() {
 
-		$this->middleware('authUser', ['only' => ['create']]);
+		$this->middleware('authUser', ['only' => ['create', 'store']]);
 	}
 
 	/**
@@ -25,8 +23,28 @@ class CategoriesController extends Controller {
 	 */
 	public function index()
 	{
-		//
-		echo 'sarasa index categories';
+		
+		if ( Request::has('q') ) {
+
+			$q = Request::get('q');
+
+			$articles = Article::where('name', 'LIKE', '%'.$q.'%')->get();
+
+			if (!count($articles)) 
+			{
+				return redirect()
+					->route('admin.articles.index')
+					->with('error', 'Artículo '.$q.' no encontrado');
+			}
+
+		} else {
+
+			$articles = Article::all();
+		}
+
+
+		return view('admin.articles.index')
+				->with('articles', $articles);
 	}
 
 	/**
@@ -36,7 +54,7 @@ class CategoriesController extends Controller {
 	 */
 	public function create()
 	{
-		return view ('categories.create');		
+		return view('admin.articles.create');
 	}
 
 	/**
@@ -48,8 +66,8 @@ class CategoriesController extends Controller {
 	{
 		$all = Request::all();
 
-		$validator = Validator::make($all,
-			['name' => ['required', 'unique:categories', 'min:5', 'max:50']]
+		$validator = Validator::make($all, 
+			['name' => ['required', 'min:5', 'max:50']]
 		);
 
 		if ( $validator->fails() ) 
@@ -61,28 +79,29 @@ class CategoriesController extends Controller {
 				->with('errors', $errors);
 		}
 
-		Category::create($all);
+		Article::create($all);
 
 		return redirect()
-				->route('categories.index')
-				->with('success', 'Se guardó correctamente');	}
+				->route('admin.articles.index')
+				->with('success', 'Se guardó correctamente');
+	}
 
 	/**
-	 * Display the specified Category.
+	 * Display the specified resource.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function show($id)
 	{
-		$category = Category::find($id);
+		$article = Article::find($id);
 
-		if (!$category) {
+		if (!$article) {
 			Session::flash('error', 'No se encontró: '.$id);
 		}
 
-		return view('categories.show')
-					->with('category', $category);
+		return view('admin.articles.show')
+					->with('article', $article);
 	}
 
 	/**
@@ -115,10 +134,11 @@ class CategoriesController extends Controller {
 	 */
 	public function destroy($id)
 	{
-//		Article::destroy($id);
-//
-//		return redirect()
-//				->route('categories.index')
-//				->with('success', 'El artículo fue borrado.');
+		Article::destroy($id);
+
+		return redirect()
+				->route('admin.articles.index')
+				->with('success', 'El artículo fue borrado.');
 	}
+
 }

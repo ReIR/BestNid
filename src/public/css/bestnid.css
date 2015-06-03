@@ -3,6 +3,28 @@ body {
 	background: #f2f2f2;
 }
 
+* {
+	-webkit-border-radius: 0 !important;
+	-moz-border-radius: 0 !important;
+	border-radius: 0 !important;
+}
+
+.background-red {
+	background-color: #e20f18;
+}
+
+.red {
+	color: #e20f18;
+}
+
+.navbar-search-input {
+	margin: 8px 0 0 0;
+}
+
+.navbar-search-input .form-group {
+	margin: auto;
+}
+
 .form-container {
 	margin-top: 70px;
 }
@@ -16,7 +38,7 @@ body {
 }
 
 .navbar-nav li a.active {
-	border-bottom: 1px solid #FF6666;
+	border-bottom: 1px solid #e20f18;
 }
 
 .avatar-image {
@@ -35,4 +57,12 @@ body {
 	background-position: center center;
 	background-repeat: no-repeat;
 	display: block;
+}
+.background-logo {
+	background-image: url('../img/logo-bestnid.png');
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+	background-position: center center;
+	width: 55px;
+	margin: 0 10px 0 0 !important;
 }

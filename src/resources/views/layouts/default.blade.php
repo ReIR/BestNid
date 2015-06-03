@@ -5,6 +5,8 @@
 		 <link rel="stylesheet" href="{{asset('css/bestnid.css')}}">
 	</head>
 	<body>
+		
+		<?php $route = Route::currentRouteName(); ?>
 
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 		  <div class="container-fluid">
@@ -16,23 +18,28 @@
 		          <span class="icon-bar"></span>
 		          <span class="icon-bar"></span>
 		        </button>
-		        <a class="navbar-brand" href="{{route('articles.index')}}">Bestnid</a>
+		        <a class="navbar-brand background-logo" href="{{route('home')}}"></a>
 		      </div>
 
 		      <!-- Collect the nav links, forms, and other content for toggling -->
 		      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-		        {!! Form::open(array('route' => 'articles.index', 'method' => 'GET', 'class' => 'navbar-form navbar-left')) !!}
+						<ul class="nav navbar-nav">
+							<li>
+								<a href="{{route('admin.index')}}"
+								class="{{($route == 'admin.index') ? 'active' : ''}}">Administración</a>
+							</li>
+						</ul>
+				
+		        {!! Form::open(array('route' => 'articles.index', 'method' => 'GET', 'class' => 'navbar-search-input col-sm-6 col-lg-4')) !!}
 		        	<div class="form-group">
-		        		{!! Form::text('q', Request::input('q'), array('placeholder' => '', 'class' => 'form-control')) !!}
+		        		{!! Form::text('q', Request::input('q'), array('placeholder' => 'Buscar...', 'class' => 'form-control')) !!}
 		        	</div>
-		        	{!! Form::submit('buscar', array('class' => 'btn btn-default')) !!}
+		        	{!! Form::submit('buscar', array('class' => 'btn btn-default hidden')) !!}
 		        {!! Form::close() !!}
 
 
 		        <ul class="nav navbar-nav navbar-right">
 		        	@if (!Auth::check())
-		        		<?php $route = Route::currentRouteName(); ?>
 		          		<li>
 			          		<a href="{{route('users.getLogin')}}" 
 			          			class="{{($route == 'users.getLogin') ? 'active' : ''}}">
@@ -46,9 +53,6 @@
 			          		</a>
 		          		</li>
 		          	@else
-		          		<li>
-		          			<a href="#">Panel</a>
-		          		</li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{Auth::user()->getFullName()}} <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
@@ -63,14 +67,14 @@
 		    </div><!-- /.container-fluid -->
 		</nav>
 
-    	<div class="container">
-    		
-    		@section('notifications')
-    			@include('partials.notifications')
-    		@show
+  	<div class="container-fluid">
+  		
+  		@section('notifications')
+  			@include('partials.notifications')
+  		@show
 
-            @yield('content')
-        </div>
+      @yield('content')
+    </div>
 		<script src="{{ asset('js/jquery.min.js')}}"></script>
 		<script src="{{ asset('js/bootstrap.js')}}"></script>
 	</body>

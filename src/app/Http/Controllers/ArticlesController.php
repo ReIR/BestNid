@@ -8,14 +8,8 @@ use App\Article;
 use Session;
 use Validator;
 
+
 class ArticlesController extends Controller {
-
-
-	public function __construct() {
-
-		$this->middleware('authUser', ['only' => ['create']]);
-	}
-
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -53,21 +47,29 @@ class ArticlesController extends Controller {
 	}
 
 	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function show($id)
+	{
+		$article = Article::find($id);
+
+		if (!$article) {
+			Session::flash('error', 'No se encontró: '.$id);
+		}
+
+		return view('articles.show')
+					->with('article', $article);
+	}
+
+	/**
 	 * Show the form for creating a new resource.
 	 *
 	 * @return Response
 	 */
 	public function create()
-	{
-		return view('articles.create');
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
 	{
 		$all = Request::all();
 
@@ -92,12 +94,11 @@ class ArticlesController extends Controller {
 	}
 
 	/**
-	 * Display the specified resource.
+	 * Store a newly created resource in storage.
 	 *
-	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function store()
 	{
 		//Find the requested article.
 		$article = Article::find($id);
@@ -153,11 +154,7 @@ class ArticlesController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		Article::destroy($id);
-
-		return redirect()
-				->route('articles.index')
-				->with('success', 'El artículo fue borrado.');
+		//
 	}
 
 }

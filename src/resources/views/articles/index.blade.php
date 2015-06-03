@@ -10,7 +10,7 @@
 				<h1>Artículos</h1>
 			</div>
 			<div class="pull-right">
-				<a href="{{ route('articles.create') }}" class="btn btn-primary mibotoncito">
+				<a href="{{ route('admin.articles.create') }}" class="btn btn-primary mibotoncito">
 					Crear
 				</a>
 			</div>
