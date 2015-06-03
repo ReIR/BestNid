@@ -8,10 +8,6 @@ a {
 	color: #e20f18;
 }
 
-.col-md-3 .list-group.affix {
-	width: 22.8% !important;
-}
-
 * {
 	-webkit-border-radius: 0 !important;
 	-moz-border-radius: 0 !important;
