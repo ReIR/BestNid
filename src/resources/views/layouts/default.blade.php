@@ -5,7 +5,7 @@
 		 <link rel="stylesheet" href="{{asset('css/bestnid.css')}}">
 	</head>
 	<body>
-		
+
 		<?php $route = Route::currentRouteName(); ?>
 
 		<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -29,7 +29,7 @@
 								class="{{($route == 'admin.index') ? 'active' : ''}}">Administración</a>
 							</li>
 						</ul>
-				
+
 		        {!! Form::open(array('route' => 'articles.index', 'method' => 'GET', 'class' => 'navbar-search-input col-sm-6 col-lg-4')) !!}
 		        	<div class="form-group">
 		        		{!! Form::text('q', Request::input('q'), array('placeholder' => 'Buscar...', 'class' => 'form-control')) !!}
@@ -41,7 +41,7 @@
 		        <ul class="nav navbar-nav navbar-right">
 		        	@if (!Auth::check())
 		          		<li>
-			          		<a href="{{route('users.getLogin')}}" 
+			          		<a href="{{route('users.getLogin')}}"
 			          			class="{{($route == 'users.getLogin') ? 'active' : ''}}">
 			          			Iniciar Sesión
 			          		</a>
@@ -68,14 +68,21 @@
 		</nav>
 
   	<div class="container-fluid">
-  		
+
   		@section('notifications')
   			@include('partials.notifications')
   		@show
 
       @yield('content')
     </div>
-		<script src="{{ asset('js/jquery.min.js')}}"></script>
-		<script src="{{ asset('js/bootstrap.js')}}"></script>
+
+		@section('footer')
+			<footer class="footer"></footer>
+		@show
+		
+		@section('scripts')
+			<script src="{{ asset('js/jquery.min.js')}}"></script>
+			<script src="{{ asset('js/bootstrap.js')}}"></script>
+		@show
 	</body>
 </html>
