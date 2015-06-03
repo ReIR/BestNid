@@ -2,33 +2,41 @@
 
 @section('title', 'Artículos')
 
+<?php $cat = Request::get('cat'); ?>
+
+@section('sidebar')
+	<div class="col-md-3">
+		<ul class="list-group">
+			@foreach($categories as $c)
+				<li class="list-group-item">
+					<a href="{{route('articles.index')}}?cat={{$c->name}}">
+						{{$c->name}}
+					</a>
+					@if ($c->name === $cat )
+						<a href="{{route('articles.index')}}" class="pull-right text-danger">X</a>
+					@endif
+				</li>
+			@endforeach
+		</ul>
+	</div>
+@show
+
 @section('content')
-
-	<div class="container-fluid">
+	<div class="col-md-9">
 		<div class="row">
-			<div class="pull-left">
-				<h1>Artículos</h1>
-			</div>
-			<div class="pull-right">
-				<a href="{{ route('admin.articles.create') }}" class="btn btn-primary mibotoncito">
-					Crear
+			@foreach($articles as $a)
+				<a href="{{route('articles.show', ['id' => $a->id])}}">
+					<div class="col-sm-6 col-md-4">
+						<div class="thumbnail">
+							<img src="{{$a->getImageURL()}}" alt="...">
+							<div class="caption">
+								<h3>{{$a->title}}</h3>
+								<p>{{$a->description}}</p>
+							</div>
+						</div>
+					</div>
 				</a>
-			</div>
-		</div>
-
-		<div class="row marginTop10">
-			@foreach ($articles as $a)
-				<div class="panel panel-default">
-				  <div class="panel-heading">
-				  	<a href="{{ route('articles.show', ['id' => $a->id ]) }}">
-				  		{{$a->title}}
-				  	</a>
-				  </div>
-				  <div class="panel-body">
-				    {{$a->title}}
-				  </div>
-				</div>
 			@endforeach
 		</div>
 	</div>
-@stop
+@overwrite

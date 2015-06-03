@@ -4,10 +4,10 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Request;
 
-use App\Article;
 use Session;
 use Validator;
-
+use App\Article;
+use App\Category;
 
 class ArticlesController extends Controller {
 	/**
@@ -42,8 +42,11 @@ class ArticlesController extends Controller {
 				->with('error', 'No se han encontrado artículos que cumplan las condiciones de búsqueda.');
 		}
 
+		$categories = Category::all();
+
 		return view('articles.index')
-				->with('articles', $articles);
+				->with('articles', $articles)
+				->with('categories', $categories);
 	}
 
 	/**

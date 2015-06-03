@@ -1,5 +1,7 @@
 @if(Session::has('success'))
+<div class="alert alert-success" role="alert">
 	<span>{{Session::get('success')}}</span>
+</div>
 @endif
 
 @if( Session::has('error') || Session::has('errors') )
@@ -14,8 +16,8 @@
 			</ul>
 		@endif
 
-		@if ( Session::has('error')) 
+		@if ( Session::has('error'))
 			{{Session::get('error')}}
 		@endif
 	</div>
-@endif		
+@endif
