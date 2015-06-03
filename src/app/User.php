@@ -69,7 +69,7 @@ class User extends Model implements Authenticatable {
 	|
 	*/
 	public static function create(array $data) {
-		
+
 		$data['password'] = Hash::make($data['password']);
 
 		return parent::create($data);

@@ -8,4 +8,5 @@
 		{!! Form::text('name', '', array('placeholder' => 'Nombre')) !!}
 		{!! Form::submit('Enviar', array('class' => 'button')) !!}
 	{!! Form::close() !!}
+
 @overwrite
