@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Article;
 use App\User;
+use App\Category;
 
 class DatabaseSeeder extends Seeder {
 
@@ -34,25 +35,36 @@ class DatabaseSeeder extends Seeder {
 			'lastName' => 'Uno'
 		]);
 
+		$category1 = Category::create([
+				'name' => 'Automóviles'
+			]);
+
+		$category2 = Category::create([
+				'name' => 'Cocina'
+			]);
+
 
 		// 1ra forma
 		Article::create([
-			'name' => 'Articulo 1',
-			'user_id' => $user->id
+			'title' => 'Mercedes Benz',
+			'description' => 'Acá está mi auto re pillo.',
+			'image' => 'mercedes_benz.png',
+			'endDate' => (new DateTime())->format('Y-m-d H:i:s'),
+
+			'user_id' => $user->id,
+			'category_id' => $category1->id
 		]);
 
-		// 2da forma
-		$a2 = new Article;
-		$a2->name = 'Articulo 2';
-		$user->articles()->save($a2);
+		Article::create([
+			'title' => 'Palo de amasar',
+			'description' => 'Instrumento de represión de masas.',
+			'image' => 'palo_de_amasar.png',
+			'endDate' => (new DateTime())->format('Y-m-d H:i:s'),
 
-		// 3ra forma
-		$a3 = new Article;
-		$a3->name = 'Articulo 3';
-		$a3->user()->associate($user);
-		$a3->save();
+			'user_id' => $user->id,
+			'category_id' => $category2->id
+		]);
 
-		// $this->call('UserTableSeeder');
 	}
 
 }

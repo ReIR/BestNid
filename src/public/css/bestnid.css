@@ -1,5 +1,5 @@
-body { 
-	padding-top: 70px; 
+body {
+	padding-top: 70px;
 	background: #f2f2f2;
 }
 
@@ -17,4 +17,22 @@ body {
 
 .navbar-nav li a.active {
 	border-bottom: 1px solid #FF6666;
+}
+
+.avatar-image {
+	height: 64px;
+	width: 64px;
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	display: block;
+}
+
+.article-image {
+	height: 300px;
+	width: 350px;
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	display: block;
 }
