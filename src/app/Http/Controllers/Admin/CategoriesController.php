@@ -15,8 +15,8 @@ class CategoriesController extends Controller {
 
 
 	public function __construct() {
-
 		$this->middleware('authAdmin');
+		$this->middleware('csrf', ['only' => ['store', 'destroy', 'update']]);
 	}
 
 	/**
