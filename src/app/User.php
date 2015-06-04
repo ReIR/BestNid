@@ -21,6 +21,30 @@ class User extends Model implements Authenticatable {
 
 	/*
 	| -----------------------------------------
+	|	These fields are mass assignables
+	| -----------------------------------------
+	|
+	*/
+	protected $fillable = ['firstName','lastName','email','username'];
+
+	/*
+	| -----------------------------------------
+	|	These fields are not mass assignables
+	| -----------------------------------------
+	|
+	*/
+	protected $guarded = ['*'];
+
+	/*
+	| -----------------------------------------
+	|	These fields are hidden in response
+	| -----------------------------------------
+	|
+	*/
+	protected $hidden = ['password', 'remember_token'];
+
+	/*
+	| -----------------------------------------
 	|	Validation Rules
 	| -----------------------------------------
 	|
@@ -64,40 +88,31 @@ class User extends Model implements Authenticatable {
 
 	/*
 	| -----------------------------------------
+	|	Accesors & Mutators
+	| -----------------------------------------
+	|
+	*/
+	public function setPasswordAttribute($value)
+  {
+      $this->attributes['password'] = $value;
+  }
+
+	/*
+	| -----------------------------------------
 	|	Override methods
 	| -----------------------------------------
 	|
 	*/
 	public static function create(array $data) {
 
-		$data['password'] = Hash::make($data['password']);
+		$user = parent::create($data);
 
-		return parent::create($data);
+		$user->setPasswordAttribute(Hash::make($data['password']));
+
+		$user->save();
+
+		return $user;
 	}
-
-	/*
-	| -----------------------------------------
-	|	These fields are mass assignables
-	| -----------------------------------------
-	|
-	*/
-	protected $fillable = ['firstName','lastName','email','username','password'];
-
-	/*
-	| -----------------------------------------
-	|	These fields are not mass assignables
-	| -----------------------------------------
-	|
-	*/
-	protected $guarded = ['*'];
-
-	/*
-	| -----------------------------------------
-	|	These fields are hidden in response
-	| -----------------------------------------
-	|
-	*/
-	protected $hidden = ['password', 'remember_token'];
 
 	/*
 	| -----------------------------------------
