@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 use App\Category;
+use Illuminate\Support\Str;
 
 class Article extends Model {
 
@@ -72,6 +73,10 @@ class Article extends Model {
 
 	public function getImageURL(){
 		return asset('images/'.$this->image);
+	}
+
+	public function getDescription($limit = 100) {
+		return Str::limit($this->description, $limit);
 	}
 
 }
