@@ -15,7 +15,7 @@ class AuthAdminCheck {
 	public function handle($request, Closure $next)
 	{
 		if( !User::currentUserIsAdmin() ){
-			abort(403, 'Prohibido.');
+			abort(401, 'No Autorizado');
 		}
 
 		return $next($request);
