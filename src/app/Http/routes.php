@@ -11,6 +11,15 @@
 |
 */
 
+// ---------------------------------
+//	Pattern's validators
+// ---------------------------------
+//
+Route::pattern('id', '[0-9]+'); // [0-9] sólo numeros; + al menos uno
+
+// ---------------------------------
+//	Root
+// ---------------------------------
 Route::get('/', ['as' => 'home', function(){
 	return redirect()->route('articles.index');
 }]);
@@ -22,6 +31,10 @@ Route::get('/', ['as' => 'home', function(){
 //
 Route::group(['prefix' => 'admin'], function(){
 
+	// ---------------------------------
+	//	Dashboard
+	// ---------------------------------
+	//
 	Route::get('/', ['as' => 'admin.index', 'uses' => 'Admin\AdminController@index']);
 
 	// ---------------------------------
@@ -39,20 +52,6 @@ Route::group(['prefix' => 'admin'], function(){
 	Route::get('categories/alert/{id}',
 		['as' => 'admin.categories.alert', 'uses' => 'Admin\CategoriesController@alert']);
 });
-
-// ---------------------------------
-//	Pattern's validators
-// ---------------------------------
-//
-Route::pattern('id', '[0-9]+'); // [0-9] sólo numeros; + al menos uno
-
-// ---------------------------------
-//	Root
-// ---------------------------------
-//
-//Route::get('/', function(){
-//	return redirect()->route('articles.index');
-//});
 
 // ---------------------------------
 //	Articles
@@ -80,17 +79,3 @@ Route::get('users/logout', [
 	'as' => 'users.logout',
 	'uses' => 'UsersController@logout'
 ]);
-
-//Route::get('categories', [
-//	'as' => 'categories',
-//	'uses' => 'CategoriesController@index'
-//]);
-
-//Route::get('categories/create', [
-//	'as' => 'categories.create',
-//	'uses' => 'CategoriesController@create'
-//]);
-//Route::controllers([
-//	'auth' => 'Auth\AuthController',
-//	'password' => 'Auth\PasswordController',
-//]);
