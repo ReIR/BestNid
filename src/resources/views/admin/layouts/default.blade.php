@@ -8,4 +8,4 @@
 	@show
 </div>
 <!-- Aquí debería tener el col-md-9, pero las cosas no salen como queremos. -->
-	@section('content')
+@section('content')
