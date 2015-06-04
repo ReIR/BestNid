@@ -122,14 +122,14 @@ class CategoriesController extends Controller {
 		{
 			return redirect()
 				->route('admin.categories.index')
-				->with('error', 'La categoría no puede ser borrada porque tiene artículos asociados.');
+				->with('error', 'La categoría '. $category->name . ' no puede ser borrada porque tiene artículos asociados.');
 		}
 
 		Category::destroy($id);
 
 		return redirect()
 			->route('admin.categories.index')
-			->with('success', 'La categoría fue borrada.');
+			->with('success', 'La categoría '. $category->name . ' fue borrada.');
 	}
 
 	public function alert ($id){
