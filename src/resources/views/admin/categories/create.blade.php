@@ -4,7 +4,7 @@
 
 @section('content')
 	<h1>Alta categoría</h1>
-	{!! Form::open(array('route' => 'categories.store', 'method' => 'POST')) !!}
+	{!! Form::open(array('route' => 'admin.categories.store', 'method' => 'POST')) !!}
 		{!! Form::text('name', '', array('placeholder' => 'Nombre')) !!}
 		{!! Form::submit('Enviar', array('class' => 'button')) !!}
 	{!! Form::close() !!}

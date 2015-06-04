@@ -13,7 +13,8 @@ class ArticlesController extends Controller {
 
 	public function __construct() {
 
-		$this->middleware('authUser', ['only' => ['create', 'store']]);
+		//$this->middleware('authUser', ['only' => ['create', 'store']]);
+		$this->middleware('authUser');
 	}
 
 	/**
@@ -23,14 +24,14 @@ class ArticlesController extends Controller {
 	 */
 	public function index()
 	{
-		
+
 		if ( Request::has('q') ) {
 
 			$q = Request::get('q');
 
 			$articles = Article::where('name', 'LIKE', '%'.$q.'%')->get();
 
-			if (!count($articles)) 
+			if (!count($articles))
 			{
 				return redirect()
 					->route('admin.articles.index')
@@ -66,11 +67,11 @@ class ArticlesController extends Controller {
 	{
 		$all = Request::all();
 
-		$validator = Validator::make($all, 
+		$validator = Validator::make($all,
 			['name' => ['required', 'min:5', 'max:50']]
 		);
 
-		if ( $validator->fails() ) 
+		if ( $validator->fails() )
 		{
 			$errors = $validator->errors()->all();
 
