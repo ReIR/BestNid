@@ -79,4 +79,8 @@ class Article extends Model {
 		return Str::limit($this->description, $limit);
 	}
 
+	public function getTitle($limit = 20) {
+		return Str::limit($this->title, $limit);
+	}
+
 }

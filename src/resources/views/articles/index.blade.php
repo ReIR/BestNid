@@ -30,7 +30,7 @@
 						<div class="thumbnail">
 							<img src="{{$a->getImageURL()}}" alt="...">
 							<div class="caption">
-								<h3>{{$a->title}}</h3>
+								<h3>{{$a->getTitle(20)}}</h3>
 								<p>{{$a->getDescription(35)}}</p>
 							</div>
 						</div>
