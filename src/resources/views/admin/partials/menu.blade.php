@@ -13,7 +13,7 @@
 	</li>
 	@if ( App\User::currentUserIsAdmin() )
 		<li class="list-group-item">
-			<span class="badge">3</span>
+			<span class="badge">{{App\Category::count()}}</span>
 			<a href="{{route('admin.categories.index')}}">Categorías</a>
 		</li>
 	@endif
