@@ -68,7 +68,7 @@ class ArticlesController extends Controller {
 		}
 
 		//Get 3 articles of the same category.
-		$related = Article::with('category')->ofCategory($article->category_id)->take(2)->get();
+		$related = Article::with('category')->ofCategory($article->category_id)->orderBy(\DB::raw('RAND()'))->take(2)->get();
 
 		//Case of not finding related articles return a view without them.
 		if(!count($related)) {
