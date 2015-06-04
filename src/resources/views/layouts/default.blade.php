@@ -34,6 +34,7 @@
 		        	<div class="form-group">
 		        		{!! Form::text('q', Request::input('q'), array('placeholder' => 'Buscar...', 'class' => 'form-control')) !!}
 		        	</div>
+							<input type="hidden" name="cat" value="{{$cat}}">
 		        	{!! Form::submit('buscar', array('class' => 'btn btn-default hidden')) !!}
 		        {!! Form::close() !!}
 

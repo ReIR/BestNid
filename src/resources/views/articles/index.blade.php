@@ -2,10 +2,14 @@
 
 @section('title', 'Artículos')
 
-<?php $cat = Request::get('cat'); ?>
+<?php
+	$cat = Request::get('cat');
+	$q = Request::get('q');
+?>
 
 @section('sidebar')
 	<div class="col-md-3">
+		<h4>Categorías</h4>
 		<ul class="list-group">
 			@foreach($categories as $c)
 				<li class="list-group-item">
@@ -23,7 +27,25 @@
 
 @section('content')
 	<div class="col-md-9">
-		<div class="row">
+		@if(Request::has('q'))
+			<div class="row">
+				<div class="col-md-12">
+					{!! Form::open(array('route' => 'articles.index', 'method' => 'GET', 'class' => 'form-inline  pull-right')) !!}
+						<input type="hidden" name="q" value="{{$q}}">
+						<select class="form-control" name="cat">
+							<option value="">
+									Filtrar por Categoría
+							</option>
+							@foreach($categories as $c)
+								<option value="{{$c->name}}" {{($c->name == $cat) ? 'selected="selected"' : ''}}>
+										{{$c->name}}
+								</option>
+							@endforeach
+						</select>
+						{!! Form::submit('Buscar', array('class' => 'btn btn-default')) !!}
+					{!! Form::close() !!}
+				</div>
+			@endif
 			@foreach($articles as $a)
 				<a href="{{route('articles.show', ['id' => $a->id])}}">
 					<div class="col-sm-6 col-md-4">
