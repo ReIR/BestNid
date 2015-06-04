@@ -83,6 +83,7 @@
 		@section('scripts')
 			<script src="{{ asset('js/jquery.min.js')}}"></script>
 			<script src="{{ asset('js/bootstrap.js')}}"></script>
+			<script src="{{ asset('js/bestnid.js')}}"></script>
 		@show
 	</body>
 </html>

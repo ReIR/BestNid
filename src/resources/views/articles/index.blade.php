@@ -31,7 +31,7 @@
 							<img src="{{$a->getImageURL()}}" alt="...">
 							<div class="caption">
 								<h3>{{$a->title}}</h3>
-								<p>{{$a->description}}</p>
+								<p>{{$a->getDescription(35)}}</p>
 							</div>
 						</div>
 					</div>
