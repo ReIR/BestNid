@@ -16,7 +16,8 @@ class CategoriesController extends Controller {
 
 	public function __construct() {
 
-		$this->middleware('authAdmin', ['only' => ['create', 'update', 'destroy', 'edit']]);
+	//	$this->middleware('authAdmin', ['only' => ['create', 'update', 'destroy', 'edit']]);
+		$this->middleware('authAdmin');
 	}
 
 	/**
@@ -26,12 +27,8 @@ class CategoriesController extends Controller {
 	 */
 	public function index()
 	{
-		//
-		//return view('admin.categories.index');
-
 
 		$categories = Category::all();
-
 
 		return view('admin.categories.index')
 				->with('categories', $categories);
@@ -44,7 +41,7 @@ class CategoriesController extends Controller {
 	 */
 	public function create()
 	{
-		return view ('admin.categories.create');		
+		return view ('admin.categories.create');
 	}
 
 	/**
@@ -60,7 +57,7 @@ class CategoriesController extends Controller {
 			['name' => ['required', 'unique:categories', 'min:5', 'max:50']]
 		);
 
-		if ( $validator->fails() ) 
+		if ( $validator->fails() )
 		{
 			$errors = $validator->errors()->all();
 
@@ -73,7 +70,8 @@ class CategoriesController extends Controller {
 
 		return redirect()
 				->route('admin.categories.index')
-				->with('success', 'Se guardó correctamente');	}
+				->with('success', 'Se guardó correctamente');
+	}
 
 	/**
 	 * Display the specified Category.
@@ -116,23 +114,31 @@ class CategoriesController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		/*
 		$category = Category::find($id);
 
-		if (!$category) 
+		if (!$category)
 			abort(404, 'No Encontrado');
 
-		if ( !$category->articles ) 
+		if ( $category->articles->count() > 0 )
 		{
-			Category::destroy($id);
-
 			return redirect()
 				->route('admin.categories.index')
-				->with('success', 'La categoría fue borrada.');
+				->with('error', 'La categoría no puede ser borrada porque tiene artículos asociados.');
 		}
 
+		Category::destroy($id);
+
 		return redirect()
-				->back()
-				->with('error', 'La categoría no puede ser borrada');		
-	}*/
+			->route('admin.categories.index')
+			->with('success', 'La categoría fue borrada.');
+	}
+
+	public function warning ($id){
+
+		$category = Category::find($id);
+
+		return view ('admin.partials.alert')
+			->with('category', $category)
+			->with('message', '¿Desea eliminar la categoría '. $category->name.'?');
+	}
 }
