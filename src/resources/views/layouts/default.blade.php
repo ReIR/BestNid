@@ -23,12 +23,18 @@
 
 		      <!-- Collect the nav links, forms, and other content for toggling -->
 		      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<ul class="nav navbar-nav">
-							<li>
-								<a href="{{route('admin.index')}}"
-								class="{{($route == 'admin.index') ? 'active' : ''}}">Administración</a>
-							</li>
-						</ul>
+							<ul class="nav navbar-nav">
+								<li>
+									<a href="{{route('articles.index')}}"
+									class="{{($route == 'articles.index') ? 'active' : ''}}">Inicio</a>
+								</li>
+								@if(Auth::check())
+									<li>
+										<a href="{{route('admin.index')}}"
+										class="{{($route == 'admin.index') ? 'active' : ''}}">Administración</a>
+									</li>
+								@endif
+							</ul>
 
 		        {!! Form::open(array('route' => 'articles.index', 'method' => 'GET', 'class' => 'navbar-search-input col-sm-6 col-lg-4')) !!}
 		        	<div class="form-group">
