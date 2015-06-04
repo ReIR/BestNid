@@ -36,8 +36,8 @@ Route::group(['prefix' => 'admin'], function(){
 	//
 	Route::resource('categories', 'Admin\CategoriesController', ['except' => 'show']);
 
-	Route::get('categories/warning/{id}',
-		['as' => 'admin.categories.warning', 'uses' => 'Admin\CategoriesController@warning']);
+	Route::get('categories/alert/{id}',
+		['as' => 'admin.categories.alert', 'uses' => 'Admin\CategoriesController@alert']);
 });
 
 // ---------------------------------

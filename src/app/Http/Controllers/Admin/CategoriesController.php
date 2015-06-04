@@ -133,7 +133,7 @@ class CategoriesController extends Controller {
 			->with('success', 'La categoría fue borrada.');
 	}
 
-	public function warning ($id){
+	public function alert ($id){
 
 		$category = Category::find($id);
 

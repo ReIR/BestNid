@@ -19,7 +19,7 @@
 					<td
 						<div class="pull-right">
 							<a class="btn btn-default" href="#" role="button">Editar</a>
-							<a class="btn btn-danger" href="{{route ('admin.categories.warning', ['id'=>$c->id])}}" role="button">Borrar</a>
+							<a class="btn btn-danger" href="{{route ('admin.categories.alert', ['id'=>$c->id])}}" role="button">Borrar</a>
 						</div>
 					</td>
 				</tr>
