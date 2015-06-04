@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 use App\Category;
 use App\Article;
 use Session;
-use Validator;
 use Request;
 
 class CategoriesController extends Controller {
@@ -52,9 +51,7 @@ class CategoriesController extends Controller {
 	{
 		$all = Request::all();
 
-		$validator = Validator::make($all,
-			['name' => ['required', 'unique:categories', 'min:5', 'max:50']]
-		);
+		$validator = Category::validate($all);
 
 		if ( $validator->fails() )
 		{
@@ -91,7 +88,9 @@ class CategoriesController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		$category = Category::find($id);
+		return view('admin.categories.update')
+				->with('category', $category);
 	}
 
 	/**
@@ -102,7 +101,28 @@ class CategoriesController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		$all = Request::all();
+
+		if(!$category = Category::find($all['id'])) {
+			abort(404);
+		}
+
+		$validator = Category::validateUpdate($all);
+
+		if ( $validator->fails() )
+		{
+			$errors = $validator->errors()->all();
+
+			return redirect()
+				->back()
+				->with('errors', $errors);
+		}
+
+		$category->update($all);
+
+		return redirect()
+				->route('admin.categories.index')
+				->with('success', 'Se guardó correctamente');
 	}
 
 	/**

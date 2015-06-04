@@ -12,7 +12,7 @@
 			</div>
 			<div class="form-group pull-right">
 				{!! Form::submit('Enviar', array('class' => 'btn btn-default')) !!}
-				<a class="btn btn-danger" href="{{route('admin.categories.index')}}">Cancel</a>
+				<a class="btn btn-danger" href="{{route('admin.categories.index')}}">Cancelar</a>
 			</div>
 			{!! Form::close() !!}
 		</div>
