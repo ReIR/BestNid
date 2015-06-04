@@ -18,6 +18,7 @@ class ArticlesController extends Controller {
 
 	public function index()
 	{
+
 		//Set eager query (performance enhancement)
 		$articles = Article::with('category');
 
@@ -30,9 +31,10 @@ class ArticlesController extends Controller {
 		if ( Request::has('q')) {
 			$articles = $articles->named(Request::get('q'));
 		}
-		//dd($articles);
+
 		//Here is when the query is actualy run.
 		$articles = $articles->get();
+
 
 		//Check for results.
 		if (!count($articles))

@@ -51,7 +51,19 @@ class Article extends Model {
 
 	public function scopeOfNamedCategory($query, $category) {
 			return $query->join('categories', 'articles.category_id', '=', 'categories.id')
-				->where('categories.name', '=', $category);
+				->where('categories.name', '=', $category)
+				->select(
+					'articles.id as id',
+					'articles.title as title',
+					'articles.description as description',
+					'articles.image as image',
+					'articles.endDate as endDate',
+					'articles.user_id as user_id',
+					'articles.category_id as category_id',
+					'articles.created_at as created_at',
+					'articles.updated_at as updated_at',
+					'categories.name as category_name'
+				);
 	}
 
 	public function scopeNamed($query, $name) {
