@@ -84,7 +84,9 @@
 
 	{{-- Countdown requirements --}}
 	<div id='endDateIn' style='display:none;'>{{$article->endDate}}</div>
-	<script src="{{asset('js/jquery.min.js')}}" charset="utf-8"></script>
-	<script src="{{asset('js/jquery.countdown.min.js')}}" charset="utf-8"></script>
-	<script src="{{asset('js/article.countdown.js')}}" charset="utf-8"></script>
+	@section('scripts')
+		@parent
+		<script src="{{asset('js/jquery.countdown.min.js')}}"></script>
+		<script src="{{asset('js/article.countdown.js')}}"></script>
+	@stop
 @stop
