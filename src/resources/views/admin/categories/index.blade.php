@@ -21,7 +21,7 @@
 						<td>{{$c->name}}</td>
 						<td
 							<div class="text-right">
-								<a class="btn btn-default" href="#" role="button">Editar</a>
+								<a class="btn btn-default" href="{{route('admin.categories.edit', ['id' => $c->id])}}" role="button">Editar</a>
 								<a class="btn btn-danger" href="{{route ('admin.categories.alert', ['id'=>$c->id])}}" role="button">Borrar</a>
 							</div>
 						</td>
