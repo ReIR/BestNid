@@ -11,6 +11,7 @@ class Category extends Model {
 	private static $messages = [
 		// name messages
 		'name.required' => 'El nombre es requerido',
+		'name.unique' => 'Ya existe una categoría con ese nombre',
 		'name.alpha' => 'El nombre no puede contener números ni símbolos',
 		'name.max' => 'El nombre debe tener menos de :max caracteres',
 		'name.min' => 'El nombre debe tener al menos :min caracteres',
@@ -31,7 +32,7 @@ class Category extends Model {
 		$rulestemp = self::$rulesForCreation;
 		$messages = self::$messages;
 
-		$rulestemp['name'] = 'required|alpha|min:4|max:50|unique:categories,name,'.$all['id'];
+		$rulestemp['name'] = $rulestemp['name'].','.$all['id'];
 
 		return Validator::make($all, $rulestemp, $messages);
 	}
