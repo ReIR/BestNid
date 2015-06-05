@@ -8,6 +8,14 @@ class Category extends Model {
 
 	protected $fillable = ['name'];
 
+	private static $messages = [
+		// name messages
+		'name.required' => 'El nombre es requerido',
+		'name.alpha' => 'El nombre no puede contener números ni símbolos',
+		'name.max' => 'El nombre debe tener menos de :max caracteres',
+		'name.min' => 'El nombre debe tener al menos :min caracteres',
+	];
+
 	private static $rulesForCreation = [
 			'name' => 'required|alpha|min:4|max:50|unique:categories,name'
 	];
@@ -32,16 +40,4 @@ class Category extends Model {
 	public function articles() {
 		return $this->hasMany('App\Article');
 	}
-
-	private static $messages = [
-		// name messages
-		'name.required' => 'El nombre es requerido',
-		'name.alpha' => 'El nombre no puede contener números ni símbolos',
-		'name.max' => 'El nombre debe tener menos de :max caracteres',
-		'name.min' => 'El nombre debe tener al menos :min caracteres',
-
-	];
-
-
-
 }
