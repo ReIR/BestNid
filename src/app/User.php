@@ -25,15 +25,7 @@ class User extends Model implements Authenticatable {
 	| -----------------------------------------
 	|
 	*/
-	protected $fillable = ['firstName','lastName','email','username'];
-
-	/*
-	| -----------------------------------------
-	|	These fields are not mass assignables
-	| -----------------------------------------
-	|
-	*/
-	protected $guarded = ['*'];
+	protected $fillable = ['firstName','lastName','email','username','password'];
 
 	/*
 	| -----------------------------------------
@@ -116,30 +108,15 @@ class User extends Model implements Authenticatable {
 
 	/*
 	| -----------------------------------------
-	|	Accesors & Mutators
-	| -----------------------------------------
-	|
-	*/
-	public function setPasswordAttribute($value)
-  {
-      $this->attributes['password'] = $value;
-  }
-
-	/*
-	| -----------------------------------------
 	|	Override methods
 	| -----------------------------------------
 	|
 	*/
 	public static function create(array $data) {
+		
+		$data['password'] = Hash::make($data['password']);
 
-		$user = parent::create($data);
-
-		$user->setPasswordAttribute(Hash::make($data['password']));
-
-		$user->save();
-
-		return $user;
+		return parent::create($data);
 	}
 
 	/*
