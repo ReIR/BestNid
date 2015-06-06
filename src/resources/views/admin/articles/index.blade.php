@@ -2,11 +2,8 @@
 
 @section('title', 'Administración')
 
-@section('content')
-
-
-	<div class="col-md-9">
-
+<div class="col-md-9">
+	@section('content')
 		<!-- Row Form Search Article By Title -->
 		<div class="row">
 			<div class="col-md-6">
@@ -77,6 +74,5 @@
 	 			</table>
  			</div>
 		</div>
-
-	</div>
-@overwrite
+	@overwrite
+</div>
