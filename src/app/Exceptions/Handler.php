@@ -39,11 +39,13 @@ class Handler extends ExceptionHandler {
 	 */
 	public function render($request, Exception $e)
 	{
-		if ($e instanceof ModelNotFoundException)
-    	{
-           abort(404, "No encontrado");
-    	}
 
+		if ( $e->getStatusCode() == 404 )
+  	{
+			return redirect()
+				->route('articles.index')
+				->with('error', 'Error 404: La página solicitada no existe');
+  	}
 
 		return parent::render($request, $e);
 	}
