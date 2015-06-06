@@ -2,11 +2,16 @@
 
 @section('title', 'Login')
 
+@section('notifications')@overwrite
+
 @section('content')
 	<div class="col-md-4 col-md-offset-4 form-container">
 		<div class="panel panel-default">
 		<div class="panel-heading">Iniciar Sesión</div>
 			<div class="panel-body">
+				<div class="row">
+					@include('partials.notifications')
+				</div>
 				{!! Form::open(array('route' => 'users.postLogin', 'method' => 'POST')) !!}
 					<div class="form-group">
 						<div class="input-group">

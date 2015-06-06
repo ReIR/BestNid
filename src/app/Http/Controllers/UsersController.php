@@ -98,7 +98,7 @@ class UsersController extends Controller {
 			return redirect()
 				->back()
 				->with('data', $data)
-				->with('errors', $validator->errors()->all());
+				->with('errors', $validator->messages());
 		}
 
 		$user = User::create($data);
