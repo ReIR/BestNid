@@ -41,12 +41,16 @@
 								@endif
 							</ul>
 
-		        {!! Form::open(array('route' => 'articles.index', 'method' => 'GET', 'class' => 'navbar-search-input col-sm-6 col-lg-4')) !!}
-		        	<div class="form-group">
+		        {!! Form::open(array('route' => 'articles.index', 'method' => 'GET', 'class' => 'navbar-search-input col-sm-6')) !!}
+		       		<input type="hidden" name="cat" value="{{Request::get('cat')}}"/>
+		        	<div class="input-group">
 		        		{!! Form::text('q', Request::input('q'), array('placeholder' => 'Buscar...', 'class' => 'form-control')) !!}
+        		      <span class="input-group-btn">
+        		        <button class="btn btn-default button-icon" type="submit">
+        		        	<span class="glyphicon glyphicon-search"></span>
+        		        </button>
+        		      </span>
 		        	</div>
-							<input type="hidden" name="cat" value="{{Request::get('cat')}}">
-		        	{!! Form::submit('buscar', array('class' => 'btn btn-default hidden')) !!}
 		        {!! Form::close() !!}
 
 
