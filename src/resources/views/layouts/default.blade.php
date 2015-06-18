@@ -3,11 +3,11 @@
 		 <title>Bestnid - @yield('title')</title>
 		 <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
 		 <link rel="stylesheet" href="{{asset('css/bestnid.css')}}">
-		@section('scripts')
-			<script src="{{ asset('js/jquery.min.js')}}"></script>
-			<script src="{{ asset('js/bootstrap.js')}}"></script>
-			<script src="{{ asset('js/bestnid.js')}}"></script>
-		@show
+			@section('scripts')
+				<script src="{{ asset('js/jquery.min.js')}}"></script>
+				<script src="{{ asset('js/bootstrap.js')}}"></script>
+				<script src="{{ asset('js/bestnid.js')}}"></script>
+			@show
 	</head>
 	<body>
 

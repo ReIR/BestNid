@@ -1,5 +1,7 @@
+<?php $route = Route::currentRouteName(); ?>
+
 <ul class="list-group">
-	<li class="list-group-item">
+	<li class="list-group-item {{($route == 'admin.articles.index') ? 'active' : ''}}">
 		<span class="badge">1</span>
 		<a href="{{route('admin.articles.index')}}">Artículos</a>
 	</li>
