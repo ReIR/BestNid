@@ -1,8 +1,9 @@
-jQuery(function($){  
+jQuery(function($){
   var end = $("#endDateIn").html();
-  $("#endDate").countdown(end, function(event) {
+  $("#endTime").countdown(end, function(event) {
     $(this).text(
-      event.strftime('%D días %H horas %M minutos')
+      event.strftime('%D días')
     );
   });
-})
+  $("#endDate").html((new Date(end)).toLocaleDateString());
+});

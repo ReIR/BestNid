@@ -24,8 +24,7 @@
 					</a>
 				</h1>
 
-				<span class="subasta-info">La subasta termina en: <span id='endDate'class="text-danger"></span></span>
-
+				<span class="subasta-info">La subasta termina el: <span id='endDate'></span>(<span id='endTime'class="text-danger"></span>)</span>
 				<div class="subasta-description col-md-9">
 					<p>{{$article->getDescription(700)}}</p>
 				</div>
