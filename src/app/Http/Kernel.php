@@ -26,6 +26,7 @@ class Kernel extends HttpKernel {
 		'csrf' => 'App\Http\Middleware\VerifyCsrfToken',
 		'authUser' => 'App\Http\Middleware\AuthCheck',
 		'authAdmin' => 'App\Http\Middleware\AuthAdminCheck',
+		'isOwner' => 'App\Http\Middleware\IsOwner'
 	];
 
 }
