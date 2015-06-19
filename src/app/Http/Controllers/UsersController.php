@@ -125,9 +125,14 @@ class UsersController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit()
 	{
-		//
+	/**
+	*	$id = Auth::user()->id;
+	*	$user = User::find($id);
+	*	return view('users.update')
+	*		->with('user', $user);
+	*/
 	}
 
 	/**

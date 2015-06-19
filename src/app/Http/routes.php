@@ -44,6 +44,14 @@ Route::group(['prefix' => 'admin'], function(){
 	Route::resource('articles', 'Admin\ArticlesController');
 
 	// ---------------------------------
+	//	Edit User's Account
+	// ---------------------------------
+	//
+	Route::get('account/edit', ['as' => 'admin.account.edit', 'uses' => 'Admin\AccountController@editAccount']);
+
+	Route::patch('account', ['as' => 'admin.account.update', 'uses' => 'Admin\AccountController@updateAccount']);
+//	Route::resource('user', 'UsersController', ['except' => 'show', 'create', 'store']);
+	// ---------------------------------
 	//	Categories
 	// ---------------------------------
 	//
