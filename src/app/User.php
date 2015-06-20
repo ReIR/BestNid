@@ -8,6 +8,7 @@ use Illuminate\Auth\Authenticatable as AuthenticableTrait;
 use Auth;
 use Validator;
 use Hash;
+use Request;
 
 class User extends Model implements Authenticatable {
 
@@ -42,32 +43,23 @@ class User extends Model implements Authenticatable {
 	|
 	*/
 
-	private static $rulesForAdmin = [
-		'firstName' => 'required|alpha|min:3|max:30',
-		'lastName' => 'required|alpha|min:3|max:30',
-		'email' => 'required|email|min:10|max:30|unique:users',
-		'username' => 'required|min:4|max:16|unique:users',
-		'password' => 'required|min:6',
-		'rol' => 'required|in:user,admin'
-	];
-
-	private static $rulesForCreation = [
-		'firstName' => 'required|alpha|min:3|max:30',
-		'lastName' => 'required|alpha|min:3|max:30',
-		'email' => 'required|email|min:10|max:30|unique:users',
-		'username' => 'required|min:4|max:16|unique:users',
+	private static $rules = [
+		'firstName' => 'required|regex:/^[\pL\s]+$/u|min:3|max:30',
+		'lastName' => 'required|regex:/^[\pL\s]+$/u|min:3|max:30',
+		'email' => 'required|email|min:10|max:30|unique:users,email',
+		'username' => 'required|min:4|max:16|unique:users,username',
 		'password' => 'required|min:6|same:repassword'
 	];
 
 	private static $messages = [
 		// firstName messages
-    'firstName.required' => 'El nombre es requerido',
-		'firstName.alpha' => 'El nombre no puede contener números ni símbolos',
+    	'firstName.required' => 'El nombre es requerido',
+		'firstName.regex' => 'El nombre no puede contener números ni símbolos',
 		'firstName.min' => 'El nombre debe tener al menos :min caracteres',
 		'firstName.max' => 'El nombre debe tener menos de :max caracteres',
 		// lastName messages
 		'lastName.required' => 'El apellido es requerido',
-		'lastName.alpha' => 'El apellido no puede contener números ni símbolos',
+		'lastName.regex' => 'El apellido no puede contener números ni símbolos',
 		'lastName.min' => 'El apellido debe tener al menos :min caracteres',
 		'lastName.max' => 'El apellido debe tener menos de :max caracteres',
 		// email messages
@@ -96,11 +88,14 @@ class User extends Model implements Authenticatable {
 	* @return Validator
 	*/
 	public static function validate($all) {
-		$rules = self::$rulesForCreation;
+		$rules = self::$rules;
 		$messages = self::$messages;
+		$method = Request::method();
 
-		if ( self::currentUserIsAdmin() ) {
-			$rules = self::$rulesForAdmin;
+		if ($method == 'PATCH' || $method == 'PUT') {
+			unset($rules['password']);
+			$rules['email'] = $rules['email'] .','.Auth::user()->id;
+			$rules['username'] = $rules['username'] .','.Auth::user()->id;
 		}
 
 		return Validator::make($all, $rules, $messages);
