@@ -8,6 +8,7 @@ use Session;
 use Validator;
 use App\Article;
 use App\Category;
+use App\Question;
 
 class ArticlesController extends Controller {
 	/**
@@ -74,16 +75,39 @@ class ArticlesController extends Controller {
 								->take(4)
 								->get();
 
-		//Case of not finding related articles return a view without them.
+		$questions = Question::with('article')
+								->ofArticle($article->id)
+								->orderBy('created_at')
+								->get();
+
+		// Case of not finding related articles nor questions return a view without them.
+		if(!count($related) && !count($questions)) {
+			return view('articles.show')
+						->with('article', $article)
+						->with('related', [])
+						->with('questions', []);
+		}
+
+		// Maybe I found questions but not relateds...
 		if(!count($related)) {
 			return view('articles.show')
 						->with('article', $article)
-						->with('related', null);
+						->with('related', [])
+						->with('questions', $questions);
 		}
 
-		//Return the view of the article and its relateds.
+		// Maybe it was the other way arrownd...
+		if(!count($questions)) {
+			return view('articles.show')
+						->with('article', $article)
+						->with('related', $related)
+						->with('questions', []);
+		}
+
+		// Hurray! I found everything!
 		return view('articles.show')
 					->with('article', $article)
-					->with('related', $related);
+					->with('related', $related)
+					->with('questions', $questions);
 	}
 }

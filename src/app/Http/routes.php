@@ -65,6 +65,13 @@ Route::resource('articles', 'ArticlesController', ['only' => ['index', 'show']])
 //
 Route::resource('users', 'UsersController', ['only' => ['create', 'store']]);
 
+// ---------------------------------
+//	Questions
+// ---------------------------------
+//
+Route::resource('questions', 'QuestionsController', ['only' => ['store', 'show']]);
+
+
 Route::get('users/login', [
 	'as' => 'users.getLogin',
 	'uses' => 'UsersController@getLogin'

@@ -24,7 +24,7 @@
 					</a>
 				</h1>
 
-				<span class="subasta-info">La subasta termina el: <span id='endDate'></span>(<span id='endTime'class="text-danger"></span>)</span>
+				<span class="subasta-info">La subasta termina el: <span id='endDate'></span> (<span id='endTime'class="text-danger"></span>)</span>
 				<div class="subasta-description col-md-9">
 					<p>{{$article->getDescription(700)}}</p>
 				</div>
@@ -34,25 +34,37 @@
 			<div class="row" style="padding-top: 40px;">
 				<div class="col-lg-12">
 					<h4 class="btn btn-danger" id="questions-button">
-						Preguntas al subastador <span class="badge">1</span>
+						Preguntas al subastador <span class="badge">{{count($questions)}}</span>
 					</h4>
 				</div>
 			</div>
 
 			<div id="questions" class="row hidden" style="padding-top: 40px;">
-				<div class="col-lg-12">
+				<div class="col-lg-10">
 					{{-- Questions --}}
-					<div class="media">
-						<div class="media-left">
-							<a href="#" class='avatar-image' style='background-image: url({{ asset('images/no_image_large.png') }})'></a>
-						</div>
-						<div class="media-body">
-							<h4 class="media-heading">Tiene aire acondicionado?</h4>
-								Sabes que todos los que vengo viendo no tienen aire... que onda el tuyo?
-						</div>
-					</div>		{{-- End of Question --}}
-				</div>	{{-- End of Q&A row --}}
-			</div>
+					@foreach($questions as $question)
+						<div class="media">	{{-- Question Start --}}
+							<div class="media-body">
+								<h4 class="media-heading">{{$question->text}}</h4>
+							</div>
+						</div>	{{-- End of Question --}}
+					@endforeach
+					<div class="col-md-12"> {{-- Question Form --}}
+						<div class="panel panel-default">
+							<div class="panel-heading">Agregar Pregunta</div>
+								<div class="panel-body">
+									<div class="row">
+										@include('partials.notifications')
+									</div>
+									{!! Form::open(array('route' => 'questions.store', 'method' => 'POST', 'class' => 'form-inline')) !!}
+									<textarea class='col-md-11' rows='3' name='text' placeholder='Qué desea preguntar?'></textarea>
+									{!! Form::hidden('article_id', $article->id)!!}
+									{!! Form::submit('Enviar', array('class' => 'btn btn-danger')) !!}
+								</div>
+							</div>
+					</div>
+				</div>	{{-- End of Question Form --}}
+			</div>	{{-- End of Q&A section --}}
 
 			<div class="col-md-9 related">
 				{{-- Related Articles --}}
