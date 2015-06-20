@@ -44,8 +44,8 @@ class User extends Model implements Authenticatable {
 	*/
 
 	private static $rules = [
-		'firstName' => 'required|alpha|min:3|max:30',
-		'lastName' => 'required|alpha|min:3|max:30',
+		'firstName' => 'required|regex:/^[\pL\s]+$/u|min:3|max:30',
+		'lastName' => 'required|regex:/^[\pL\s]+$/u|min:3|max:30',
 		'email' => 'required|email|min:10|max:30|unique:users,email',
 		'username' => 'required|min:4|max:16|unique:users,username',
 		'password' => 'required|min:6|same:repassword'
@@ -54,12 +54,12 @@ class User extends Model implements Authenticatable {
 	private static $messages = [
 		// firstName messages
     	'firstName.required' => 'El nombre es requerido',
-		'firstName.alpha' => 'El nombre no puede contener números ni símbolos',
+		'firstName.regex' => 'El nombre no puede contener números ni símbolos',
 		'firstName.min' => 'El nombre debe tener al menos :min caracteres',
 		'firstName.max' => 'El nombre debe tener menos de :max caracteres',
 		// lastName messages
 		'lastName.required' => 'El apellido es requerido',
-		'lastName.alpha' => 'El apellido no puede contener números ni símbolos',
+		'lastName.regex' => 'El apellido no puede contener números ni símbolos',
 		'lastName.min' => 'El apellido debe tener al menos :min caracteres',
 		'lastName.max' => 'El apellido debe tener menos de :max caracteres',
 		// email messages
