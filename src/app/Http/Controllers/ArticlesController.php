@@ -72,6 +72,7 @@ class ArticlesController extends Controller {
 		$related = Article::with('category')
 								->ofCategory($article->category_id)
 								->where('id', '!=', $id)
+								->where('endDate', '>', date("Y-m-d H:i:s"))
 								->orderBy(\DB::raw('RAND()'))
 								->take(4)
 								->get();
