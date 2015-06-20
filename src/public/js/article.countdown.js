@@ -1,9 +1,15 @@
 jQuery(function($){
   var end = $("#endDateIn").html();
-  $("#endTime").countdown(end, function(event) {
-    $(this).text(
-      event.strftime('%D días')
-    );
-  });
-  $("#endDate").html((new Date(end)).toLocaleDateString());
+  var endDate = new Date(end);
+  var tomorrow = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+  if (endDate > tomorrow) {
+    $("#endTime").countdown(end, function(event) {
+      $(this).text(
+        event.strftime('%D días')
+      );
+    });
+  } else {
+    $("#endTime").html("Mañana");
+  }
+  $("#endDate").html(endDate.toLocaleDateString());
 });
