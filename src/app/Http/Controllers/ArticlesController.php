@@ -21,7 +21,8 @@ class ArticlesController extends Controller {
 	{
 
 		//Set eager query (performance enhancement)
-		$articles = Article::with('category');
+		$articles = Article::with('category')
+								->notFinished();
 
 		//Query for all the category (should me moved to another method)
 		if ( Request::has('cat')) {
@@ -38,7 +39,7 @@ class ArticlesController extends Controller {
 
 
 		//Check for results.
-		if (!count($articles))
+		if ((Request::has('q') || Request::has('cat')) && !count($articles))
 		{
 			return redirect()
 				->route('articles.index')
@@ -71,8 +72,8 @@ class ArticlesController extends Controller {
 		//Get 3 articles of the same category.
 		$related = Article::with('category')
 								->ofCategory($article->category_id)
+								->notFinished()
 								->where('id', '!=', $id)
-								->where('endDate', '>', date("Y-m-d H:i:s"))
 								->orderBy(\DB::raw('RAND()'))
 								->take(4)
 								->get();

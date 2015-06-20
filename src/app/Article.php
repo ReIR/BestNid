@@ -71,6 +71,10 @@ class Article extends Model {
 		return $query->where('title', 'LIKE', '%'.$name.'%');
 	}
 
+	public function scopeNotFinished($query) {
+		return $query->where('endDate', '>', date("Y-m-d H:i:s"));
+	}
+
 	public function getImageURL(){
 		return asset('images/'.$this->image);
 	}
