@@ -71,6 +71,7 @@ class ArticlesController extends Controller {
 		//Get 3 articles of the same category.
 		$related = Article::with('category')
 								->ofCategory($article->category_id)
+								->where('id', '!=', $id)
 								->orderBy(\DB::raw('RAND()'))
 								->take(4)
 								->get();
