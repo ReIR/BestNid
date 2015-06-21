@@ -14,10 +14,12 @@
 
 					<?php $error = Session::has('errors') && Session::get('errors')->get('firstName'); ?>
 		    	<div class="form-group {{$error ? 'has-error' : ''}}">
+		    	    <label for="firstName">Nombre</label>
 		    		<input 
 		    			class="form-control"
 		    			type="text"
 		    			name="firstName"
+		    			id="firstName"
 		    			value="{{$user->firstName}}" />
 							@if($error)
 								<span class="text-danger">
@@ -28,10 +30,12 @@
 
 					<?php $error = Session::has('errors') && Session::get('errors')->get('lastName'); ?>
 		    	<div class="form-group {{$error ? 'has-error' : ''}}">
+		    		<label for="lastName">Apellido</label>
 		    		<input 
 		    			class="form-control"
 		    			type="text"
 		    			name="lastName"
+		    			id="lastName"
 		    			value="{{$user->lastName}}" />
 							@if($error)
 								<span class="text-danger">
@@ -42,10 +46,12 @@
 
 		    	<?php $error = Session::has('errors') && Session::get('errors')->get('username'); ?>
 					<div class="form-group {{$error ? 'has-error' : ''}}">
+		    	    <label for="username">Nombre de usuario</label>
 		    		<input 
 		    			class="form-control"
 		    			type="text"
 		    			name="username"
+		    			id="username"
 		    			value="{{$user->username}}" />
 							@if($error)
 								<span class="text-danger">
@@ -56,10 +62,12 @@
 
 					<?php $error = Session::has('errors') && Session::get('errors')->get('email'); ?>
 					<div class="form-group {{$error ? 'has-error' : ''}}">
+					<label for="email">Email</label>
 		    		<input
 		    			class="form-control"
 		    			type="email"
 		    			name="email"
+		    			id="email"
 						@if($error)
 			    			value="<?php echo Session::get('data')['email']; ?>" />
 							<span class="text-danger">
