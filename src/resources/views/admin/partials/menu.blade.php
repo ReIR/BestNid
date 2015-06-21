@@ -3,7 +3,7 @@
 <ul class="list-group">
 	<li class="list-group-item {{($route == 'admin.articles.index') ? 'active' : ''}}">
 		<span class="badge">1</span>
-		<a href="{{route('admin.articles.index')}}">Artículos</a>
+		<a href="{{route('admin.articles.index')}}">Subastas</a>
 	</li>
 	<li class="list-group-item">
 		<span class="badge">2</span>

@@ -17,8 +17,8 @@ class CreateArticlesTable extends Migration {
 			$table->increments('id');
 			$table->string('title', 50);
 			$table->text('description');
-			$table->string('image', 100)->default('no-imge.png');
-			$table->timestamp('endDate');
+			$table->string('image', 100)->default('no_large_image.png');
+			$table->date('endDate');
 			$table->timestamps();
 
 			$table->integer('user_id')->unsigned();

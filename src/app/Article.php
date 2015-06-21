@@ -4,9 +4,62 @@ use Illuminate\Database\Eloquent\Model;
 use App\Category;
 use Illuminate\Support\Str;
 
+use Request;
+use Auth;
+use Validator;
+use Hash;
+use Image;
+use Carbon\Carbon;
+
 class Article extends Model {
 
 	protected $table = 'articles';
+
+	private static $rules = [
+		'title' => 'required|min:4|max:50',
+		'description' => 'required|min:10',
+		'image' => 'required|image|mimes:jpeg,jpg,png',
+		'endDate' => 'required',
+		'category_id' => 'required|integer|exists:categories,id'
+	];
+
+	private static $messages = [
+    'title.required' => 'El título es requerido',
+		'title.min' => 'El título debe tener más de :min caracteres',
+		'title.max' => 'El título debe tener menos de :max caracteres',
+		'description.required' => 'La descripción es requerida',
+		'description.min' => 'La descripción debe tener más de :min caracteres',
+		'image.required' => 'La imagen es requerida',
+		'image.image' => 'El archivo adjunto no es una imagen',
+		'image.mimes' => 'La imagen no es un formato válido. Debe ser jpeg, jpg ó png',
+		'image.size' => 'La imagen debe tener un tamaño menor a :size KB',
+		'endDate.required' => 'La fecha de finalización es requerida',
+		'endDate.after' => 'La fecha de finalización debe ser de al menos 15 días',
+		'endDate.date' => 'La fecha de finalización tiene un formato incorrecto',
+		'category_id.required' => 'La categoría es requerida',
+		'category_id.integer' => 'La categoría es requerida',
+		'category_id.exists' => 'La categoría no es un valor válido'
+	];
+
+	/*
+	* Validate data $all
+	*
+	* @param $all article data
+	*
+	* @return Validator
+	*/
+	public static function validate($all) {
+
+		$rules = self::$rules;
+
+		$after15days = date('m/d/Y', strtotime("+14 days"));
+
+		$all['endDate'] = date('m/d/Y', strtotime($all['endDate']));
+
+		$rules['endDate'] .= '|after:'.$after15days;
+
+		return Validator::make($all, $rules, self::$messages);
+	}
 
 	/**
 	 * The attributes that are mass assignable.
@@ -15,12 +68,12 @@ class Article extends Model {
 	 */
 	protected $fillable = [
 		'name',
+		'user_id',
 		'title',
 		'description',
 		'image',
 		'endDate',
-		'user_id',
-		'category_id'
+		'category_id',
 	];
 
 	/**
@@ -76,7 +129,7 @@ class Article extends Model {
 	}
 
 	public function getImageURL(){
-		return asset('images/'.$this->image);
+		return asset( self::getImagesPath() . $this->image);
 	}
 
 	public function getDescription($limit = 100) {
@@ -85,6 +138,69 @@ class Article extends Model {
 
 	public function getTitle($limit = 20) {
 		return Str::limit($this->title, $limit);
+	}
+
+	/*
+	| -----------------------------------------
+	|	Return path for persist images
+	| -----------------------------------------
+	|
+	*/
+	private static function getImagesFullPath(){
+		return public_path() . '/images/articles/';
+	}
+
+	private static function getImagesPath(){
+		return 'images/articles/';
+	}
+
+	/*
+	| -----------------------------------------
+	|	Convert and persist images
+	| -----------------------------------------
+	|
+	*/
+	public static function savePhoto($file) {
+		$name = md5(microtime());
+		$name .= '.jpg';
+
+		$img = Image::make($file)->resize(600, 600)->encode('jpg', 90);
+
+		$img->save( self::getImagesFullPath() . $name);
+
+		return $name;
+	}
+
+	/*
+	| -----------------------------------------
+	|	Get categories for FORM
+	| -----------------------------------------
+	|
+	*/
+	public static function getMapCategories(){
+		$categories = [];
+		$categories[] = '';
+
+		foreach(Category::all() as $c){
+			$categories[$c->id] = $c->name;
+		}
+
+		return $categories;
+	}
+
+	/*
+	| -----------------------------------------
+	|	Override methods
+	| -----------------------------------------
+	|
+	*/
+	public static function create(array $data) {
+
+		// Assign user_id and save image
+		$data['user_id'] = Auth::user()->id;
+		$data['image'] = self::savePhoto($data['image']);
+
+		return parent::create($data);
 	}
 
 }

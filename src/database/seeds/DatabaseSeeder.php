@@ -53,58 +53,58 @@ class DatabaseSeeder extends Seeder {
 			]);
 
 
-		// 1ra forma
-		$article1 = Article::create([
+
+		Auth::attempt(['username' => 'user', 'password' => '123']);
+
+
+		$article1 = Article::forceCreate([
 			'title' => 'Mercedes Benz',
 			'description' => 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.',
-			'image' => 'mercedes_benz.png',
-			'endDate' => (new DateTime('2015-08-18'))->format('Y-m-d H:i:s'),
-
-			'user_id' => $user1->id,
+			'image' => 'http://lorempixel.com/400/200/sports/',
+			'endDate' => date('Y-m-d', strtotime('+20 days')),
+			'user_id' => Auth::user()->id,
 			'category_id' => $category1->id
 		]);
 
-		$article2 = Article::create([
+		$article2 = Article::forceCreate([
 			'title' => 'Audi R8',
 			'description' => 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.',
-			'image' => 'audi.png',
-			'endDate' => (new DateTime('2015-09-21'))->format('Y-m-d H:i:s'),
-
-			'user_id' => $user1->id,
+			'image' => 'http://lorempixel.com/400/200/sports/',
+			'endDate' => date('Y-m-d', strtotime('+20 days')),
+			'user_id' => Auth::user()->id,
 			'category_id' => $category1->id
 		]);
 
-
-		$article3 = Article::create([
+		$article3 = Article::forceCreate([
 			'title' => 'BMW nuevito',
 			'description' => 'Casi 0km.',
-			'image' => 'bmw.png',
-			'endDate' => (new DateTime('2016-03-8'))->format('Y-m-d H:i:s'),
-
-			'user_id' => $user1->id,
+			'image' => 'http://lorempixel.com/400/200/sports/',
+			'endDate' => date('Y-m-d', strtotime('+20 days')),
+			'user_id' => Auth::user()->id,
 			'category_id' => $category1->id
 		]);
 
-		$article4 = Article::create([
+		$article4 = Article::forceCreate([
 			'title' => 'Mi falcon',
 			'description' => 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.',
-			'image' => 'falcon.png',
-			'endDate' => (new DateTime('2015-12-24'))->format('Y-m-d H:i:s'),
-
-			'user_id' => $user1->id,
+			'image' => 'http://lorempixel.com/400/200/sports/',
+			'endDate' => date('Y-m-d', strtotime('+20 days')),
+			'user_id' => Auth::user()->id,
 			'category_id' => $category1->id
 		]);
 
-
-		$article5 = Article::create([
+		$article5 = Article::forceCreate([
 			'title' => 'Palo de amasar',
 			'description' => 'Instrumento de represión de masas.',
-			'image' => 'palo_de_amasar.png',
-			'endDate' => (new DateTime('2016-1-1'))->format('Y-m-d H:i:s'),
-
-			'user_id' => $user1->id,
+			'image' => 'http://lorempixel.com/400/200/sports/',
+			'endDate' => date('Y-m-d', strtotime('+20 days')),
+			'user_id' => Auth::user()->id,
 			'category_id' => $category2->id
 		]);
+
+
+
+
 
 		$question1 = Question::create([
 			'text' => 'Tiene aire acondicionado?',

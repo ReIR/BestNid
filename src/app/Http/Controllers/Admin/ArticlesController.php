@@ -5,16 +5,18 @@ use App\Http\Controllers\Controller;
 use Request;
 
 use App\Article;
+use App\Category;
 use Session;
 use Validator;
+use Auth;
 
 class ArticlesController extends Controller {
 
 
 	public function __construct() {
 
-		//$this->middleware('authUser', ['only' => ['create', 'store']]);
 		$this->middleware('authUser');
+		$this->middleware('csrf', ['only' => 'store']);
 	}
 
 	/**
@@ -43,7 +45,6 @@ class ArticlesController extends Controller {
 			$articles = Article::all();
 		}
 
-
 		return view('admin.articles.index')
 				->with('articles', $articles);
 	}
@@ -55,7 +56,9 @@ class ArticlesController extends Controller {
 	 */
 	public function create()
 	{
-		return view('admin.articles.create');
+		$categories = Article::getMapCategories();
+
+		return view('admin.articles.create')->withCategories($categories);
 	}
 
 	/**
@@ -67,17 +70,14 @@ class ArticlesController extends Controller {
 	{
 		$all = Request::all();
 
-		$validator = Validator::make($all,
-			['name' => ['required', 'min:5', 'max:50']]
-		);
+		$validator = Article::validate($all);
 
 		if ( $validator->fails() )
 		{
-			$errors = $validator->errors()->all();
-
 			return redirect()
 				->back()
-				->with('errors', $errors);
+				->with('errors', $validator->messages())
+				->withInput();
 		}
 
 		Article::create($all);

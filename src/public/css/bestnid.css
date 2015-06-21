@@ -8,6 +8,34 @@ body {
 	color: #333;
 }
 
+.article-form .form-inline > * {
+	vertical-align: top;
+}
+
+.uploadField:before{
+	content: attr(data-content);
+	position:absolute;
+	top:9px;
+	width:100%;
+	text-align:center;
+}
+
+.uploadField {
+	width: 100px;
+  height: 40px;
+  background: white;
+	border: 1px solid #ccc;
+	position:relative;
+  overflow: hidden;
+}
+
+.uploadField input {
+    width: 157px !important;
+    height: 57px !important;
+    opacity: 0 !important;
+    overflow: hidden !important;
+}
+
 .fixed-top {
 	position: fixed;
 	left: 0;
