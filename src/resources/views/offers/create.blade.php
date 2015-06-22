@@ -25,7 +25,7 @@
 
 							<?php $error = Session::has('errors') && Session::get('errors')->get('text'); ?>
 				    	<div class="form-group {{$error ? 'has-error' : ''}}">
-				    		<textarea placeholder="Razón" class="form-control" type="text" name="text"></textarea>
+				    		<textarea placeholder="Razón" class="form-control" type="text" name="text">{{Request::old('text')}}</textarea>
 								@if($error)
 									<span class="text-danger">
 										{{Session::get('errors')->get('text')[0]}}								
@@ -35,7 +35,7 @@
 
 							<?php $error = Session::has('errors') && Session::get('errors')->get('amount'); ?>
 				    	<div class="form-group {{$error ? 'has-error' : ''}}">
-				    		<input placeholder="Monto" class="form-control" type="float" name="amount" />
+				    		<input value="{{Request::old('amount')}}" placeholder="Monto" class="form-control" type="float" name="amount" />
 								@if($error)
 									<span class="text-danger">
 										{{Session::get('errors')->get('amount')[0]}}	
@@ -45,7 +45,7 @@
 
 							<?php $error = Session::has('errors') && Session::get('errors')->get('card'); ?>
 				    	<div class="form-group {{$error ? 'has-error' : ''}}">
-				    		<input placeholder="Número de tarjeta" class="form-control" type="numeric" name="card" />
+				    		<input value="{{Request::old('card')}}" placeholder="Número de tarjeta" class="form-control" type="numeric" name="card" />
 								@if($error)
 									<span class="text-danger">
 										{{Session::get('errors')->get('card')[0]}}
@@ -55,7 +55,7 @@
 
 								<?php $error = Session::has('errors') && Session::get('errors')->get('contact'); ?>
 				    	<div class="form-group {{$error ? 'has-error' : ''}}">
-				    		<input placeholder="Teléfono de contacto" class="form-control" type="numeric" name="contact" />
+				    		<input value="{{Request::old('contact')}}" placeholder="Teléfono de contacto" class="form-control" type="numeric" name="contact" />
 								@if($error)
 									<span class="text-danger">
 										{{Session::get('errors')->get('contact')[0]}}

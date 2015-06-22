@@ -35,8 +35,15 @@ class OffersController extends Controller {
 	{
 		$article= Article::find($id);
 
-		return view('offers.create')
-			->with('article', $article);
+		if (!$article->isCurrentOwner())
+		{
+			return view('offers.create')
+				->with('article', $article);
+		}
+		return redirect()
+				->route('articles.show', ['id'=> $article->id]);
+				
+
 	}
 
 	/**
@@ -56,20 +63,21 @@ class OffersController extends Controller {
 		{
 			return redirect()
 				->back()
-				->with('data', $data)
+				->withInput()
 				->with('errors', $validator->messages());
 		}
 
 		$article = Article::find($id);
-		//$users = DB::table('users')->where('user_id', '=', )->get();
-		//dd($articles);
-
-		if ( Auth::user()->id != $article->user_id )
+		
+		if ( (Auth::user()->id == $article->user_id) || (Auth::user()->alreadyOffered($id)) )
 		{
-			Offer::create($data);
+			return redirect()
+				->route('articles.index')
+				->with('error', 'Este usuario ya ofertó en esta subasta.');
+
 		}else {
-			echo "Un usuario no puede ofertar sus propias subastas";
-			die();
+
+			Offer::create($data);
 		}
 
 		return redirect()
