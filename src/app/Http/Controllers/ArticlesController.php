@@ -83,31 +83,12 @@ class ArticlesController extends Controller {
 								->orderBy('created_at')
 								->get();
 
-		// Case of not finding related articles nor questions return a view without them.
-		if(!count($related) && !count($questions)) {
-			return view('articles.show')
-						->with('article', $article)
-						->with('related', [])
-						->with('questions', []);
-		}
+		//Case of questions being null, send an empty array.
+		$questions = $questions? $questions : [];
 
-		// Maybe I found questions but not relateds...
-		if(!count($related)) {
-			return view('articles.show')
-						->with('article', $article)
-						->with('related', [])
-						->with('questions', $questions);
-		}
+		//The same for related.
+		$related = $related? $related : [];
 
-		// Maybe it was the other way arrownd...
-		if(!count($questions)) {
-			return view('articles.show')
-						->with('article', $article)
-						->with('related', $related)
-						->with('questions', []);
-		}
-
-		// Hurray! I found everything!
 		return view('articles.show')
 					->with('article', $article)
 					->with('related', $related)
