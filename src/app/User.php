@@ -9,6 +9,7 @@ use Auth;
 use Validator;
 use Hash;
 use Request;
+use DB;
 
 class User extends Model implements Authenticatable {
 
@@ -124,6 +125,16 @@ class User extends Model implements Authenticatable {
 		return $this->hasMany('App\Article');
 	}
 
+		/*
+	| -----------------------------------------
+	|	Relationships with Offers
+	| -----------------------------------------
+	|
+	*/
+	public function offers() {
+		return $this->hasMany('App\Offer');
+	}
+
 	/*
 	| -----------------------------------------
 	|	Helper methods
@@ -140,4 +151,12 @@ class User extends Model implements Authenticatable {
 
 		return ( (Auth::check()) && (Auth::user()->role === 'admin') );
 	}
+
+	public function alreadyOffered($id){
+		$offers = DB::table('offers')
+					->where('article_id', '=', $id)
+					->where( 'user_id', '=', Auth::user()->id)->get();
+		return !empty($offers);
+	}
+
 }
