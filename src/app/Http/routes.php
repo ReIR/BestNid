@@ -68,16 +68,17 @@ Route::group(['prefix' => 'admin'], function(){
 Route::resource('articles', 'ArticlesController', ['only' => ['index', 'show']]);
 
 // ---------------------------------
+//	Questions
+// ---------------------------------
+//
+Route::resource('articles.questions', 'QuestionsController', ['only' => ['store', 'show']]);
+
+// ---------------------------------
 //	Users
 // ---------------------------------
 //
 Route::resource('users', 'UsersController', ['only' => ['create', 'store']]);
 
-// ---------------------------------
-//	Questions
-// ---------------------------------
-//
-Route::resource('questions', 'QuestionsController', ['only' => ['store', 'show']]);
 
 
 Route::get('users/login', [

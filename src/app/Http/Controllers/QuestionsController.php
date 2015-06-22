@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Question;
+use App\Article;
 
 use Request;
 use Auth;
@@ -40,12 +41,25 @@ class QuestionsController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store($article_id)
 	{
 		//Get all params.
 		$data = Request::all();
 
-		//Get the id of the asker. Add it to the params array.
+		//Ensure that the form wasn't adulterated.
+		$data['article_id'] = $article_id;
+
+		$article = Article::find($article_id);
+
+		//Ensure that the owner isn't making questions.
+		if($article->isCurrentOwner()) {
+
+			return redirect()
+				->back()
+				->with('error', 'El dueño del artículo no puede hacer preguntas sobre sus artículos.');
+		}
+
+		//Then get the id of the asker. Add it to the params array.
 		$data['user_id'] = Auth::user()->id;
 
 		$validator = Question::validate($data);
@@ -62,7 +76,8 @@ class QuestionsController extends Controller {
 		Question::create($data);
 
 		return redirect()
-			->route('articles.show', ['id' => $data["article_id"]]);
+			->route('articles.show', ['id' => $data["article_id"]])
+			->with('success', 'La pregunta se agregó correctamente.');
 	}
 
 	/**

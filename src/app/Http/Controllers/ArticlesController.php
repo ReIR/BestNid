@@ -3,7 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Request;
-
+use Auth;
 use Session;
 use Validator;
 use App\Article;
@@ -69,7 +69,7 @@ class ArticlesController extends Controller {
 			abort(404, 'No se encontró el artículo: '.$id);
 		}
 
-		//Get 3 articles of the same category.
+		//Get 4 articles of the same category.
 		$related = Article::with('category')
 								->ofCategory($article->category_id)
 								->notFinished()
@@ -89,9 +89,13 @@ class ArticlesController extends Controller {
 		//The same for related.
 		$related = $related? $related : [];
 
+		//Check if the requester is the owner of the article.
+		$isCurrentOwner = $article->isCurrentOwner();
+
 		return view('articles.show')
 					->with('article', $article)
 					->with('related', $related)
-					->with('questions', $questions);
+					->with('questions', $questions)
+					->with('isOwner', $isCurrentOwner);
 	}
 }

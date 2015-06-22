@@ -140,6 +140,10 @@ class Article extends Model {
 		return Str::limit($this->title, $limit);
 	}
 
+	public function isCurrentOwner() {
+		return (Auth::check() && (Auth::user()->id == $this->user_id));
+	}
+
 	/*
 	| -----------------------------------------
 	|	Return path for persist images
