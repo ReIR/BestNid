@@ -13,20 +13,30 @@
 
 			<div class="col-sm-8">
 			{{-- Article Information column--}}
-				<h1>
-					<span>
-						{{$article->title}}
-					</span>
-					<a href="{{ route('articles.index')}}?cat={{$article->category->name}}">
-						<span class="badge">
-							{{$article->category->name}}
+				<div class="row">
+					<h1>
+						<span>
+							{{$article->title}}
 						</span>
-					</a>
-				</h1>
+						<a href="{{ route('articles.index')}}?cat={{$article->category->name}}">
+							<span class="badge">
+								{{$article->category->name}}
+							</span>
+						</a>
+					</h1>
 
-				<span class="subasta-info">La subasta termina el: <span id='endDate'></span> (<span id='endTime'class="text-danger"></span>)</span>
-				<div class="subasta-description col-md-9">
-					<p>{{$article->getDescription(700)}}</p>
+					<span class="subasta-info">La subasta termina el: <span id='endDate'></span> (<span id='endTime'class="text-danger"></span>)
+					</span>
+				</div>
+				<div class="row">
+						@if (Auth::check() && Auth::user()->id != $article->user_id )
+							<a class="btn btn-success" href="{{ route('offers.create', ['id'=> $article->id])}}" role="button">Ofertar</a>
+						@endif
+				</div>
+				<div class="row">
+					<div class="subasta-description col-md-9">
+							<p>{{$article->getDescription(700)}}</p>
+					</div>
 				</div>
 			</div> {{-- End of Info Column --}}
 

@@ -7,6 +7,7 @@ use App\Article;
 use App\User;
 use App\Category;
 use App\Question;
+use App\Offer;
 
 class DatabaseSeeder extends Seeder {
 
@@ -123,6 +124,15 @@ class DatabaseSeeder extends Seeder {
 			'user_id' => $user2->id,
 			'article_id' => $article1->id
 		]);
+
+		$offer1 = Offer::create([
+			'text' => 'Me interesa el producto porque soy fanático de los gatos.',
+			'card' => 1234567890123456,
+			'contact' => '2215529657',
+			'user_id' => $user2->id,
+			'article_id' => $article1->id
+		]);
+
 	}
 
 }

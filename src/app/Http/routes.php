@@ -94,3 +94,16 @@ Route::get('users/logout', [
 	'as' => 'users.logout',
 	'uses' => 'UsersController@logout'
 ]);
+
+// ---------------------------------
+//	Offers
+// ---------------------------------
+//
+Route::get('articles/{id}/offers/create', [
+		'as' => 'offers.create',
+		'uses' => 'OffersController@create'
+	]);
+Route::post('articles/{id}/offers', [
+		'as' => 'offers.store',
+		'uses' => 'OffersController@store'
+	]);
