@@ -128,6 +128,7 @@ class DatabaseSeeder extends Seeder {
 		$offer1 = Offer::create([
 			'text' => 'Me interesa el producto porque soy fanático de los gatos.',
 			'card' => 1234567890123456,
+			'amount' => 1.0,
 			'contact' => '2215529657',
 			'user_id' => $user2->id,
 			'article_id' => $article1->id
