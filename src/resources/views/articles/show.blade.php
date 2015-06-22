@@ -34,7 +34,9 @@
 						@endif
 						@if(!$isLoggedIn)
 							<span class="text-danger"> Para poder ofertar debe iniciar sesión.</span>
-							<a class="btn btn-danger" href="{{route('users.getLogin')}}" role="button">Iniciar Sesión</a>
+							<a href="{{route('users.getLogin')}}">
+								<span class="label label-danger">Iniciar Sesión</span>
+							</a>
 						@endif
 				</div>
 				<div class="row">
@@ -81,7 +83,9 @@
 					@endif
 					@if(!$isLoggedIn)
 						<span class="text-danger"> Para poder hacer preguntas debe iniciar sesión.</span>
-						<a class="btn btn-danger" href="{{route('users.getLogin')}}" role="button">Iniciar Sesión</a>
+						<a href="{{route('users.getLogin')}}">
+							<span class="label label-danger">Iniciar Sesión</span>
+						</a>
 					@endif
 				</div>
 			</div>	{{-- End of Q&A section --}}
