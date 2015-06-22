@@ -29,8 +29,12 @@
 					</span>
 				</div>
 				<div class="row">
-						@if (!$isOwner)
+						@if ($isLoggedIn && !$isOwner)
 							<a class="btn btn-success" href="{{ route('offers.create', ['id'=> $article->id])}}" role="button">Ofertar</a>
+						@endif
+						@if(!$isLoggedIn)
+							<span class="text-danger"> Para poder ofertar debe iniciar sesión.</span>
+							<a class="btn btn-danger" href="{{route('users.getLogin')}}" role="button">Iniciar Sesión</a>
 						@endif
 				</div>
 				<div class="row">
@@ -59,7 +63,7 @@
 							</div>
 						</div>	{{-- End of Question --}}
 					@endforeach
-					@if(!$isOwner)
+					@if($isLoggedIn && !$isOwner)
 						<div class="col-md-12"> {{-- Question Form --}}
 							<div class="panel panel-default">
 								<div class="panel-heading">Agregar Pregunta</div>
@@ -74,6 +78,10 @@
 									</div>
 								</div>
 						</div> {{-- End of Question Form --}}
+					@endif
+					@if(!$isLoggedIn)
+						<span class="text-danger"> Para poder hacer preguntas debe iniciar sesión.</span>
+						<a class="btn btn-danger" href="{{route('users.getLogin')}}" role="button">Iniciar Sesión</a>
 					@endif
 				</div>
 			</div>	{{-- End of Q&A section --}}
