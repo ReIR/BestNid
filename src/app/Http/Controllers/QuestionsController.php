@@ -51,10 +51,12 @@ class QuestionsController extends Controller {
 		$validator = Question::validate($data);
 
 		if($validator->fails()) {
+
+			$error = $validator->errors()->first();
+
 			return redirect()
 				->back()
-				->with('data', $data)
-				->with('errors', $validator->messages());
+				->with('error', $error);
 		}
 
 		Question::create($data);

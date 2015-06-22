@@ -39,7 +39,7 @@ class Question extends Model {
 	*/
 
 	private static $rulesForCreation = [
-		'text' => 'required|min:1|max:144',
+		'text' => 'required|min:10|max:144',
 		'user_id' => 'required|exists:users,id',
 		'article_id' => 'required|exists:articles,id'
 	];
