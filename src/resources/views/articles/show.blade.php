@@ -66,7 +66,7 @@
 									<div class="row">
 										@include('partials.notifications')
 									</div>
-									{!! Form::open(array('route' => 'questions.store', 'method' => 'POST', 'class' => 'form-inline')) !!}
+									{!! Form::open(array('route' => ['articles.questions.store', $article->id], 'method' => 'POST', 'class' => 'form-inline')) !!}
 									<textarea class='col-md-11' rows='3' name='text' placeholder='Qué desea preguntar?'></textarea>
 									{!! Form::hidden('article_id', $article->id)!!}
 									{!! Form::submit('Enviar', array('class' => 'btn btn-danger')) !!}
