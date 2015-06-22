@@ -29,7 +29,7 @@
 					</span>
 				</div>
 				<div class="row">
-						@if (Auth::check() && Auth::user()->id != $article->user_id )
+						@if (!$isOwner)
 							<a class="btn btn-success" href="{{ route('offers.create', ['id'=> $article->id])}}" role="button">Ofertar</a>
 						@endif
 				</div>
@@ -59,21 +59,23 @@
 							</div>
 						</div>	{{-- End of Question --}}
 					@endforeach
-					<div class="col-md-12"> {{-- Question Form --}}
-						<div class="panel panel-default">
-							<div class="panel-heading">Agregar Pregunta</div>
-								<div class="panel-body">
-									<div class="row">
-										@include('partials.notifications')
+					@if(!$isOwner)
+						<div class="col-md-12"> {{-- Question Form --}}
+							<div class="panel panel-default">
+								<div class="panel-heading">Agregar Pregunta</div>
+									<div class="panel-body">
+										<div class="row">
+											@include('partials.notifications')
+										</div>
+										{!! Form::open(array('route' => ['articles.questions.store', $article->id], 'method' => 'POST', 'class' => 'form-inline')) !!}
+										<textarea class='col-md-11' rows='3' name='text' placeholder='Qué desea preguntar?'></textarea>
+										{!! Form::hidden('article_id', $article->id)!!}
+										{!! Form::submit('Enviar', array('class' => 'btn btn-danger')) !!}
 									</div>
-									{!! Form::open(array('route' => ['articles.questions.store', $article->id], 'method' => 'POST', 'class' => 'form-inline')) !!}
-									<textarea class='col-md-11' rows='3' name='text' placeholder='Qué desea preguntar?'></textarea>
-									{!! Form::hidden('article_id', $article->id)!!}
-									{!! Form::submit('Enviar', array('class' => 'btn btn-danger')) !!}
 								</div>
-							</div>
-					</div>
-				</div>	{{-- End of Question Form --}}
+						</div> {{-- End of Question Form --}}
+					@endif
+				</div>
 			</div>	{{-- End of Q&A section --}}
 
 			<div class="col-md-9 related">
