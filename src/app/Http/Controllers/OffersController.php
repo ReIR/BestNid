@@ -35,15 +35,15 @@ class OffersController extends Controller {
 	{
 		$article= Article::find($id);
 
-		if (!$article->isCurrentOwner())
+		if (!$article->isCurrentOwner() && !Auth::user()->alreadyOffered($id))
 		{
 			return view('offers.create')
 				->with('article', $article);
 		}
 		return redirect()
-				->route('articles.show', ['id'=> $article->id]);
+				->route('articles.show', ['id'=> $article->id])
+				->with('error', 'Usted ya ha ofertado sobre este artículo.');
 				
-
 	}
 
 	/**
