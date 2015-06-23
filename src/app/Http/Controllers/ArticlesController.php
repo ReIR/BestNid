@@ -89,13 +89,17 @@ class ArticlesController extends Controller {
 		//The same for related.
 		$related = $related? $related : [];
 
+		$isLoggedIn = Auth::check();
+
 		//Check if the requester is the owner of the article.
-		$isCurrentOwner = $article->isCurrentOwner();
+		$isOwner = $article->isCurrentOwner();
 
 		return view('articles.show')
 					->with('article', $article)
 					->with('related', $related)
 					->with('questions', $questions)
-					->with('isOwner', $isCurrentOwner);
+					->with('isLoggedIn', $isLoggedIn)
+					->with('isOwner', $isOwner);
+
 	}
 }
