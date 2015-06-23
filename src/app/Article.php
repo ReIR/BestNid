@@ -168,7 +168,7 @@ class Article extends Model {
 		$name = md5(microtime());
 		$name .= '.jpg';
 
-		$img = Image::make($file)->resize(600, 600)->encode('jpg', 90);
+		$img = Image::make($file)->resize(640, 480)->encode('jpg', 100);
 
 		$img->save( self::getImagesFullPath() . $name);
 
