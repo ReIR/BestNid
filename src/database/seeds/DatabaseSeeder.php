@@ -61,7 +61,7 @@ class DatabaseSeeder extends Seeder {
 		$article1 = Article::forceCreate([
 			'title' => 'Mercedes Benz',
 			'description' => 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.',
-			'image' => 'https://upload.wikimedia.org/wikipedia/commons/0/02/Mercedes-Benz_C_250_CDI_BlueEFFICIENCY_Coup%C3%A9_Edition_1_(C_204)_%E2%80%93_Frontansicht,_2._Juli_2011,_D%C3%BCsseldorf.jpg',
+			'image' => 'http://clasife.com/oc-content/uploads/0/8_original.jpg',
 			'endDate' => date('Y-m-d', strtotime('+20 days')),
 			'user_id' => Auth::user()->id,
 			'category_id' => $category1->id
