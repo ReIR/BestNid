@@ -61,7 +61,7 @@ class DatabaseSeeder extends Seeder {
 		$article1 = Article::forceCreate([
 			'title' => 'Mercedes Benz',
 			'description' => 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.',
-			'image' => 'http://lorempixel.com/400/200/sports/',
+			'image' => 'https://upload.wikimedia.org/wikipedia/commons/0/02/Mercedes-Benz_C_250_CDI_BlueEFFICIENCY_Coup%C3%A9_Edition_1_(C_204)_%E2%80%93_Frontansicht,_2._Juli_2011,_D%C3%BCsseldorf.jpg',
 			'endDate' => date('Y-m-d', strtotime('+20 days')),
 			'user_id' => Auth::user()->id,
 			'category_id' => $category1->id
@@ -70,7 +70,7 @@ class DatabaseSeeder extends Seeder {
 		$article2 = Article::forceCreate([
 			'title' => 'Audi R8',
 			'description' => 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.',
-			'image' => 'http://lorempixel.com/400/200/sports/',
+			'image' => 'http://fondosparawhatsapp.net/wp-content/uploads/2014/08/Fondos-de-Audi-R8-en-HD7.jpg',
 			'endDate' => date('Y-m-d', strtotime('+20 days')),
 			'user_id' => Auth::user()->id,
 			'category_id' => $category1->id
@@ -79,7 +79,7 @@ class DatabaseSeeder extends Seeder {
 		$article3 = Article::forceCreate([
 			'title' => 'BMW nuevito',
 			'description' => 'Casi 0km.',
-			'image' => 'http://lorempixel.com/400/200/sports/',
+			'image' => 'http://i.ytimg.com/vi/CiTYQ-Zp3AI/maxresdefault.jpg',
 			'endDate' => date('Y-m-d', strtotime('+20 days')),
 			'user_id' => Auth::user()->id,
 			'category_id' => $category1->id
@@ -88,7 +88,7 @@ class DatabaseSeeder extends Seeder {
 		$article4 = Article::forceCreate([
 			'title' => 'Mi falcon',
 			'description' => 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.',
-			'image' => 'http://lorempixel.com/400/200/sports/',
+			'image' => 'http://sp5.fotolog.com/photo/5/60/9/ogum/1192585585_f.jpg',
 			'endDate' => date('Y-m-d', strtotime('+20 days')),
 			'user_id' => Auth::user()->id,
 			'category_id' => $category1->id
@@ -96,8 +96,8 @@ class DatabaseSeeder extends Seeder {
 
 		$article5 = Article::forceCreate([
 			'title' => 'Palo de amasar',
-			'description' => 'Instrumento de represión de masas.',
-			'image' => 'http://lorempixel.com/400/200/sports/',
+			'description' => 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.',
+			'image' => 'http://mla-s2-p.mlstatic.com/palo-de-amasar-de-madera-ultimo-disponible-4159-MLA2656233743_052012-F.jpg',
 			'endDate' => date('Y-m-d', strtotime('+20 days')),
 			'user_id' => Auth::user()->id,
 			'category_id' => $category2->id
