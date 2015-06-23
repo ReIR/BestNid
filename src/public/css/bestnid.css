@@ -74,6 +74,7 @@ body {
 .article .subasta-description {
 	margin: 10px auto;
 	color: #707070;
+	font-size: 12px;
 	padding-left:0;
 }
 
@@ -87,6 +88,11 @@ body {
 
 .article .img-container {
 	padding-left:0;
+	height:300px;
+	margin: 0 10px 0 0;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
 }
 
 .modal-open .modal {
@@ -161,6 +167,8 @@ a {
 	color: #fff;
 }
 
+
+
 .avatar-image {
 	height: 64px;
 	width: 64px;
@@ -184,4 +192,8 @@ a {
 	width: 100%;
 	max-height: 250px;
 	background-size:cover;
+}
+
+.article-buttons {
+	margin-top: 20px;
 }

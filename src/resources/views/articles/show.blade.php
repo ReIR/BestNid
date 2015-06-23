@@ -5,13 +5,10 @@
 @section('content')
 		<div class="col-lg-10 col-lg-offset-2 article">
 			{{-- Image column --}}
-			<div class="col-sm-4 img-container">
-				{{-- <div class="col-md-4 col-lg-offset-2"> --}}
-					<img src="{{$article->getImageURL()}}" class="img-responsive">
-				{{-- </div> --}}
-			</div>	{{-- End of Image column --}}
+			<div class="col-sm-5 img-container" style="background-image:url({{$article->getImageURL()}});"></div>
+			{{-- End of Image column --}}
 
-			<div class="col-sm-8">
+			<div class="col-sm-6">
 			{{-- Article Information column--}}
 				<div class="row">
 					<h1>
@@ -24,20 +21,8 @@
 							</span>
 						</a>
 					</h1>
-
 					<span class="subasta-info">La subasta termina el: <span id='endDate'></span> (<span id='endTime'class="text-danger"></span>)
 					</span>
-				</div>
-				<div class="row">
-						@if ($isLoggedIn && !$isOwner)
-							<a class="btn btn-success" href="{{ route('offers.create', ['id'=> $article->id])}}" role="button">Ofertar</a>
-						@endif
-						@if(!$isLoggedIn)
-							<span class="text-danger"> Para poder ofertar debe iniciar sesión.</span>
-							<a href="{{route('users.getLogin')}}">
-								<span class="label label-danger">Iniciar Sesión</span>
-							</a>
-						@endif
 				</div>
 				<div class="row">
 					<div class="subasta-description col-md-9">
@@ -47,11 +32,19 @@
 			</div> {{-- End of Info Column --}}
 
 			{{-- Q&A row  --}}
-			<div class="row" style="padding-top: 40px;">
-				<div class="col-lg-12">
-					<h4 class="btn btn-danger" id="questions-button">
-						Preguntas al subastador <span class="badge">{{count($questions)}}</span>
-					</h4>
+			<div class="row">
+				<div class="col-sm-12 article-buttons">
+					@if ($isLoggedIn && !$isOwner)
+						<a class="btn btn-success" href="{{ route('offers.create', ['id'=> $article->id])}}" role="button">Ofertar</a>
+					@endif
+					@if(!$isLoggedIn)
+						<span class="text-muted">
+							Para poder ofertar debe <a class="text-danger" href="{{route('users.getLogin')}}">iniciar sesión.</a>
+						</span>
+					@endif
+					<button class="btn btn-danger" id="questions-button">
+						Preguntas <span class="badge">{{count($questions)}}</span>
+					</button>
 				</div>
 			</div>
 
@@ -82,10 +75,9 @@
 						</div> {{-- End of Question Form --}}
 					@endif
 					@if(!$isLoggedIn)
-						<span class="text-danger"> Para poder hacer preguntas debe iniciar sesión.</span>
-						<a href="{{route('users.getLogin')}}">
-							<span class="label label-danger">Iniciar Sesión</span>
-						</a>
+						<span class="text-muted">
+							Para poder hacer consultas debe <a class="text-danger" href="{{route('users.getLogin')}}">iniciar sesión.</a>
+						</span>
 					@endif
 				</div>
 			</div>	{{-- End of Q&A section --}}
