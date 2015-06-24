@@ -45,6 +45,14 @@ class DatabaseSeeder extends Seeder {
 			'lastName' => 'Dos'
 		]);
 
+		$user3 = User::create([
+			'username' => 'user3',
+			'email' => 'user3@email.com',
+			'password' => '123',
+			'firstName' => 'User',
+			'lastName' => 'Tres'
+		]);
+
 		$category1 = Category::create([
 				'name' => 'Automóviles'
 			]);
@@ -109,13 +117,13 @@ class DatabaseSeeder extends Seeder {
 
 		$question1 = Question::create([
 			'text' => 'Tiene aire acondicionado?',
-			'user_id' => $user1->id,
+			'user_id' => $user2->id,
 			'article_id' => $article1->id
 		]);
 
 		$question2 = Question::create([
 			'text' => 'Viene con caja de sexta?',
-			'user_id' => $user1->id,
+			'user_id' => $user2->id,
 			'article_id' => $article2->id
 		]);
 
