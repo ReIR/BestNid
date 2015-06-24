@@ -3,6 +3,7 @@
 use Illuminate\Database\Eloquent\Model;
 
 use Validator;
+use Auth;
 
 class Question extends Model {
 
@@ -73,6 +74,20 @@ class Question extends Model {
 		return Validator::make($all, $rules, $messages);
 	}
 
+	public static function countMyPendingQuestions() {
+		return count(Question::with('user')
+									->ofUser(Auth::user()->id)
+									->notAnswered()
+									->get());
+	}
+
+	public static function countMyAnsweredQuestions() {
+		return count(Question::with('user')
+									->ofUser(Auth::user()->id)
+									->answered()
+									->get());
+	}
+
 	public function user() {
 		return $this->belongsTo('App\User');
 	}
@@ -83,6 +98,20 @@ class Question extends Model {
 
 	public function scopeOfArticle($query, $article) {
 		return $query->where('article_id', '=', $article);
+	}
+
+	public function scopeOfUser($query, $user) {
+		return $query->where('user_id', '=', $user);
+	}
+
+	public function scopeNotAnswered($query) {
+		//TO BE FILLED
+		return $query;
+	}
+
+	public function scopeAnswered($query) {
+		//TO BE FILLED
+		return $query->where('text', '=', ' ');
 	}
 
 }

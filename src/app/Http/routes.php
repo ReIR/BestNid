@@ -44,6 +44,12 @@ Route::group(['prefix' => 'admin'], function(){
 	Route::resource('articles', 'Admin\ArticlesController');
 
 	// ---------------------------------
+	//	Questions
+	// ---------------------------------
+	//
+	Route::resource('questions', 'Admin\QuestionsController');
+
+	// ---------------------------------
 	//	Edit User's Account
 	// ---------------------------------
 	//
