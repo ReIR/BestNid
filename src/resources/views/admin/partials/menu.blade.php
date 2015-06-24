@@ -2,7 +2,7 @@
 
 <ul class="list-group">
 	<li class="list-group-item {{($route == 'admin.articles.index') ? 'active' : ''}}">
-		<span class="badge">1</span>
+		<span class="badge">{{App\Article::count()}}</span>
 		<a href="{{route('admin.articles.index')}}">Subastas</a>
 	</li>
 	<li class="list-group-item">
@@ -10,12 +10,13 @@
 		<a href="#">Ventas</a>
 	</li>
 	<li class="list-group-item">
-		<span class="badge">0</span>
-		<a href="#">Preguntas</a>
+		<span class="badge">{{App\Question::countMyPendingQuestions()}}</span>
+		<span class="badge">{{App\Question::countMyAnsweredQuestions()}}</span>
+		<a href="{{route('admin.questions.index')}}">Preguntas</a>
 	</li>
 	@if ( App\User::currentUserIsAdmin() )
 		<li class="list-group-item">
-			<span class="badge">3</span>
+			<span class="badge">{{App\User::count()}}</span>
 			<a href="#">Usuarios</a>
 		</li>
 		<li class="list-group-item">
