@@ -27,12 +27,15 @@ class QuestionsController extends Controller {
 		$questions = Question::with('article')
 									->ofUser(Auth::user()->id)
 									->notAnswered()
+									->orderBy('created_at')
 									->get();
 
 		$answeredQuestions = Question::with('article')
 									->ofUser(Auth::user()->id)
 									->answered()
+									->orderBy('created_at')
 									->get();
+
 
 		return view('admin.questions.index')
 				->with('questions', $questions)

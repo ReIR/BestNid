@@ -80,6 +80,12 @@ Route::resource('articles', 'ArticlesController', ['only' => ['index', 'show']])
 Route::resource('articles.questions', 'QuestionsController', ['only' => ['store', 'show']]);
 
 // ---------------------------------
+//	Answers
+// ---------------------------------
+//
+Route::resource('articles.questions.answers', 'AnswersController', ['only' => ['store', 'show']]);
+
+// ---------------------------------
 //	Users
 // ---------------------------------
 //

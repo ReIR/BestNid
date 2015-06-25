@@ -109,7 +109,7 @@ class User extends Model implements Authenticatable {
 	|
 	*/
 	public static function create(array $data) {
-		
+
 		$data['password'] = Hash::make($data['password']);
 
 		return parent::create($data);
@@ -123,6 +123,26 @@ class User extends Model implements Authenticatable {
 	*/
 	public function articles() {
 		return $this->hasMany('App\Article');
+	}
+
+	/*
+	| -----------------------------------------
+	|	Relationships with Questions
+	| -----------------------------------------
+	|
+	*/
+	public function questions() {
+		return $this->hasMany('App\Question');
+	}
+
+	/*
+	| -----------------------------------------
+	|	Relationships with Answers
+	| -----------------------------------------
+	|
+	*/
+	public function answers() {
+		return $this->hasMany('App\Answer');
 	}
 
 		/*

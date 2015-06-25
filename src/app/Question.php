@@ -96,22 +96,51 @@ class Question extends Model {
 		return $this->belongsTo('App\Article');
 	}
 
+	public function answer() {
+		return $this->hasOne('App\Answer');
+	}
+
+	public function isAnswered() {
+		return ($this->answer()->first() || false);
+	}
+
 	public function scopeOfArticle($query, $article) {
-		return $query->where('article_id', '=', $article);
+		return $query->where('questions.article_id', '=', $article);
 	}
 
 	public function scopeOfUser($query, $user) {
-		return $query->where('user_id', '=', $user);
+		return $query->where('questions.user_id', '=', $user);
 	}
 
 	public function scopeNotAnswered($query) {
 		//TO BE FILLED
-		return $query;
+		return $query->leftJoin('answers', 'questions.id', '=', 'answers.question_id')
+			->whereNull('answers.question_id')
+			->select(
+				'questions.id as id',
+				'questions.text as text',
+				'questions.user_id as user_id',
+				'questions.article_id as article_id',
+				'questions.created_at as created_at',
+				'answers.id as answer_id',
+				'answers.text as answer_text',
+				'answers.user_id as answer_user_id'
+			);
 	}
 
 	public function scopeAnswered($query) {
-		//TO BE FILLED
-		return $query->where('text', '=', ' ');
+
+		return $query->join('answers', 'questions.id', '=', 'answers.question_id')
+			->select(
+				'questions.id as id',
+				'questions.text as text',
+				'questions.user_id as user_id',
+				'questions.article_id as article_id',
+				'answers.id as answer_id',
+				'answers.text as answer_text',
+				'answers.user_id as answer_user_id',
+				'answers.created_at as created_at'
+			);
 	}
 
 }

@@ -99,6 +99,10 @@ class Article extends Model {
 		return $this->belongsTo('App\Category');
 	}
 
+	public function questions() {
+		return $this->hasMany('App\Question');
+	}
+
 	public function scopeOfCategory($query, $category) {
 		return $query->where('category_id', '=', $category);
 	}

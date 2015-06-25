@@ -31,20 +31,32 @@
 							<thead>
 								<tr>
 									<th colspan="1">Preguntas</th>
+									<th colspan="1">Respuestas</th>
 			            <th colspan="1">Artículo</th>
+									<th colspan="2">Acciones</th>
 								</tr>
 							</thead>
 							<tbody>
 								@forelse ($answeredQuestions as $aq)
+
 									<tr>
 										<td>{{$aq->text}}</td>
+										<td>{{$aq->answer_text}}</td>
 			              <td>{{$aq->article->title}}</td>
+
 										<td
 											<div class="text-right">
-												<a class="btn btn-default" href="{{route('admin.questions.edit', ['id' => $aq->id])}}" role="button">Editar</a>
+												<a class="btn btn-success" href="{{ route('offers.create', ['id'=> $aq->article->id])}}" role="button">Ofertar</a>
+											</div>
+										</td>
+
+										<td
+											<div class="text-right">
+												<a class="btn btn-default" href="{{route('articles.show', ['id' => $aq->article->id])}}" role="button">Ver artículo</a>
 											</div>
 										</td>
 									</tr>
+
 			          @empty
 			          <tr>
 			            <td>No han respondido a ninguna de tus preguntas.</td>

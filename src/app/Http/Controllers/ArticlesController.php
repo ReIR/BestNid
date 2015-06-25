@@ -78,8 +78,12 @@ class ArticlesController extends Controller {
 								->take(4)
 								->get();
 
-		$questions = Question::with('article')
-								->ofArticle($article->id)
+		// $questions = Question::with('article')
+		// 						->ofArticle($article->id)
+		// 						->orderBy('created_at')
+		// 						->get();
+
+		$questions = $article->questions()
 								->orderBy('created_at')
 								->get();
 
