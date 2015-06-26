@@ -140,6 +140,10 @@ class Article extends Model {
 		return $query->where('endDate', '<=', date("Y-m-d"));
 	}
 
+	public function scopeIsCurrentUserOwner($query) {
+		return $query->where('user_id', '=', Auth::user()->id);
+	}
+
 	public function getImageURL(){
 		return asset( self::getImagesPath() . $this->image);
 	}
