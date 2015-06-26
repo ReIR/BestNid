@@ -59,6 +59,13 @@ class QuestionsController extends Controller {
 				->with('error', 'El dueño del artículo no puede hacer preguntas sobre sus artículos.');
 		}
 
+		if(!$article->isActive()) {
+
+			return redirect()
+				->back()
+				->with('error', 'No se puede hacer preguntas sobre artículos que ya han finalizado.');
+		}
+
 		//Then get the id of the asker. Add it to the params array.
 		$data['user_id'] = Auth::user()->id;
 
