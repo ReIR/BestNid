@@ -73,10 +73,13 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{Auth::user()->getFullName()}} <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
 								<li>
-					          		<a href="{{route('admin.account.edit')}}"
-					          			class="{{($route == 'admin.account.edit') ? 'active' : ''}}">
-					          				Editar Cuenta
-					          		</a>
+		          		<a href="{{route('admin.account.edit')}}"
+		          			class="{{($route == 'admin.account.edit') ? 'active' : ''}}">
+		          				Editar Cuenta
+		          		</a>
+								</li>
+								<li>
+									<a href="{{route('admin.account.changePass')}}">Cambiar Contraseña</a>
 								</li>
 								<li>
 									<a href="{{route('users.logout')}}">Cerrar Sesión</a>

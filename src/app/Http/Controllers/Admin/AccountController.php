@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use App\User;
 use Request;
+use Hash;
 
 //use Illuminate\Http\Request;
 
@@ -64,7 +65,7 @@ class AccountController extends Controller {
 	 */
 	public function editAccount()
 	{
-		
+
 		$id = Auth::user()->id;
 		$user = User::find($id);
 		return view('admin.account.update')
@@ -86,6 +87,7 @@ class AccountController extends Controller {
 	public function updateAccount ()
 	{
 		$data = Request::all();
+
 		$validator = User::validate($data);
 
 		if ( $validator->fails() )
@@ -101,6 +103,38 @@ class AccountController extends Controller {
 		return redirect()
 			->route('admin.index')
 			->with('success', 'La información se ha guardado correctamente.');
+	}
+
+	public function getChangePassword() {
+
+		return view('admin.account.change-pass')->withUser(Auth::user());
+	}
+
+	public function updatePassword() {
+
+		$data = Request::all();
+
+		if ( ! Hash::check($data['password'], Auth::user()->password) ) {
+			return redirect()
+				->back()
+				->with('error', 'La contraseña actual no es correcta');
+		}
+
+		$validator = User::validatePassword($data);
+
+		if ( $validator->fails() ) {
+			return redirect()
+				->back()
+				->with('errors', $validator->messages());
+		}
+
+		Auth::user()->update([
+			'password' => Hash::make($data['newpassword'])
+		]);
+
+		return redirect()
+			->route('articles.index')
+			->with('success', 'Contraseña actualizada!');
 	}
 
 	/**

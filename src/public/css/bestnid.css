@@ -158,6 +158,11 @@ a {
 	border:0;
 }
 
+.list-group .active:hover {
+	background: #e20f18;
+	border:0;
+}
+
 .active:hover{
 	cursor:pointer;
 }
