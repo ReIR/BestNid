@@ -148,6 +148,10 @@ class Article extends Model {
 		return (Auth::check() && (Auth::user()->id == $this->user_id));
 	}
 
+	public function offers() {
+		return $this->hasMany('App\Offer');
+	}
+
 	/*
 	| -----------------------------------------
 	|	Return path for persist images
