@@ -103,6 +103,10 @@ class Article extends Model {
 		return $this->hasMany('App\Question');
 	}
 
+	public function offers() {
+		return $this->hasMany('App\Offer');
+	}
+
 	public function scopeOfCategory($query, $category) {
 		return $query->where('category_id', '=', $category);
 	}
@@ -129,7 +133,11 @@ class Article extends Model {
 	}
 
 	public function scopeNotFinished($query) {
-		return $query->where('endDate', '>', date("Y-m-d H:i:s"));
+		return $query->where('endDate', '>', date("Y-m-d"));
+	}
+
+	public function scopeFinished($query) {
+		return $query->where('endDate', '<=', date("Y-m-d"));
 	}
 
 	public function getImageURL(){
@@ -144,12 +152,25 @@ class Article extends Model {
 		return Str::limit($this->title, $limit);
 	}
 
+	public function getRemainingDays() {
+		$today = new \DateTime();
+		$end = new \DateTime($this->endDate);
+		$diff = $today->diff($end);
+		$diff = $diff->format("%r%a");
+
+		return ( $diff > 0 ) ? $diff : 0;
+	}
+
+	public function toBeFinished() {
+		return ( !$this->isActive() && $this->offers->count() );
+	}
+
 	public function isCurrentOwner() {
 		return (Auth::check() && (Auth::user()->id == $this->user_id));
 	}
 
-	public function offers() {
-		return $this->hasMany('App\Offer');
+	public function isActive() {
+		return ( $this->getRemainingDays() > 0 );
 	}
 
 	/*

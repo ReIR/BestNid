@@ -26,22 +26,23 @@ class ArticlesController extends Controller {
 	 */
 	public function index()
 	{
+		$articles = new Article;
 
-		if ( Request::has('q') ) {
+		if ( Request::has('active') ) {
 
-			$q = Request::get('q');
+			if ( Request::get('active') == 1 ){
 
-			$articles = Article::where('name', 'LIKE', '%'.$q.'%')->get();
+				$articles = $articles->notFinished()->get();
 
-			if (!count($articles))
-			{
-				return redirect()
-					->route('admin.articles.index')
-					->with('error', 'Artículo '.$q.' no encontrado');
+			} else if ( Request::get('active') == 0 ) {
+
+				$articles = $articles->finished()->get();
+
+			} else {
+				$articles = Article::all();
 			}
 
 		} else {
-
 			$articles = Article::all();
 		}
 

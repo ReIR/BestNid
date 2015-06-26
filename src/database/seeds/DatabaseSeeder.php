@@ -97,7 +97,7 @@ class DatabaseSeeder extends Seeder {
 			'title' => 'Mi falcon',
 			'description' => 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.',
 			'image' => 'http://sp5.fotolog.com/photo/5/60/9/ogum/1192585585_f.jpg',
-			'endDate' => date('Y-m-d', strtotime('+20 days')),
+			'endDate' => date('Y-m-d', strtotime('-5 days')),
 			'user_id' => Auth::user()->id,
 			'category_id' => $category1->id
 		]);
@@ -106,7 +106,7 @@ class DatabaseSeeder extends Seeder {
 			'title' => 'Palo de amasar',
 			'description' => 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.',
 			'image' => 'http://mla-s2-p.mlstatic.com/palo-de-amasar-de-madera-ultimo-disponible-4159-MLA2656233743_052012-F.jpg',
-			'endDate' => date('Y-m-d', strtotime('+20 days')),
+			'endDate' => date('Y-m-d', strtotime('+5 days')),
 			'user_id' => Auth::user()->id,
 			'category_id' => $category2->id
 		]);
