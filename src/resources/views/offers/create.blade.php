@@ -21,7 +21,7 @@
 					<div class="panel-heading text-center">Oferta</div>
 					  	<div class="panel-body">
 
-		 				{!! Form::open(array('route' => array('offers.store', $article->id), 'method' => 'POST')) !!}
+		 				{!! Form::open(array('route' => array('articles.offers.store', $article->id), 'method' => 'POST')) !!}
 
 							<?php $error = Session::has('errors') && Session::get('errors')->get('text'); ?>
 				    	<div class="form-group {{$error ? 'has-error' : ''}}">

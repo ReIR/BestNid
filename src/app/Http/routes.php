@@ -113,7 +113,7 @@ Route::get('users/logout', [
 // ---------------------------------
 //
 Route::get('articles/{id}/offers/create', [
-		'as' => 'offers.create',
+		'as' => 'articles.offers.create',
 		'uses' => 'OffersController@create'
 	]);
 
@@ -121,6 +121,12 @@ Route::get('articles/{id}/offers', [
 		'as' => 'admin.articles.offers.index',
 		'uses' => 'Admin\OffersController@index'
 	]);
+
+Route::post('articles/{id}/offers/store', [
+	'as' => 'articles.offers.store',
+	'uses' => 'OffersController@store'
+	]);
+
 /*Route::post('admin/articles/{id_article}/offers/{id_offer}/sales', [
 		'as' => 'admin.articles.index',
 		'uses' => 'Admin\OffersController@index'

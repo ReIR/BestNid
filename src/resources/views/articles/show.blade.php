@@ -35,7 +35,7 @@
 			<div class="row">
 				<div class="col-sm-12 article-buttons">
 					@if ($isLoggedIn && !$isOwner)
-						<a class="btn btn-success" href="{{ route('offers.create', ['id'=> $article->id])}}" role="button">Ofertar</a>
+						<a class="btn btn-success" href="{{ route('articles.offers.create', ['id'=> $article->id])}}" role="button">Ofertar</a>
 					@endif
 					@if(!$isLoggedIn)
 						<span class="text-muted">
