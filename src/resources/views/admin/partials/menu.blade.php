@@ -18,6 +18,11 @@
 		<span class="badge">2</span>
 		<a href="#">Preguntas a mis artículos</a>
 	</li>
+		<li class="list-group-item">
+		<span class="badge">0</span>
+		<span class="badge">0</span>
+		<a href="#">Ofertas</a>
+	</li>
 	@if ( App\User::currentUserIsAdmin() )
 		<li class="list-group-item">
 			<span class="badge">{{App\User::count()}}</span>

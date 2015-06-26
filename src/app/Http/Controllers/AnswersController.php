@@ -49,6 +49,13 @@ class AnswersController extends Controller {
 				->with('error', 'El dueño del artículo es el único que puede responder preguntas sobre sus artículos.');
 		}
 
+		if(!$article->isActive()) {
+
+			return redirect()
+				->back()
+				->with('error', 'No se pueden responder preguntas sobre artículos que ya han finalizado.');
+		}
+
 		$question = Question::find($question_id)
 			->with('article')
 			->first();
