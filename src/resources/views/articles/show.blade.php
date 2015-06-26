@@ -42,83 +42,69 @@
 							Para poder ofertar debe <a class="text-danger" href="{{route('users.getLogin')}}">iniciar sesión.</a>
 						</span>
 					@endif
-					<button class="btn btn-danger" id="questions-button">
-						Preguntas <span class="badge">{{count($questions)}}</span>
-					</button>
+					<h3 class="text">
+						Preguntas
+					</h3>
 				</div>
 			</div>
 
-			<div id="questions" class="row hidden" style="padding-top: 40px;">
+			<div id="questions" class="row" style="padding-top: 40px;">
 				<div class="col-md-10">
-					{{-- Questions --}}
-					@foreach($questions as $question)
-					<div class="row">
-						<div class="col-md-12">
 
-							<div class="media">	{{-- Question Start --}}
-								<div class="media-body">
-									<h4 class="media-heading">{{$question->text}}</h4>
-								</div>
-							</div>	{{-- End of Question --}}
+					<div class="panel panel-default">
+					  <div class="panel-body">
+							{{-- Questions --}}
+							@foreach($questions as $question)
+								<div class="row">
+									<div class="col-md-12">
 
-							@if($question->isAnswered())
-
-							<div class="col-md-10"> {{-- Answer  --}}
-								<div class="panel panel-default">
-									<div class="panel-body">
-										<h4 class="media-heading">{{$question->answer()->first()->text}}</h4>
-									</div>
-								</div>
-							</div> {{-- End of Answer  --}}
-
-							@endif
-
-							@if($isOwner && !$question->isAnswered())
-								<div class="col-md-10"> {{-- Answer Form --}}
-									<div class="panel panel-default">
-										<div class="panel-heading">Responder Pregunta</div>
-										<div class="panel-body">
-											{!! Form::open(array('route' => ['articles.questions.answers.store', $article->id, $question->id], 'method' => 'POST', 'class' => 'form-inline')) !!}
-												{!! Form::textarea('text', null, ['rows' => '3', 'class' => 'col-md-11', 'placeholder' => 'Escribe tu respuesta aquí.']) !!}
-												{!! Form::submit('Enviar', array('class' => 'btn btn-danger')) !!}
-											{!! Form::close() !!}
+										<div class="panel panel-default">
+										  <div class="panel-heading">{{$question->text}}</div>
+												@if($question->isAnswered())
+											  	<div class="panel-body">
+														{{$question->answer()->first()->text}}
+											  	</div>
+												@elseif($isOwner)
+													<div class="panel-body">
+														<div class="col-md-12"> {{-- Answer Form --}}
+																{!! Form::open(array('route' => ['articles.questions.answers.store', $article->id, $question->id], 'method' => 'POST', 'class' => 'form-inline')) !!}
+																	{!! Form::textarea('text', null, ['rows' => '1', 'class' => 'form-control', 'cols' => "90", 'placeholder' => 'Escribe tu respuesta aquí.']) !!}
+																	{!! Form::submit('Enviar', array('class' => 'btn btn-success')) !!}
+																{!! Form::close() !!}
+														</div> {{-- End of Answer Form --}}
+													</div>
+												@endif
 										</div>
 									</div>
-								</div> {{-- End of Answer Form --}}
-							@endif
+								</div>
+							@endforeach
 
-						</div>
-					</div>
-					@endforeach
+					  </div>
 
-					@if($isLoggedIn && !$isOwner)
-
-						<div class="col-md-10"> {{-- Question Form --}}
-							<div class="panel panel-default">
-								<div class="panel-heading">Agregar Pregunta</div>
-									<div class="panel-body">
-										{!! Form::open(array('route' => ['articles.questions.store', $article->id], 'method' => 'POST', 'class' => 'form-inline')) !!}
-										<textarea class='col-md-11' rows='3' name='text' placeholder='Qué desea preguntar?'></textarea>
-										{!! Form::hidden('article_id', $article->id)!!}
-										{!! Form::submit('Enviar', array('class' => 'btn btn-danger')) !!}
+							@if(!$isLoggedIn)
+						  	<div class="panel-footer">
+									<div class="row">
+										<div class="col-md-12">
+											<span class="text-muted">
+												Para poder hacer consultas debe <a class="text-danger" href="{{route('users.getLogin')}}">iniciar sesión.</a>
+											</span>
+										</div>
 									</div>
 								</div>
-						</div> {{-- End of Question Form --}}
-
-					@endif
-
-					@if(!$isLoggedIn)
-
-						<div class="row">
-							<div class="col-md-12">
-								<span class="text-muted">
-									Para poder hacer consultas debe <a class="text-danger" href="{{route('users.getLogin')}}">iniciar sesión.</a>
-								</span>
-							</div>
-						</div>
-
-					@endif
-
+							@elseif(!$isOwner)
+								<div class="panel-footer">
+									<div class="row"> {{-- Question Form --}}
+										<div class="col-md-12">
+												{!! Form::open(array('route' => ['articles.questions.store', $article->id], 'method' => 'POST', 'class' => 'form-inline')) !!}
+													{!! Form::textarea('text', null, ['rows' => '1', 'class' => 'form-control', 'cols' => "100", 'placeholder' => 'Escribe tu pregunta aquí.']) !!}
+													{!! Form::hidden('article_id', $article->id)!!}
+													{!! Form::submit('Enviar', array('class' => 'btn btn-success')) !!}
+												{!! Form::close() !!}
+										</div>
+									</div> {{-- End of Question Form --}}
+								</div>
+							@endif
+					</div>
 				</div>
 			</div>	{{-- End of Q&A section --}}
 

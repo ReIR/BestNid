@@ -1,12 +1,12 @@
 jQuery(function($){
 
-  $('#questions-button').click(function(){
-    if ( $('#questions').hasClass('hidden') ) {
-      $('#questions').removeClass('hidden')
-    } else {
-      $('#questions').addClass('hidden')
-    }
-  });
+  // $('#questions-button').click(function(){
+  //   if ( $('#questions').hasClass('hidden') ) {
+  //     $('#questions').removeClass('hidden')
+  //   } else {
+  //     $('#questions').addClass('hidden')
+  //   }
+  // });
 
   $('#uploadImage').change(function(){
     var oFReader = new FileReader();
