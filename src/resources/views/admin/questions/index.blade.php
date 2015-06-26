@@ -4,8 +4,6 @@
 
 @section('content')
 	<div class="col-md-9">
-		<div class="row pull-right">
-		</div>
 		<div class="row">
 			<div>
 			  <!-- Nav tabs -->
