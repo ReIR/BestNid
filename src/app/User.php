@@ -52,6 +52,11 @@ class User extends Model implements Authenticatable {
 		'password' => 'required|min:6|same:repassword'
 	];
 
+	private static $rulesForPassword = [
+		'password' => 'required',
+		'newpassword' => 'required|min:6|same:repassword'
+	];
+
 	private static $messages = [
 		// firstName messages
     	'firstName.required' => 'El nombre es requerido',
@@ -80,6 +85,16 @@ class User extends Model implements Authenticatable {
 		'password.same' => 'Las contraseñas no coinciden'
 	];
 
+	private static $messagesForPassword = [
+		// password messages
+		'password.required' => 'La contraseña es requerida',
+		'password.min' => 'La contraseña debe tener al menos 6 caracteres',
+		// newpassword messages
+		'newpassword.required' => 'La nueva contraseña es requerida',
+		'newpassword.min' => 'La nueva contraseña debe tener al menos 6 caracteres',
+		'newpassword.same' => 'Las contraseñas no coinciden'
+	];
+
 	/*
 	* Validate data $all, depending of current
 	* user role
@@ -100,6 +115,19 @@ class User extends Model implements Authenticatable {
 		}
 
 		return Validator::make($all, $rules, $messages);
+	}
+
+	/*
+	* Validate password
+	*
+	* @return Validator
+	*/
+	public static function validatePassword($data) {
+
+		$rules = self::$rulesForPassword;
+		$messages = self::$messagesForPassword;
+
+		return Validator::make($data, $rules, $messages);
 	}
 
 	/*
