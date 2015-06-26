@@ -16,9 +16,9 @@
 				<form class="form-inline" role="search">
 					<div class="form-group">
 						<select class="form-control" name="active">
-							<option value>Todas</option>
 							<option value="1" {{Request::get('active') == 1 ? 'selected' : ''}}>Activas</option>
 							<option value="0" {{Request::get('active') == 0 ? 'selected' : ''}}>No Activas</option>
+							<option value="" {{ (!Request::has('active')) ? 'selected' : ''}}>Todas</option>
 						</select>
 					</div>
 					<button type="submit" class="btn btn-default">Filtrar</button>

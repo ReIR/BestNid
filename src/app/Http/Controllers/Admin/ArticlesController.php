@@ -28,23 +28,21 @@ class ArticlesController extends Controller {
 	{
 		$articles = new Article;
 
+		$articles = $articles->isCurrentUserOwner();
+
 		if ( Request::has('active') ) {
 
 			if ( Request::get('active') == 1 ){
 
-				$articles = $articles->notFinished()->get();
+				$articles = $articles->notFinished();
 
 			} else if ( Request::get('active') == 0 ) {
 
-				$articles = $articles->finished()->get();
-
-			} else {
-				$articles = Article::all();
+				$articles = $articles->finished();
 			}
-
-		} else {
-			$articles = Article::all();
 		}
+
+		$articles = $articles->get();
 
 		return view('admin.articles.index')
 				->with('articles', $articles);
