@@ -1,6 +1,7 @@
 <?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use Validator;
 use DB;
 use Auth;
@@ -49,7 +50,7 @@ class Offer extends Model {
 		'article_id.exists' => '¡Ese artículo no existe!'
 	];
 
-	public static function validate($all) 
+	public static function validate($all)
 	{
 		return Validator::make($all, self::$rules, self::$messages);
 	}
@@ -62,6 +63,10 @@ class Offer extends Model {
 	public function article()
 	{
 		return $this->belongsTo('App\Article');
+	}
+
+	public function getReason($limit = 30) {
+		return Str::limit($this->text, $limit);
 	}
 
 	//Retorna la cantidad de ofertas que se han realizado a las publicaciones del usuario registrado.

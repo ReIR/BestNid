@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\User;
+use App\Offer;
 use Request;
 use Hash;
 
@@ -82,6 +83,11 @@ class AccountController extends Controller {
 	public function update($id)
 	{
 		//
+	}
+
+	public function getOffers() {
+
+		return view('admin.account.offers')->withOffers( Auth::user()->offers );
 	}
 
 	public function updateAccount ()

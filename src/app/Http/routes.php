@@ -60,6 +60,8 @@ Route::group(['prefix' => 'admin'], function(){
 	Route::get('account/password/edit', ['as' => 'admin.account.changePass','uses' => 'Admin\AccountController@getChangePassword']);
 	Route::patch('account/password', ['as' => 'admin.account.updatePass','uses' => 'Admin\AccountController@updatePassword']);
 
+	Route::get('account/offers', ['as' => 'admin.account.offers', 'uses' => 'Admin\AccountController@getOffers']);
+
 //	Route::resource('user', 'UsersController', ['except' => 'show', 'create', 'store']);
 	// ---------------------------------
 	//	Categories

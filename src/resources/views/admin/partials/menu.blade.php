@@ -19,9 +19,8 @@
 		<a href="#">Preguntas a mis artículos</a>
 	</li>
 		<li class="list-group-item">
-		<span class="badge">0</span>
-		<span class="badge">0</span>
-		<a href="#">Ofertas</a>
+		<span class="badge">{{Auth::user()->offers->count()}}</span>
+		<a href="{{route('admin.account.offers')}}">Mis Ofertas</a>
 	</li>
 	@if ( App\User::currentUserIsAdmin() )
 		<li class="list-group-item">
