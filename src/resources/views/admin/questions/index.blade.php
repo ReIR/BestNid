@@ -76,11 +76,6 @@
 									<tr>
 										<td>{{$q->text}}</td>
 			              <td>{{$q->article->title}}</td>
-										<td
-											<div class="text-right">
-												<a class="btn btn-default" href="{{route('admin.questions.edit', ['id' => $q->id])}}" role="button">Editar</a>
-											</div>
-										</td>
 									</tr>
 			          @empty
 			          <tr>

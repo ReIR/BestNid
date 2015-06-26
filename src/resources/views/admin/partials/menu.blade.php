@@ -7,16 +7,16 @@
 	</li>
 	<li class="list-group-item">
 		<span class="badge">2</span>
-		<a href="#">Preguntas a mis artículos</a>
-	</li>
-	<li class="list-group-item">
-		<span class="badge">2</span>
 		<a href="#">Ventas</a>
 	</li>
 	<li class="list-group-item">
 		<span class="badge">{{App\Question::countMyPendingQuestions()}}</span>
 		<span class="badge">{{App\Question::countMyAnsweredQuestions()}}</span>
 		<a href="{{route('admin.questions.index')}}">Mis preguntas</a>
+	</li>
+	<li class="list-group-item">
+		<span class="badge">2</span>
+		<a href="#">Preguntas a mis artículos</a>
 	</li>
 	@if ( App\User::currentUserIsAdmin() )
 		<li class="list-group-item">
