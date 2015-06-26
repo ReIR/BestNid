@@ -159,7 +159,7 @@ a {
 }
 
 .active:hover{
-	background:transparent !important;
+	background:#e20f18 !important;
 	cursor:pointer;
 }
 

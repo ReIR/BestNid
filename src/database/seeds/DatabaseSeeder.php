@@ -142,6 +142,23 @@ class DatabaseSeeder extends Seeder {
 			'article_id' => $article1->id
 		]);
 
+		$offer2 = Offer::create([
+			'text' => 'Me gustan los perros.',
+			'card' => 1234567890123456,
+			'amount' => 1.0,
+			'contact' => '2215529657',
+			'user_id' => $user3->id,
+			'article_id' => $article4->id
+			]);
+
+			$offer3 = Offer::create([
+			'text' => 'Me gustan las mujeres',
+			'card' => 1234567890123456,
+			'amount' => 10011.0,
+			'contact' => '2215529657',
+			'user_id' => $user2->id,
+			'article_id' => $article4->id
+			]);
 	}
 
 }
