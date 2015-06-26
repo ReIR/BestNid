@@ -58,7 +58,7 @@
 			 				 			<a class="btn btn-default" href="#" role="button">Borrar</a>--}}
 										<a class="btn btn-default" href="{{route('articles.show', $article->id)}}" role="button">Ver</a>
 										@if($article->toBeFinished())
-											<a class="btn btn-success" href="{{route('articles.show', $article->id)}}" role="button">Finalizar</a>
+											<a class="btn btn-success" href="{{route('admin.articles.offers.index', $article->id)}}" role="button">Finalizar</a>
 										@endif
 		 				 			</div>
 								</td>

@@ -162,7 +162,12 @@ class Article extends Model {
 	}
 
 	public function toBeFinished() {
-		return ( !$this->isActive() && $this->offers->count() );
+
+		// FIXME: Add model Sale!!!
+
+		$sale = false;
+
+		return ( !$this->isActive() && $this->offers->count() && !$sale );
 	}
 
 	public function isCurrentOwner() {
