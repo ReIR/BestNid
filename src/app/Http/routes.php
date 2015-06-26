@@ -116,7 +116,12 @@ Route::get('articles/{id}/offers/create', [
 		'as' => 'offers.create',
 		'uses' => 'OffersController@create'
 	]);
-Route::post('articles/{id}/offers', [
-		'as' => 'offers.store',
-		'uses' => 'OffersController@store'
+
+Route::get('articles/{id}/offers', [
+		'as' => 'admin.articles.offers.index',
+		'uses' => 'Admin\OffersController@index'
+	]);
+/*Route::post('admin/articles/{id_article}/offers/{id_offer}/sales', [
+		'as' => 'admin.articles.index',
+		'uses' => 'Admin\OffersController@index'
 	]);

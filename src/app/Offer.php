@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Validator;
+use DB;
+use Auth;
 
 class Offer extends Model {
 
@@ -62,4 +64,13 @@ class Offer extends Model {
 		return $this->belongsTo('App\Article');
 	}
 
+	//Retorna la cantidad de ofertas que se han realizado a las publicaciones del usuario registrado.
+	public static function offersInMyArticles(){
+		return DB::table('articles')
+							->join('offers', 'articles.id', '=', 'offers.article_id')
+							->select('articles.title')
+							->where ('articles.user_id', '=', Auth::user()->id)
+							//Quedarme con aquellas subastas que han finalizado, alta paja.
+							->count();
+	}
 }
