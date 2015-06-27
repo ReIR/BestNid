@@ -44,5 +44,8 @@ class Sale extends Model {
 	public function offer(){
 		return $this->belongsTo('App\Offer');
 	}
-	
+
+	public static function alreadySold($id){
+		return !(self::where('article_id', '=', $id)->count() == 0 );
+	}
 }
