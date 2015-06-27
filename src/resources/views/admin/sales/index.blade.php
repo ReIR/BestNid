@@ -10,11 +10,11 @@
       <form class="form-inline" role="search">
 					<span>Filtrar entre</span>
           <div class="input-group">
-            <input type="date" name="initialDate" class="form-control" value="" />
+            <input type="date" name="initialDate" class="form-control" value="{{Request::get('initialDate')}}" />
           </div>
 					y
           <div class="input-group">
-            <input type="date" name="finalDate" class="form-control" value="" />
+            <input type="date" name="finalDate" class="form-control" value="{{Request::get('finalDate')}}" />
           </div>
           <button type="submit" class="btn btn-default">Filtrar</button>
         </form>
