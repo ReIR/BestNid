@@ -76,6 +76,7 @@ class ArticlesController extends Controller {
 			return redirect()
 				->back()
 				->with('errors', $validator->messages())
+				->with('warning', 'Vuelva a cargar la imagen.')
 				->withInput();
 		}
 
