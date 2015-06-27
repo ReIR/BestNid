@@ -137,3 +137,12 @@ Route::post('admin/articles/{id_article}/offers/{id_offer}/sales/store', [
 		'as' => 'admin.articles.offers.sales.store',
 		'uses' => 'Admin\SalesController@store'
 	]);
+
+	// ---------------------------------
+	//	Offers
+	// ---------------------------------
+	//
+Route::get('admin/sales/index', [
+		'as' => 'admin.sales.index',
+		'uses' => 'Admin\SalesController@index'
+	]);

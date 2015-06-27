@@ -207,4 +207,9 @@ class User extends Model implements Authenticatable {
 		return !empty($offers);
 	}
 
+
+	public static function currentTotalArticles() {
+		return Article::where('user_id', '=', Auth::user()->id)->count();
+	}
+
 }

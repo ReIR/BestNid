@@ -73,21 +73,26 @@
 				<div class="input-group">
 					<label for="endDate">Imagen</label>
 					<div class="preview">
-						<img id="uploadPreview" class="img-responsive" style="width: 100px; height: 100px; display: none;" />
+						<img src="{{old('image')}}" id="uploadPreview" class="img-responsive" style="width: 100px; height: 100px; display: none;" />
 					</div>
 					<div class="uploadField" data-content="Agregar">
-						<input id="uploadImage" type="file" name="image"/>
+						<input id="uploadImage" type="file" name="image" value="{{old('image')}}"/>
 					</div>
 					@if($error)
 						<div class="text-danger">
 							{{Session::get('errors')->get('image')[0]}}
 						</div>
 					@endif
+					@if (!$error && Session::has('warning'))
+						<div class="text-danger">
+							{{ Session::get('warning') }}
+						</div>
+					@endif
 				</div>
 			</div>
 			<div class="form-group pull-right">
 				{!! Form::submit('Enviar', array('class' => 'btn btn-default')) !!}
-				<a class="btn btn-danger" href="{{route('admin.categories.index')}}">Cancelar</a>
+				<a class="btn btn-danger" href="{{route('admin.articles.index')}}">Cancelar</a>
 			</div>
 			{!! Form::close() !!}
 		</div>
