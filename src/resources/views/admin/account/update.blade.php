@@ -9,13 +9,17 @@
 		<div class="panel panel-default">
 		  <div class="panel-heading">Editar Cuenta</div>
 		  <div class="panel-body">
-
+				@if(Session::has('success'))
+					<div class="row">
+						@include('partials.notifications')
+					</div>
+				@endif
 		    {!! Form::open(array('route' => array('admin.account.update'), 'method' => 'PATCH')) !!}
 
 					<?php $error = Session::has('errors') && Session::get('errors')->get('firstName'); ?>
 		    	<div class="form-group {{$error ? 'has-error' : ''}}">
 		    	    <label for="firstName">Nombre</label>
-		    		<input 
+		    		<input
 		    			class="form-control"
 		    			type="text"
 		    			name="firstName"
@@ -31,7 +35,7 @@
 					<?php $error = Session::has('errors') && Session::get('errors')->get('lastName'); ?>
 		    	<div class="form-group {{$error ? 'has-error' : ''}}">
 		    		<label for="lastName">Apellido</label>
-		    		<input 
+		    		<input
 		    			class="form-control"
 		    			type="text"
 		    			name="lastName"
@@ -47,7 +51,7 @@
 		    	<?php $error = Session::has('errors') && Session::get('errors')->get('username'); ?>
 					<div class="form-group {{$error ? 'has-error' : ''}}">
 		    	    <label for="username">Nombre de usuario</label>
-		    		<input 
+		    		<input
 		    			class="form-control"
 		    			type="text"
 		    			name="username"

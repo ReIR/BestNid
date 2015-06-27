@@ -134,7 +134,7 @@ class DatabaseSeeder extends Seeder {
 		]);
 
 		$offer1 = Offer::create([
-			'text' => 'Me interesa el producto porque soy fanático de los gatos.',
+			'text' => 'Me interesa el producto porque soy fanático del mismo.',
 			'card' => 1234567890123456,
 			'amount' => 1.0,
 			'contact' => '2215529657',
@@ -143,7 +143,7 @@ class DatabaseSeeder extends Seeder {
 		]);
 
 		$offer2 = Offer::create([
-			'text' => 'Me gustan los perros.',
+			'text' => 'No tengo idea pero lo quiero.',
 			'card' => 1234567890123456,
 			'amount' => 1.0,
 			'contact' => '2215529657',
@@ -152,7 +152,7 @@ class DatabaseSeeder extends Seeder {
 			]);
 
 			$offer3 = Offer::create([
-			'text' => 'Me gustan las mujeres',
+			'text' => 'Me gusta este auto!',
 			'card' => 1234567890123456,
 			'amount' => 10011.0,
 			'contact' => '2215529657',

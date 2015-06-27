@@ -9,6 +9,7 @@ use Validator;
 use App\Article;
 use App\Category;
 use App\Question;
+use App\Offer;
 
 class ArticlesController extends Controller {
 	/**
@@ -98,11 +99,21 @@ class ArticlesController extends Controller {
 		//Check if the requester is the owner of the article.
 		$isOwner = $article->isCurrentOwner();
 
+		$isOfferted = false;
+
+		if ($isLoggedIn) {
+			$isOfferted = Offer::where('article_id', '=', $id)
+							->where('user_id', '=', Auth::user()->id)
+							->count();
+		}
+
+
 		return view('articles.show')
 					->with('article', $article)
 					->with('related', $related)
 					->with('questions', $questions)
 					->with('isLoggedIn', $isLoggedIn)
+					->with('isOfferted', $isOfferted)
 					->with('isOwner', $isOwner);
 
 	}

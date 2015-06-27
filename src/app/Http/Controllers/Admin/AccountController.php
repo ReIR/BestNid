@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use Auth;
 use App\User;
 use App\Offer;
+use App\Article;
+use App\Question;
 use Request;
 use Hash;
 
@@ -86,8 +88,29 @@ class AccountController extends Controller {
 	}
 
 	public function getOffers() {
-
 		return view('admin.account.offers')->withOffers( Auth::user()->offers );
+	}
+
+	public function getQuestions() {
+
+		$myArticles = Article::isCurrentUserOwner()->select('id')->get();
+		$questions = Question::whereIn('article_id', $myArticles->toArray());
+
+		if ( Request::has('answered') ) {
+
+			if ( Request::get('answered') == 1 ){
+
+				$questions = $questions->answered();
+
+			} else if ( Request::get('answered') == 0 ) {
+
+				$questions = $questions->notAnswered();
+			}
+		}
+
+		$questions = $questions->get();
+
+		return view('admin.account.questions')->withQuestions( $questions );
 	}
 
 	public function updateAccount ()
@@ -107,7 +130,7 @@ class AccountController extends Controller {
 		Auth::user()->update($data);
 
 		return redirect()
-			->route('admin.index')
+			->route('admin.account.edit')
 			->with('success', 'La información se ha guardado correctamente.');
 	}
 

@@ -87,7 +87,11 @@ class Question extends Model {
 	}
 
 	public static function countMyArticlesQuestions() {
-		return 2;
+
+		$myArticles = Article::isCurrentUserOwner()->select('id')->get();
+		$questions = Question::whereIn('article_id', $myArticles->toArray());
+
+		return $questions->count();
 	}
 
 	public function user() {

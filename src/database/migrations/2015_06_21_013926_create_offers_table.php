@@ -16,7 +16,7 @@ class CreateOffersTable extends Migration {
 		{
 			$table->increments('id');
 			$table->text('text');
-			$table->float('amount');
+			$table->float('amount')->unsigned();
 			$table->bigInteger('card');
 			$table->bigInteger('contact');
 			$table->timestamps();

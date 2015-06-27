@@ -62,6 +62,8 @@ Route::group(['prefix' => 'admin'], function(){
 
 	Route::get('account/offers', ['as' => 'admin.account.offers', 'uses' => 'Admin\AccountController@getOffers']);
 
+	Route::get('account/questions', ['as' => 'admin.account.questions', 'uses' => 'Admin\AccountController@getQuestions']);
+
 //	Route::resource('user', 'UsersController', ['except' => 'show', 'create', 'store']);
 	// ---------------------------------
 	//	Categories
