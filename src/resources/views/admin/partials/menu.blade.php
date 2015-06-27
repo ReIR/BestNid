@@ -2,7 +2,7 @@
 
 <ul class="list-group">
 	<li class="list-group-item {{($route == 'admin.articles.index') ? 'active' : ''}}">
-		<span class="badge">{{App\Article::count()}}</span>
+		<span class="badge">{{App\User::currentTotalArticles()}}</span>
 		<a href="{{route('admin.articles.index')}}">Subastas</a>
 	</li>
 	<li class="list-group-item">

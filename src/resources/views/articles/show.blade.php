@@ -45,6 +45,7 @@
 					<h3 class="text">
 						Preguntas
 					</h3>
+					<hr class="separator">
 				</div>
 			</div>
 
@@ -54,7 +55,7 @@
 					<div class="panel panel-default">
 					  <div class="panel-body">
 							{{-- Questions --}}
-							@foreach($questions as $question)
+							@forelse($questions as $question)
 								<div class="row">
 									<div class="col-md-12">
 
@@ -77,7 +78,9 @@
 										</div>
 									</div>
 								</div>
-							@endforeach
+							@empty
+								<p>Aún no hay preguntas :( </p>
+							@endforelse
 
 					  </div>
 
