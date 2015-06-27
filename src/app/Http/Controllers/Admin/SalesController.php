@@ -57,7 +57,7 @@ class SalesController extends Controller {
 	public function store()
 	{
 		$data = Request::all();
-		$data['date'] = date('Y/m/d', strtotime(date('Y/m/d')));
+		$data['date'] = date('Y-m-d', strtotime(date('Y-m-d')));
 		$article = Article::find($data['article_id']);
 		$validator = Sale::validate($data);
 
@@ -77,9 +77,10 @@ class SalesController extends Controller {
 		}
 
 		Sale::create($data);
+		
 		return redirect()
 				->route('admin.articles.index')
-				->with('success','Se ha guardado la oferta ganadora para '. $article->title . ' con éxito.');
+				->with('success','La transacción se ha hecho correctamente. Se notificará al ganador vía e-mail.');
 	}
 
 	/**

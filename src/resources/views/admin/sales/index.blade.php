@@ -8,12 +8,12 @@
 
       <div class="col-md-12">
       <form class="form-inline" role="search">
+					<span>Filtrar entre</span>
           <div class="input-group">
-            <label for="initialDate">Fecha inicial</label>
             <input type="date" name="initialDate" class="form-control" value="" />
           </div>
+					y
           <div class="input-group">
-            <label for="finalDate">Fecha final</label>
             <input type="date" name="finalDate" class="form-control" value="" />
           </div>
           <button type="submit" class="btn btn-default">Filtrar</button>
@@ -34,7 +34,7 @@
             <tr>
               <td>{{$ms->title}}</td>
               <td>
-                {{$ms->date}}
+                 {{date('d-m-Y',strtotime($ms->date))}}
               </td>
               <td
                 <div class="text-right">

@@ -6,7 +6,7 @@
 		<a href="{{route('admin.articles.index')}}">Subastas</a>
 	</li>
 	<li class="list-group-item">
-		<span class="badge">0</span>
+		<span class="badge">{{App\Sale::countMySales()}}</span>
 		<a href="{{route('admin.sales.index')}}">Ventas</a>
 	</li>
 	<li class="list-group-item">

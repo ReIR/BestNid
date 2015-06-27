@@ -3,7 +3,7 @@
 use Illuminate\Database\Eloquent\Model;
 use Validator;
 use DB;
-use Auth; 
+use Auth;
 
 class Sale extends Model {
 
@@ -56,5 +56,10 @@ class Sale extends Model {
 						->join('articles', 'articles.id', '=', 'sales.article_id')
 						->select('*')
 						->where('articles.user_id', '=', Auth::user()->id);
+	}
+
+	public static function countMySales(){
+		return self::salesOfUser()
+						->count();
 	}
 }
