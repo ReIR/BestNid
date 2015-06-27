@@ -107,6 +107,10 @@ class Article extends Model {
 		return $this->hasMany('App\Offer');
 	}
 
+	public function sale() {
+		return $this->hasOne('App\Sale');
+	}
+
 	public function scopeOfCategory($query, $category) {
 		return $query->where('category_id', '=', $category);
 	}
@@ -167,11 +171,9 @@ class Article extends Model {
 
 	public function toBeFinished() {
 
-		// FIXME: Add model Sale!!!
+		// Finished, has offers and is not sold.
 
-		$sale = false;
-
-		return ( !$this->isActive() && $this->offers->count() && !$sale );
+		return ( !$this->isActive() && $this->offers->count() && !$this->sale );
 	}
 
 	public function isCurrentOwner() {
