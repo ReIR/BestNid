@@ -44,7 +44,7 @@
 
 										<td
 											<div class="text-right">
-												<a class="btn btn-success" href="{{ route('offers.create', ['id'=> $aq->article->id])}}" role="button">Ofertar</a>
+												<a class="btn btn-success" href="{{ route('articles.offers.create', ['id'=> $aq->article->id])}}" role="button">Ofertar</a>
 											</div>
 										</td>
 
