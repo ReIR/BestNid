@@ -129,11 +129,11 @@ Route::get('articles/{id}/offers', [
 	]);
 
 Route::post('articles/{id}/offers/store', [
-	'as' => 'articles.offers.store',
-	'uses' => 'OffersController@store'
+		'as' => 'articles.offers.store',
+		'uses' => 'OffersController@store'
 	]);
 
-/*Route::post('admin/articles/{id_article}/offers/{id_offer}/sales', [
-		'as' => 'admin.articles.index',
-		'uses' => 'Admin\OffersController@index'
+Route::post('admin/articles/{id_article}/offers/{id_offer}/sales/store', [
+		'as' => 'admin.articles.offers.sales.store',
+		'uses' => 'Admin\SalesController@store'
 	]);
