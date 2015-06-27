@@ -56,9 +56,7 @@ class AnswersController extends Controller {
 				->with('error', 'No se pueden responder preguntas sobre artículos que ya han finalizado.');
 		}
 
-		$question = Question::find($question_id)
-			->with('article')
-			->first();
+		$question = Question::find($question_id);
 
 		//Check that the form wasnt adulterated.
 		if($question->article->id != $article_id) {
