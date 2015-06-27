@@ -56,10 +56,10 @@
 		 				 			<div class="pull-right">
 			 				 			{{--<a class="btn btn-default" href="#" role="button">Editar</a>
 			 				 			<a class="btn btn-default" href="#" role="button">Borrar</a>--}}
-										<a class="btn btn-default" href="{{route('articles.show', $article->id)}}" role="button">Ver</a>
 										@if($article->toBeFinished())
 											<a class="btn btn-success" href="{{route('admin.articles.offers.index', $article->id)}}" role="button">Finalizar</a>
 										@endif
+										<a class="btn btn-default" href="{{route('articles.show', $article->id)}}" role="button">Ver</a>
 		 				 			</div>
 								</td>
 		 				 	</tr>
