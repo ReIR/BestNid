@@ -75,17 +75,19 @@ class Question extends Model {
 	}
 
 	public static function countMyPendingQuestions() {
-		return count(Question::with('user')
-									->ofUser(Auth::user()->id)
+		return Question::ofUser(Auth::user()->id)
 									->notAnswered()
-									->get());
+									->count();
 	}
 
 	public static function countMyAnsweredQuestions() {
-		return count(Question::with('user')
-									->ofUser(Auth::user()->id)
+		return Question::ofUser(Auth::user()->id)
 									->answered()
-									->get());
+									->count();
+	}
+
+	public static function countMyArticlesQuestions() {
+		return 2;
 	}
 
 	public function user() {
