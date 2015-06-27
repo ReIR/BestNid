@@ -15,7 +15,28 @@ class SalesController extends Controller {
 	 */
 	public function index()
 	{
-		//
+		if (Request::has('initialDate') && Request::has('finalDate')){
+
+				$initialDate = Request::get('initialDate');
+				$finalDate = Request::get('finalDate');
+
+				$salesBetween= Sale::salesOfUser()
+									->whereBetween('date', [$initialDate, $finalDate])
+									->get();
+
+				return view('admin.sales.index')
+							->with('mySales', $salesBetween);
+	//	}elseif (Request::has('initialDate')) {
+			# se requiere fecha final.
+	//	}elseif (Request::has('finalDate')) {
+			# se requiere fecha inicial
+		}
+
+		$mySales = Sale::salesOfUser()
+								->get();
+
+		return view('admin.sales.index')
+					->with('mySales', $mySales);
 	}
 
 	/**

@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Validator;
+use DB;
+use Auth; 
 
 class Sale extends Model {
 
@@ -47,5 +49,12 @@ class Sale extends Model {
 
 	public static function alreadySold($id){
 		return !(self::where('article_id', '=', $id)->count() == 0 );
+	}
+
+	public function scopeSalesOfUser($query){
+		return $query
+						->join('articles', 'articles.id', '=', 'sales.article_id')
+						->select('*')
+						->where('articles.user_id', '=', Auth::user()->id);
 	}
 }

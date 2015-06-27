@@ -6,8 +6,8 @@
 		<a href="{{route('admin.articles.index')}}">Subastas</a>
 	</li>
 	<li class="list-group-item">
-		<span class="badge">2</span>
-		<a href="#">Ventas</a>
+		<span class="badge">0</span>
+		<a href="{{route('admin.sales.index')}}">Ventas</a>
 	</li>
 	<li class="list-group-item">
 		<span class="badge">{{App\Question::countMyPendingQuestions()}}</span>
