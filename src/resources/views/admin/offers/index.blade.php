@@ -51,7 +51,21 @@
 						</td>
 						<td>
 							<div class="text-right">
-								<a class="btn btn-success" href="#" role="button">Elegir</a>
+								{{--
+								{!! Form::open(array('route' =>
+									['admin.articles.offers.sales.store', [$o->article_id, $o->id]], 'method' => 'POST')) !!}
+									{!! Form::hidden('article_id', $o->article_id)!!}
+									{!! Form::hidden('offer_id', $o->id)!!}
+									{!! Form::hidden('user_id', $o->user_id)!!}
+									{!! Form::submit('Elegir', array('class' => 'btn btn-success')) !!}
+								{!! Form::close() !!}
+								--}}
+								<form class="" action="{{route('admin.articles.offers.sales.store', [$o->article_id, $o->id] )}}" method="post">
+									<input type="numeric" name="article_id" class="form-control hidden" value="{{$o->article_id}}">
+									<input type="numeric" name="offer_id" class="form-control hidden" value="{{$o->id}}">
+									<input type="numeric" name="user_id" class="form-control hidden" value="{{$o->user_id}}">
+									<button type="submit" class="btn btn-success">Elegir</button>
+								</form>
 							</div>
 						</td>
 					</tr>

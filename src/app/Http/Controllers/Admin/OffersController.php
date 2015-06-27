@@ -6,6 +6,7 @@ use Request;
 use DB;
 use Auth;
 use App\Article;
+use App\Sale;
 
 class OffersController extends Controller {
 
@@ -39,6 +40,11 @@ class OffersController extends Controller {
 		$offers = DB::table('offers')
 			->where('offers.article_id', '=', $id)
 			->get();
+
+		if ((Sale::alreadySold($article->id))){
+			return redirect ()
+						->route('home');
+		}
 
 		if (!$article->isCurrentOwner()){
 			return redirect()
