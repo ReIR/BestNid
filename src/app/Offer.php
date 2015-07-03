@@ -20,7 +20,7 @@ class Offer extends Model {
 	*/
 	private static $rules = [
 		'text'=> 'required|min:10',
-		'amount'=> 'required|numeric|min:0|digits_between:1,10',
+		'amount'=> 'required|numeric|min:1|digits_between:1,10',
 		'card'=> 'required|numeric|digits_between:12,19',
 		'contact'=> 'required|numeric|digits_between:6,20',
 		'user_id'=>'required|exists:users,id',
