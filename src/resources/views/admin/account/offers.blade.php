@@ -21,7 +21,10 @@
               <td>{{$o->article->title}}</td>
               <td>${{$o->amount}}</td>
               <td>
-                <a href="{{route('articles.show', $o->article->id)}}" class="btn btn-default">Ver Artículo</a>
+                <a href="{{route('articles.show', $o->article->id)}}" class="btn btn-default btn-success">Ver Artículo</a>
+								@if($o->article->isActive())
+									<a href="{{route('admin.articles.offers.edit', [$o->article->id, $o->id])}}" class="btn btn-default">Editar</a>
+								@endif
               </td>
 						</tr>
 					@endforeach

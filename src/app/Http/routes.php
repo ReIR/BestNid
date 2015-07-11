@@ -140,8 +140,18 @@ Route::post('admin/articles/{id_article}/offers/{id_offer}/sales/store', [
 		'uses' => 'Admin\SalesController@store'
 	]);
 
+Route::get('admin/article/{id_article}/offers/{id_offer}/edit', [
+	'as' => 'admin.articles.offers.edit',
+	'uses' => 'Admin\OffersController@edit'
+	]);
+
+Route::patch('admin/offers/{id}', [
+	'as' => 'admin.offer.update',
+	'uses' => 'Admin\OffersController@update'
+	]);
+
 	// ---------------------------------
-	//	Offers
+	//	Sales
 	// ---------------------------------
 	//
 Route::get('admin/sales/index', [

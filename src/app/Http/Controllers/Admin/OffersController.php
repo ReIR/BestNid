@@ -7,6 +7,8 @@ use DB;
 use Auth;
 use App\Article;
 use App\Sale;
+use App\Offer;
+use Session;
 
 class OffersController extends Controller {
 
@@ -94,9 +96,29 @@ class OffersController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($article_id, $offer_id)
 	{
-		//
+		$article = Article::find($article_id);
+
+		$offer = Offer::find($offer_id);
+
+/*
+		if ($offer == null || $article==null || ($offer->article_id != $article->id)){
+			return redirect()
+				->route('home')
+				->with('error', 'Error 404: la página solicitada no existe');
+		}
+*/
+		if (!$offer->isCurrentOwner()){
+			return redirect()
+				->route('admin.index')
+				//Aquí está fallando ya que no muestra este mensaje cuando se envía.
+				->with('error', 'Usted no tiene permisos para acceder a la url solicitada.');
+		}
+
+		return view('admin.offers.update')
+				->with('offer', $offer)
+				->with('article', $article);
 	}
 
 	/**
@@ -107,7 +129,26 @@ class OffersController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		$all= Request::all();
+		$offer = Offer::find($all['id']);
+
+		$all['user_id'] = $offer->user_id;
+		$all['article_id'] = $offer->article_id;
+
+		$validator = Offer::validate($all);
+
+		if ($validator->fails()){
+			$messages = $validator->messages();
+			return redirect()
+				->back()
+				->with('errors', $messages);
+		}
+
+		$offer->update($all);
+
+		return redirect()
+				->back()
+				->with('success', 'La oferta se actualizó correctamente');
 	}
 
 	/**

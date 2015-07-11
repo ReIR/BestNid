@@ -80,4 +80,9 @@ class Offer extends Model {
 							//Quedarme con aquellas subastas que han finalizado, alta paja.
 							->count();
 	}
+
+	public function isCurrentOwner() {
+		return (Auth::check() && (Auth::user()->id == $this->user_id));
+	}
+	
 }
