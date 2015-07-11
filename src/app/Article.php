@@ -36,6 +36,7 @@ class Article extends Model {
 		'endDate.required' => 'La fecha de finalización es requerida',
 		'endDate.after' => 'La fecha de finalización debe ser de al menos 15 días',
 		'endDate.date' => 'La fecha de finalización tiene un formato incorrecto',
+		'endDate.before' => 'La fecha ingresada es superior a un año.',
 		'category_id.required' => 'La categoría es requerida',
 		'category_id.integer' => 'La categoría es requerida',
 		'category_id.exists' => 'La categoría no es un valor válido'
@@ -54,7 +55,11 @@ class Article extends Model {
 
 		$after15days = date('m/d/Y', strtotime("+14 days"));
 
+		$beforeDate = date('m/d/Y', strtotime("+365 days"));
+
 		$all['endDate'] = date('m/d/Y', strtotime($all['endDate']));
+
+		$rules['endDate'] .= '|before:'.$beforeDate;
 
 		$rules['endDate'] .= '|after:'.$after15days;
 

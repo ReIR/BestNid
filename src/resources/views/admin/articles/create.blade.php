@@ -58,7 +58,11 @@
 				?>
 				<div class="input-group col-xs-12 col-md-4">
 					<label for="endDate">Fecha de finalización</label>
-					<input type="date" name="endDate" class="form-control" value="{{$value}}" />
+					<?php
+					use Carbon\Carbon;
+					 $maxDate = Carbon::now()->addYear()->toDateString();
+					?>
+					<input type="date" name="endDate" max="{{$maxDate}}" class="form-control" value="{{$value}}" />
 					@if($error)
 						<div class="text-danger">
 							{{Session::get('errors')->get('endDate')[0]}}
