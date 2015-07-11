@@ -150,6 +150,14 @@ Route::patch('admin/offers/{id}', [
 	'uses' => 'Admin\OffersController@update'
 	]);
 
+Route::delete('admin/offers/{id}', [
+		'as' => 'admin.offer.destroy',
+		'uses' => 'Admin\OffersController@destroy'
+	]);
+
+Route::get('admin/offers/alert/{id}',
+	['as' => 'admin.offer.alert', 'uses' => 'Admin\OffersController@alert']);
+
 	// ---------------------------------
 	//	Sales
 	// ---------------------------------

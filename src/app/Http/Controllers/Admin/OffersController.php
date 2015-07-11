@@ -159,7 +159,25 @@ class OffersController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		$offer = Offer::find($id);
+
+		if (!$offer)
+			abort(404, 'No Encontrado');
+
+		Offer::destroy($id);
+
+		return redirect()
+			->route('admin.account.offers')
+			->with('success', 'La oferta fue borrada.');
+	}
+
+	public function alert ($id){
+
+		$offer = Offer::find($id);
+
+		return view ('admin.offers.alert')
+			->with('offer', $offer)
+			->with('message', '¿Desea eliminar la oferta?');
 	}
 
 }
