@@ -14,7 +14,7 @@
 		<span class="badge">{{App\Question::countMyAnsweredQuestions()}}</span>
 		<a href="{{route('admin.questions.index')}}">Mis preguntas</a>
 	</li>
-	<li class="list-group-item">
+	<li class="list-group-item {{($route == 'admin.account.questions') ? 'active' : ''}}">
 		<span class="badge">{{App\Question::countMyArticlesQuestions()}}</span>
 		<a href="{{route('admin.account.questions')}}">Preguntas de mis subastas</a>
 	</li>
