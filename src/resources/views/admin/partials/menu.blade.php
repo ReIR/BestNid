@@ -23,11 +23,11 @@
 		<a href="{{route('admin.account.offers')}}">Mis Ofertas</a>
 	</li>
 	@if ( App\User::currentUserIsAdmin() )
-		<li class="list-group-item">
+		<li class="list-group-item {{($route == 'admin.users.index') ? 'active' : ''}}">
 			<span class="badge">{{App\User::count()}}</span>
-			<a href="#">Usuarios</a>
+			<a href="{{route('admin.users.index')}}">Usuarios</a>
 		</li>
-		<li class="list-group-item">
+		<li class="list-group-item {{($route == 'admin.categories.index') ? 'active' : ''}}">
 			<span class="badge">{{App\Category::count()}}</span>
 			<a href="{{route('admin.categories.index')}}">Categorías</a>
 		</li>

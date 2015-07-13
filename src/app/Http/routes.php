@@ -73,6 +73,12 @@ Route::group(['prefix' => 'admin'], function(){
 
 	Route::get('categories/alert/{id}',
 		['as' => 'admin.categories.alert', 'uses' => 'Admin\CategoriesController@alert']);
+
+	//Para listar los usuarios por parte del administrador.
+	Route::get('users',
+		['as' => 'admin.users.index',
+		'uses' => 'Admin\UsersController@index']);
+
 });
 
 // ---------------------------------
