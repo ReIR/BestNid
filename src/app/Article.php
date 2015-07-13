@@ -23,6 +23,14 @@ class Article extends Model {
 		'category_id' => 'required|integer|exists:categories,id'
 	];
 
+	private static $editRules = [
+		'title' => 'required|min:4|max:50',
+		'description' => 'required|min:10',
+		'image' => 'image|mimes:jpeg,jpg,png',
+		'endDate' => 'required',
+		'category_id' => 'required|integer|exists:categories,id'
+	];
+
 	private static $messages = [
     'title.required' => 'El título es requerido',
 		'title.min' => 'El título debe tener más de :min caracteres',
@@ -65,6 +73,25 @@ class Article extends Model {
 
 		return Validator::make($all, $rules, self::$messages);
 	}
+
+	public static function validateEdit($all) {
+
+		$rules = self::$editRules;
+
+		$after15days = date('m/d/Y', strtotime("+14 days"));
+
+		$beforeDate = date('m/d/Y', strtotime("+365 days"));
+
+		$all['endDate'] = date('m/d/Y', strtotime($all['endDate']));
+
+		$rules['endDate'] .= '|before:'.$beforeDate;
+
+		$rules['endDate'] .= '|after:'.$after15days;
+
+		return Validator::make($all, $rules, self::$messages);
+	}
+
+
 
 	/**
 	 * The attributes that are mass assignable.
@@ -187,6 +214,10 @@ class Article extends Model {
 
 	public function isActive() {
 		return ( $this->getRemainingDays() > 0 );
+	}
+
+	public function isEditable() {
+		return ( $this->isActive() && !$this->offers->count() && !$this->questions->count() && !$this->sale );
 	}
 
 	/*
