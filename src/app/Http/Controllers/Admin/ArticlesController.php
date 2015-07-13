@@ -113,7 +113,12 @@ class ArticlesController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		$categories = Article::getMapCategories();
+		$article = Article::find($id);
+
+		return view('admin.articles.edit')
+						->withCategories($categories)
+						->withArticle($article);
 	}
 
 	/**
@@ -124,7 +129,35 @@ class ArticlesController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		$all = Request::all();
+
+		$article = Article::find($id);
+
+		if(!$article) {
+			abort(404);
+		}
+
+		if (!$article->isEditable()) {
+			return redirect()
+				->roite('admin.articles.index')
+				->with('error', 'El artículo que quiso editar ya no es editable.');
+		}
+
+		$validator = Article::validateEdit($all);
+
+		if ( $validator->fails() )
+		{
+			return redirect()
+				->back()
+				->with('errors', $validator->messages())
+				->withInput();
+		}
+
+		$article->update($all);
+
+		return redirect()
+				->route('admin.articles.index')
+				->with('success', 'Se guardó correctamente');
 	}
 
 	/**

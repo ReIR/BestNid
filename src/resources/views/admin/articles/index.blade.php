@@ -58,6 +58,10 @@
 			 				 			<a class="btn btn-default" href="#" role="button">Borrar</a>--}}
 										@if($article->toBeFinished())
 											<a class="btn btn-success" href="{{route('admin.articles.offers.index', $article->id)}}" role="button">Finalizar</a>
+										@elseif($article->isEditable())
+												<a class="btn btn-success" href="{{route('admin.articles.edit', $article->id)}}" role="button">Editar</a>
+										@else
+												<a class="btn btn-danger disabled" href="{{route('admin.articles.edit', $article->id)}}" role="button">Editar</a>
 										@endif
 										<a class="btn btn-default" href="{{route('articles.show', $article->id)}}" role="button">Ver</a>
 		 				 			</div>
