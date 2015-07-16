@@ -24,6 +24,13 @@ class UsersController extends Controller {
 					$initialDate = Request::get('initialDate');
 					$finalDate = Request::get('finalDate');
 
+					// check if is a bad range of dates
+					if ( $finalDate < $initialDate ) {
+						return redirect()
+										->route('admin.users.index')
+										->with('error', 'Rango de fechas inválido');
+					}
+
 					$usersBetween= User::whereBetween('created_at', [$initialDate, date('Y-m-d', strtotime('+1 days'.$finalDate))])->get();
 
 					return view('admin.users.index')

@@ -26,19 +26,7 @@ class OffersController extends Controller {
 	{
 
 		$article = Article::find($id);
-/*		$myArticles = DB::table('articles')
-			->join('offers', 'articles.id', '=', 'offers.article_id')
-			->select('articles.id', 'articles.title', 'articles.user_id', 'articles.category_id')
-			->where ('articles.user_id', '=', Auth::user()->id)
-			//Quedarme con aquellas subastas que han finalizado, alta paja.
-			->get();
-
-		$myOffers = DB::table('articles')
-			->join('offers', 'articles.id', '=', 'offers.article_id')
-			->select('articles.title', 'articles.id')
-			->where('offers.user_id', '=', Auth::user()->id)
-			->get();
-*/
+		
 		$offers = DB::table('offers')
 			->where('offers.article_id', '=', $id)
 			->get();
@@ -147,7 +135,7 @@ class OffersController extends Controller {
 		$offer->update($all);
 
 		return redirect()
-				->back()
+				->route('admin.account.offers')
 				->with('success', 'La oferta se actualizó correctamente');
 	}
 

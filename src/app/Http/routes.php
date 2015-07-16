@@ -43,6 +43,16 @@ Route::group(['prefix' => 'admin'], function(){
 	//
 	Route::resource('articles', 'Admin\ArticlesController');
 
+	Route::post('articles/{id_article}/offers/{id_offer}/sales/store', [
+			'as' => 'admin.articles.offers.sales.store',
+			'uses' => 'Admin\SalesController@store'
+	]);
+
+	Route::get('article/{id_article}/offers/{id_offer}/edit', [
+		'as' => 'admin.articles.offers.edit',
+		'uses' => 'Admin\OffersController@edit'
+	]);
+
 	// ---------------------------------
 	//	Questions
 	// ---------------------------------
@@ -50,36 +60,77 @@ Route::group(['prefix' => 'admin'], function(){
 	Route::resource('questions', 'Admin\QuestionsController');
 
 	// ---------------------------------
-	//	Edit User's Account
+	//	Accounts
 	// ---------------------------------
 	//
-	Route::get('account/edit', ['as' => 'admin.account.edit', 'uses' => 'Admin\AccountController@editAccount']);
+	Route::group(['prefix' => 'account'], function(){
 
-	Route::patch('account', ['as' => 'admin.account.update', 'uses' => 'Admin\AccountController@updateAccount']);
+		Route::patch('/', ['as' => 'admin.account.update', 'uses' => 'Admin\AccountController@updateAccount']);
 
-	Route::get('account/password/edit', ['as' => 'admin.account.changePass','uses' => 'Admin\AccountController@getChangePassword']);
-	Route::patch('account/password', ['as' => 'admin.account.updatePass','uses' => 'Admin\AccountController@updatePassword']);
+		Route::delete('/', ['as' => 'admin.account.delete', 'uses' => 'Admin\AccountController@destroy']);
 
-	Route::get('account/offers', ['as' => 'admin.account.offers', 'uses' => 'Admin\AccountController@getOffers']);
+		Route::get('edit', ['as' => 'admin.account.edit', 'uses' => 'Admin\AccountController@editAccount']);
 
-	Route::get('account/questions', ['as' => 'admin.account.questions', 'uses' => 'Admin\AccountController@getQuestions']);
+		Route::patch('password', ['as' => 'admin.account.updatePass','uses' => 'Admin\AccountController@updatePassword']);
 
-//	Route::resource('user', 'UsersController', ['except' => 'show', 'create', 'store']);
+		Route::get('password/edit', ['as' => 'admin.account.changePass','uses' => 'Admin\AccountController@getChangePassword']);
+
+		Route::get('offers', ['as' => 'admin.account.offers', 'uses' => 'Admin\AccountController@getOffers']);
+
+		Route::get('questions', ['as' => 'admin.account.questions', 'uses' => 'Admin\AccountController@getQuestions']);
+	});
+
 	// ---------------------------------
 	//	Categories
 	// ---------------------------------
 	//
 	Route::resource('categories', 'Admin\CategoriesController', ['except' => 'show']);
 
-	Route::get('categories/alert/{id}',
-		['as' => 'admin.categories.alert', 'uses' => 'Admin\CategoriesController@alert']);
+	Route::get('categories/alert/{id}',[
+		'as' => 'admin.categories.alert',
+		'uses' => 'Admin\CategoriesController@alert'
+	]);
 
 	//Para listar los usuarios por parte del administrador.
-	Route::get('users',
-		['as' => 'admin.users.index',
-		'uses' => 'Admin\UsersController@index']);
+	Route::get('users',[
+		'as' => 'admin.users.index',
+		'uses' => 'Admin\UsersController@index'
+	]);
 
-});
+	// ---------------------------------
+	//	Offers
+	// ---------------------------------
+	//
+	Route::patch('offers/{id}', [
+		'as' => 'admin.offer.update',
+		'uses' => 'Admin\OffersController@update'
+	]);
+
+	Route::delete('offers/{id}', [
+			'as' => 'admin.offer.destroy',
+			'uses' => 'Admin\OffersController@destroy'
+	]);
+
+	Route::get('offers/alert/{id}',[
+		'as' => 'admin.offer.alert',
+		'uses' => 'Admin\OffersController@alert'
+	]);
+
+	// ---------------------------------
+	//	Sales
+	// ---------------------------------
+	//
+	Route::get('sales/index', [
+			'as' => 'admin.sales.index',
+			'uses' => 'Admin\SalesController@index'
+	]);
+
+	Route::get('articles/{id}/offers', [
+		'as' => 'admin.articles.offers.index',
+		'uses' => 'Admin\OffersController@index'
+	]);
+
+}); // END /admin
 
 // ---------------------------------
 //	Articles
@@ -105,8 +156,6 @@ Route::resource('articles.questions.answers', 'AnswersController', ['only' => ['
 //
 Route::resource('users', 'UsersController', ['only' => ['create', 'store']]);
 
-
-
 Route::get('users/login', [
 	'as' => 'users.getLogin',
 	'uses' => 'UsersController@getLogin'
@@ -127,48 +176,11 @@ Route::get('users/logout', [
 // ---------------------------------
 //
 Route::get('articles/{id}/offers/create', [
-		'as' => 'articles.offers.create',
-		'uses' => 'OffersController@create'
-	]);
-
-Route::get('articles/{id}/offers', [
-		'as' => 'admin.articles.offers.index',
-		'uses' => 'Admin\OffersController@index'
-	]);
+	'as' => 'articles.offers.create',
+	'uses' => 'OffersController@create'
+]);
 
 Route::post('articles/{id}/offers/store', [
-		'as' => 'articles.offers.store',
-		'uses' => 'OffersController@store'
-	]);
-
-Route::post('admin/articles/{id_article}/offers/{id_offer}/sales/store', [
-		'as' => 'admin.articles.offers.sales.store',
-		'uses' => 'Admin\SalesController@store'
-	]);
-
-Route::get('admin/article/{id_article}/offers/{id_offer}/edit', [
-	'as' => 'admin.articles.offers.edit',
-	'uses' => 'Admin\OffersController@edit'
-	]);
-
-Route::patch('admin/offers/{id}', [
-	'as' => 'admin.offer.update',
-	'uses' => 'Admin\OffersController@update'
-	]);
-
-Route::delete('admin/offers/{id}', [
-		'as' => 'admin.offer.destroy',
-		'uses' => 'Admin\OffersController@destroy'
-	]);
-
-Route::get('admin/offers/alert/{id}',
-	['as' => 'admin.offer.alert', 'uses' => 'Admin\OffersController@alert']);
-
-	// ---------------------------------
-	//	Sales
-	// ---------------------------------
-	//
-Route::get('admin/sales/index', [
-		'as' => 'admin.sales.index',
-		'uses' => 'Admin\SalesController@index'
-	]);
+	'as' => 'articles.offers.store',
+	'uses' => 'OffersController@store'
+]);

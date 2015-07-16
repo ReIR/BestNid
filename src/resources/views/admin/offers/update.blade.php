@@ -74,7 +74,7 @@
           </div>
 
           {!! Form::submit('Aceptar', array('class' => 'btn btn-success')) !!}
-          <a class="btn btn-danger" href="{{route('articles.show', ['id'=>$article->id])}}">Cancelar</a>
+          <a class="btn btn-danger" href="{{URL::previous()}}">Cancelar</a>
         {!! Form::close() !!}
         </div>
       </div>
