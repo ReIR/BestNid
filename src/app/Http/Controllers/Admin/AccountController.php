@@ -204,8 +204,15 @@ class AccountController extends Controller {
 				->withError('No se puede eliminar la cuenta ya que usted cuenta con subastas activas o sin elección de ganador');
 		}
 
-		// deactivate user
-		User::deactivateCurrentUser();
+		try {
+			// deactivate user
+			User::deactivateCurrentUser();
+
+		} catch (\Exception $e) {
+			return redirect()
+				->back()
+				->withError($e->getMessage());
+		}
 
 		return redirect()
 						->route('users.getLogin')

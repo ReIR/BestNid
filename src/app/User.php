@@ -213,6 +213,9 @@ class User extends Model implements Authenticatable {
 	}
 
 	public static function deactivateCurrentUser() {
+		if ( self::currentUserIsAdmin() )
+				throw new \Exception('No puedes desactivar tu cuenta porque eres administrador.');
+
 		// mark as inactive
 		$user = Auth::user();
 		$user->active = 0;

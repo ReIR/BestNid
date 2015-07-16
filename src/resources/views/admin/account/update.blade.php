@@ -86,11 +86,13 @@
 		    	<a class="btn btn-danger" href="{{route('admin.index')}}">Cancelar</a>
 		    	{!! Form::close() !!}
 		  </div>
-			<div class="panel-footer">
-				{!! Form::open(array('url'=> route('admin.account.delete'), 'method' => 'delete')) !!}
-					<input type="submit" class="btn btn-link" value="Desactivar mi cuenta" />
-				{!! Form::close() !!}
-			</div>
+			@if ( !App\User::currentUserIsAdmin() )
+				<div class="panel-footer">
+					{!! Form::open(array('url'=> route('admin.account.delete'), 'method' => 'delete')) !!}
+						<input type="submit" class="btn btn-link" value="Desactivar mi cuenta" />
+					{!! Form::close() !!}
+				</div>
+			@endif
 		</div>
 	</div>
 @overwrite
