@@ -9,7 +9,7 @@
 		<div class="panel panel-default">
 		  <div class="panel-heading">Editar Cuenta</div>
 		  <div class="panel-body">
-				@if(Session::has('success'))
+				@if(Session::has('success') || Session::has('error'))
 					<div class="row">
 						@include('partials.notifications')
 					</div>
@@ -84,8 +84,13 @@
 
 		    	{!! Form::submit('Aceptar', array('class' => 'btn btn-success')) !!}
 		    	<a class="btn btn-danger" href="{{route('admin.index')}}">Cancelar</a>
-		    {!! Form::close() !!}
+		    	{!! Form::close() !!}
 		  </div>
+			<div class="panel-footer">
+				{!! Form::open(array('url'=> route('admin.account.delete'), 'method' => 'delete')) !!}
+					<input type="submit" class="btn btn-link" value="Desactivar mi cuenta" />
+				{!! Form::close() !!}
+			</div>
 		</div>
 	</div>
 @overwrite

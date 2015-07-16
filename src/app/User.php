@@ -212,4 +212,13 @@ class User extends Model implements Authenticatable {
 		return Article::where('user_id', '=', Auth::user()->id)->count();
 	}
 
+	public static function deactivateCurrentUser() {
+		// mark as inactive
+		$user = Auth::user();
+		$user->active = 0;
+		$user->save();
+		// logout
+		Auth::logout();
+	}
+
 }

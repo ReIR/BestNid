@@ -49,36 +49,25 @@ class UsersController extends Controller {
 		$username = Request::input('username');
 		$password = Request::input('password');
 
-		if (Auth::attempt(['username' => $username, 'password' => $password]))
-        {
-					/*
-					 *	Laravel doesn't allow to use redirect()->intended to a POST/PUT/PATCH requested URL
-					 *	beacuse redirect()->intended always'll send a GET request throwing an HTTPMethodNotAllowedException.
-					 *	So I decided to trick it a little bit:
-					 *	First I fetch the intended URL path.
-					 *	Then I take the last word (being it the RESTful endpoint).
-					 *	I check if the endpoint doesnt't correspond to a GET method. If it doesn't, then redirect to the index
-					 *	because that means that a form was sent and it was lost!
-					 *	Finally, if it does correspond to a GET method, redirect to the page they were trying to access.
-					 *
-					 *	Just to get this clear: This fix allowes to redirect to a GET endpoint when logging in,
-					 *	avoiding the HTTPMethodNotAllowedException that could throw if the redirection was called from
-					 *	an endpoint of another HTTP method.
-					 */
+		if ( Auth::validate(['username' => $username, 'password' => $password]) ) {
 
-						$intendedRoute = redirect()->intended('articles.index')->headers->allPreserveCase()["Location"][0];
-						$resourceMethod = class_basename($intendedRoute);
+				// Check if user reactive account
+				$current = User::where('username', '=', $username)->first();
 
-						if($resourceMethod != 'index' && $resourceMethod != 'show' && $resourceMethod != 'create' && $resourceMethod != 'edit') {
-							return redirect()->route('articles.index');
-						}
+				Auth::login($current);
 
-						return redirect()->to($intendedRoute);
+				if ( !$current->active ) {
+					$current->active = 1;
+					$current->save();
+					return redirect()
+						->route('articles.index')
+						->with('success', 'La cuenta ha sido reactivada :)');
+				}
 
-        } else {
+				return redirect()->route('articles.index');
+    }
 
-        	return redirect()->back()->with('error', 'Credenciales inválidas');
-        }
+    return redirect()->back()->with('error', 'Credenciales inválidas');
 	}
 
 	/**

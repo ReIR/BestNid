@@ -9,6 +9,7 @@ use App\Article;
 use App\Question;
 use Request;
 use Hash;
+use DB;
 
 //use Illuminate\Http\Request;
 
@@ -16,6 +17,7 @@ class AccountController extends Controller {
 
 	public function __construct() {
 		$this->middleware('authUser');
+		$this->middleware('csrf', ['only' => ['updateAccount', 'updatePassword', 'destroy']]);
 	}
 
 
@@ -169,12 +171,45 @@ class AccountController extends Controller {
 	/**
 	 * Remove the specified resource from storage.
 	 *
-	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy()
 	{
-		//
+		$user_id = Auth::user()->id;
+
+		// get auctions with offers
+		$articles = DB::table('articles');
+		$articles->leftJoin('offers', 'articles.id', '=', 'offers.article_id')
+				// owner
+				->where('articles.user_id', '=', $user_id)
+				// where
+				//  - not finished auctions
+				//  or
+				//  - not have set a winner
+				->where(function($query){
+					$query->where('articles.endDate', '>', DB::raw('NOW()'))
+								->orWhereNotExists(function($query){
+					      	$query->select('id')
+									      ->from('sales')
+										    ->whereRaw('sales.offer_id = offers.id');
+								});
+				});
+
+		// if exist an auction, can't delete.
+		$canDelete = $articles->count() ? false : true;
+
+		if ( ! $canDelete ) {
+			return redirect()
+				->back()
+				->withError('No se puede eliminar la cuenta ya que usted cuenta con subastas activas o sin elección de ganador');
+		}
+
+		// deactivate user
+		User::deactivateCurrentUser();
+
+		return redirect()
+						->route('users.getLogin')
+						->with('info', 'Cuenta desactivada. Vuelve pronto :(');
 	}
 
 }
