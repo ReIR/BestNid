@@ -128,7 +128,7 @@ class AccountController extends Controller {
 				->with('data', $data)
 				->with('errors', $validator->messages());
 		}
-		//Aún resta guardar la información que se vaya a modificar. Este es el lugar para hacerlo.
+
 		Auth::user()->update($data);
 
 		return redirect()
