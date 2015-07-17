@@ -41,7 +41,7 @@
 	 						<th>Categoría</th>
 							<th>Activa</th>
 	 						<th>Días Restantes</th>
-	 						<th>Acciones</th>
+	 						<th><div class="pull-right">Acciones</div></th>
 	 					</tr>
 	 				 </thead>
 	 				 <tbody>
@@ -54,16 +54,33 @@
 		 				 		<td>{{$remainingDays}} días</td>
 		 				 		<td>
 		 				 			<div class="pull-right">
-			 				 			{{--<a class="btn btn-default" href="#" role="button">Editar</a>
-			 				 			<a class="btn btn-default" href="#" role="button">Borrar</a>--}}
-										@if($article->toBeFinished())
-											<a class="btn btn-success" href="{{route('admin.articles.offers.index', $article->id)}}" role="button">Finalizar</a>
-										@elseif($article->isEditable())
-												<a class="btn btn-success" href="{{route('admin.articles.edit', $article->id)}}" role="button">Editar</a>
-										@else
-												<a class="btn btn-danger disabled" href="{{route('admin.articles.edit', $article->id)}}" role="button">Editar</a>
+										@if($article->isEditable())
+												<a class="btn btn-primary" href="{{route('admin.articles.edit', $article->id)}}" role="button" data-toggle="tooltip" data-placement="top" title="Editar artículo">
+													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+												</a>
+												<a class="btn btn-danger" href="{{route('admin.articles.alert', $article->id)}}" role="button" data-toggle="tooltip" data-placement="top" title="Eliminar artículo">
+													<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+												</a>
+										{{-- @else
+												<a class="btn btn-danger disabled" href="{{route('admin.articles.edit', $article->id)}}" role="button">
+													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+												</a>
+												<a class="btn btn-danger disabled" href="{{route('admin.articles.alert', $article->id)}}" role="button">
+													<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+												</a> --}}
 										@endif
-										<a class="btn btn-default" href="{{route('articles.show', $article->id)}}" role="button">Ver</a>
+										@if($article->toBeFinished())
+											<a class="btn btn-success" href="{{route('admin.articles.offers.index', $article->id)}}" role="button" data-toggle="tooltip" data-placement="top" title="Finalizar subasta">
+												<span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+											</a>
+										{{-- @else
+											<a class="btn btn-danger disabled" href="{{route('admin.articles.offers.index', $article->id)}}" role="button">
+												<span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+											</a> --}}
+										@endif
+										<a class="btn btn-default" href="{{route('articles.show', $article->id)}}" role="button" data-toggle="tooltip" data-placement="top" title="Ver artículo">
+											<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+										</a>
 		 				 			</div>
 								</td>
 		 				 	</tr>

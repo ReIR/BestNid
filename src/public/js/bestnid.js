@@ -8,6 +8,8 @@ jQuery(function($){
   //   }
   // });
 
+  $('[data-toggle="tooltip"]').tooltip();
+
   $('#uploadImage').change(function(){
     var oFReader = new FileReader();
     oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);

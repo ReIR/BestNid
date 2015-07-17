@@ -166,6 +166,20 @@ class ArticlesController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
+	public function alert($id)
+	{
+		$article = Article::find($id);
+
+		return view ('admin.articles.alert')
+			->with('article', $article);
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
 	public function destroy($id)
 	{
 		Article::destroy($id);
