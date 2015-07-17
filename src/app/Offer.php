@@ -84,5 +84,5 @@ class Offer extends Model {
 	public function isCurrentOwner() {
 		return (Auth::check() && (Auth::user()->id == $this->user_id));
 	}
-	
+
 }

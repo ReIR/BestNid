@@ -3,6 +3,19 @@ body {
 	background: #f2f2f2;
 }
 
+#sales {
+	background: transparent;
+	box-shadow: 0 0 0 0 !important;
+	border: 0;
+	padding: 0;
+	border-color: transparent;
+}
+
+#sales-badge > .label {
+	font-size: 15px;
+	margin: 0 20px;
+}
+
 hr.separator {
 	width: 83%;
 	margin: 20px 0;

@@ -8,6 +8,10 @@ use Request;
 
 class SalesController extends Controller {
 
+	public function __construct() {
+		$this->middleware('authUser');
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -20,23 +24,35 @@ class SalesController extends Controller {
 				$initialDate = Request::get('initialDate');
 				$finalDate = Request::get('finalDate');
 
-				$salesBetween= Sale::salesOfUser()
+				if ( $finalDate < $initialDate ) {
+					return redirect()
+									->route('admin.sales.index')
+									->with('error', 'Rango de fechas inválido');
+				}
+
+				if ( ! \App\User::currentUserIsAdmin() ) {
+
+					$salesBetween= Sale::salesOfUser()
 									->whereBetween('date', [$initialDate, $finalDate])
 									->get();
+				} else {
+
+					$salesBetween= Sale::whereBetween('date', [$initialDate, $finalDate])
+									->get();
+				}
 
 				return view('admin.sales.index')
 							->with('mySales', $salesBetween);
-	//	}elseif (Request::has('initialDate')) {
-			# se requiere fecha final.
-	//	}elseif (Request::has('finalDate')) {
-			# se requiere fecha inicial
 		}
 
-		$mySales = Sale::salesOfUser()
-								->get();
+		if ( ! \App\User::currentUserIsAdmin() ) {
+			$sales = Sale::salesOfUser()->get();
+		} else {
+			$sales = Sale::all();
+		}
 
 		return view('admin.sales.index')
-					->with('mySales', $mySales);
+					->with('mySales', $sales);
 	}
 
 	/**

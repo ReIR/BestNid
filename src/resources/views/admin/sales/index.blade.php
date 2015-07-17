@@ -25,21 +25,44 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th>Ventas</th>
-            <th>Fecha</th>
+            <th>Articulo</th>
+            <th>Fecha de Publicación</th>
+            <th>Fecha de Finalización</th>
+            <th>Fecha de Venta</th>
+						<th>Monto</th>
+						<th>Ganancia</th>
           </tr>
         </thead>
         <tbody>
-          @foreach ($mySales as $ms)
+					<?php
+						$ganancias = 0;
+						$montos = 0;
+					?>
+          @foreach ($mySales as $sale)
             <tr>
-              <td>{{$ms->title}}</td>
+              <td>{{$sale->article->getTitle(30)}}</td>
               <td>
-                 {{date('d-m-Y',strtotime($ms->date))}}
+                 {{date('d/m/Y',strtotime($sale->article->created_at))}}
               </td>
-              <td
-                <div class="text-right">
-                  <a class="btn btn-default" href="{{route('articles.show', ['id' => $ms->article_id])}}" role="button">Ver</a>
-                </div>
+							<td>
+                 {{date('d/m/Y',strtotime($sale->article->endDate))}}
+              </td>
+							<td>
+                 {{date('d/m/Y',strtotime($sale->created_at))}}
+              </td>
+							<td>
+								<?php
+									$amount = $sale->offer->amount;
+									$montos += $amount;
+								?>
+                 {{'$'.$amount}}
+              </td>
+							<td>
+								<?php
+									$income = $sale->getIncome();
+									$ganancias += $income;
+								?>
+                {{'$'.$income}}
               </td>
             </tr>
           @endforeach
@@ -48,3 +71,15 @@
     </div>
   </div>
 @overwrite
+
+@if (\App\User::currentUserIsAdmin())
+	@section('sidebar')
+		@parent
+		<div class="panel panel-default text-center col-md-8" id="sales">
+		  <div class="panel-body" id="sales-badge">
+				<span class="label label-default">Total de ventas: {{'$'.$montos}}</span>
+				<span class="label label-success">Ganancias: {{'$'.$ganancias}}</span>
+		  </div>
+		</div>
+	@stop
+@endif

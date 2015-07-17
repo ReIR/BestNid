@@ -59,7 +59,16 @@ class Sale extends Model {
 	}
 
 	public static function countMySales(){
-		return self::salesOfUser()
-						->count();
+		if (! \App\User::currentUserIsAdmin() ) {
+			$sales = self::salesOfUser()->count();
+		} else {
+			$sales = self::count();
+		}
+
+		return $sales;
+	}
+
+	public function getIncome() {
+		return $this->offer->amount * 0.3;
 	}
 }
