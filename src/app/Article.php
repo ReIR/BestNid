@@ -201,6 +201,10 @@ class Article extends Model {
 		return ( $diff > 0 ) ? $diff : 0;
 	}
 
+	public function getCreationDate() {
+		return date("d-m-Y", strtotime($this->created_at));
+	}
+
 	public function toBeFinished() {
 
 		// Finished, has offers and is not sold.

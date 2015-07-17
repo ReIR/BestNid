@@ -37,6 +37,11 @@ Route::group(['prefix' => 'admin'], function(){
 	//
 	Route::get('/', ['as' => 'admin.index', 'uses' => 'Admin\AdminController@index']);
 
+	Route::get('articlesList',[
+		'as' => 'admin.articlesList.index',
+		'uses' => 'Admin\AdminController@articlesList'
+	]);
+
 	// ---------------------------------
 	//	Articles
 	// ---------------------------------

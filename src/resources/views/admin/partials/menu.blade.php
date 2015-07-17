@@ -27,6 +27,10 @@
 			<span class="badge">{{App\User::count()}}</span>
 			<a href="{{route('admin.users.index')}}">Usuarios</a>
 		</li>
+		<li class="list-group-item {{($route == 'admin.articlesList.index') ? 'active' : ''}}">
+			<span class="badge">{{App\Article::count()}}</span>
+			<a href="{{route('admin.articlesList.index')}}">Todas las subastas</a>
+		</li>
 		<li class="list-group-item {{($route == 'admin.categories.index') ? 'active' : ''}}">
 			<span class="badge">{{App\Category::count()}}</span>
 			<a href="{{route('admin.categories.index')}}">Categorías</a>
