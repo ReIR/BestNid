@@ -43,6 +43,11 @@ Route::group(['prefix' => 'admin'], function(){
 	//
 	Route::resource('articles', 'Admin\ArticlesController');
 
+	Route::get('articles/{id_article}/alert',[
+		'as' => 'admin.articles.alert',
+		'uses' => 'Admin\ArticlesController@alert'
+	]);
+
 	Route::post('articles/{id_article}/offers/{id_offer}/sales/store', [
 			'as' => 'admin.articles.offers.sales.store',
 			'uses' => 'Admin\SalesController@store'
