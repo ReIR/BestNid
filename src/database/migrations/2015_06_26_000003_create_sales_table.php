@@ -16,7 +16,6 @@ class CreateSalesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->timestamps();
-			$table->date('date');
 
 			$table->integer('user_id')->unsigned();
 			$table->foreign('user_id')

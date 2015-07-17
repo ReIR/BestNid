@@ -11,14 +11,12 @@ class Sale extends Model {
 	protected $guarded = ['_token'];
 
 	private static $rulesForCreation = [
-		'date' => 'required',
 		'user_id' => 'required|exists:users,id',
 		'article_id' => 'required|exists:articles,id',
 		'offer_id' => 'required|exists:offers,id'
 	];
 
 	private static $messages = [
-		'date.required' => 'La fecha es requerida.',
 		'user_id.required' => 'El usuario es requerido.',
 		'user_id.exists' => 'El usuario no existe.',
 		'article_id.required' => 'El artículo es requerida.',

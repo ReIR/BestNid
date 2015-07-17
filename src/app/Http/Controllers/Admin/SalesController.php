@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Sale;
 use App\Article;
 use Request;
+use App\Offer;
 
 class SalesController extends Controller {
 
@@ -70,11 +71,15 @@ class SalesController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store($article_id, $offer_id)
 	{
+		$offer = Offer::find($offer_id);
+		
 		$data = Request::all();
-		$data['date'] = date('Y-m-d', strtotime(date('Y-m-d')));
-		$article = Article::find($data['article_id']);
+		$data['user_id'] = $offer->user_id;
+		$data['offer_id'] = $offer_id;
+		$data['article_id'] = $article_id;
+
 		$validator = Sale::validate($data);
 
 		if ( $validator->fails() )
@@ -85,11 +90,13 @@ class SalesController extends Controller {
 				->with('errors', $validator->messages());
 		}
 
-		if (!(Sale::where('article_id', '=', $data['article_id'])->count() == 0 ))
+		$hasBeenOferted = Sale::where('article_id', '=', $article_id)->count();
+
+		if ( $hasBeenOferted )
 		{
 			return redirect()
 				->route('admin.articles.index')
-				->with('error', 'Usted ya ha elegido una oferta ganadora para '. $article->title . '.');
+				->with('error', 'Usted ya ha elegido una oferta ganadora para el artículo solicitado.');
 		}
 
 		Sale::create($data);
