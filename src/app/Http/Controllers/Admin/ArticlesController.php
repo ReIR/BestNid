@@ -113,6 +113,19 @@ class ArticlesController extends Controller {
 	 */
 	public function edit($id)
 	{
+
+		$article = Article::find($id);
+
+		if(!$article) {
+			abort(404);
+		}
+
+		if (!$article->isEditable()) {
+			return redirect()
+				->route('admin.articles.index')
+				->with('error', 'El artículo que quiso editar no es editable.');
+		}
+
 		$categories = Article::getMapCategories();
 		$article = Article::find($id);
 
@@ -139,8 +152,8 @@ class ArticlesController extends Controller {
 
 		if (!$article->isEditable()) {
 			return redirect()
-				->roite('admin.articles.index')
-				->with('error', 'El artículo que quiso editar ya no es editable.');
+				->route('admin.articles.index')
+				->with('error', 'El artículo que quiso editar no es editable.');
 		}
 
 		$validator = Article::validateEdit($all);
@@ -170,6 +183,17 @@ class ArticlesController extends Controller {
 	{
 		$article = Article::find($id);
 
+		if(!$article) {
+			abort(404);
+		}
+
+		if (!$article->isEditable()) {
+			return redirect()
+				->route('admin.articles.index')
+				->with('error', 'No se puede eliminar este artículo.');
+		}
+
+
 		return view ('admin.articles.alert')
 			->with('article', $article);
 	}
@@ -182,6 +206,18 @@ class ArticlesController extends Controller {
 	 */
 	public function destroy($id)
 	{
+		$article = Article::find($id);
+
+		if(!$article) {
+			abort(404);
+		}
+
+		if (!$article->isEditable()) {
+			return redirect()
+				->route('admin.articles.index')
+				->with('error', 'No se puede eliminar este artículo.');
+		}
+
 		Article::destroy($id);
 
 		return redirect()
