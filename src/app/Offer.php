@@ -77,7 +77,6 @@ class Offer extends Model {
 							->join('offers', 'articles.id', '=', 'offers.article_id')
 							->select('articles.title')
 							->where ('articles.user_id', '=', Auth::user()->id)
-							//Quedarme con aquellas subastas que han finalizado, alta paja.
 							->count();
 	}
 

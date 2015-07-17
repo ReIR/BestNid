@@ -53,7 +53,7 @@ Route::group(['prefix' => 'admin'], function(){
 		'uses' => 'Admin\ArticlesController@alert'
 	]);
 
-	Route::post('articles/{id_article}/offers/{id_offer}/sales/store', [
+	Route::post('articles/{article_id}/offers/{offer_id}/sales/store', [
 			'as' => 'admin.articles.offers.sales.store',
 			'uses' => 'Admin\SalesController@store'
 	]);
