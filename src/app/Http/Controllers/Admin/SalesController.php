@@ -34,11 +34,11 @@ class SalesController extends Controller {
 				if ( ! \App\User::currentUserIsAdmin() ) {
 
 					$salesBetween= Sale::salesOfUser()
-									->whereBetween('date', [$initialDate, $finalDate])
+									->whereBetween('created_at', [$initialDate, $finalDate])
 									->get();
 				} else {
 
-					$salesBetween= Sale::whereBetween('date', [$initialDate, $finalDate])
+					$salesBetween= Sale::whereBetween('created_at', [$initialDate, $finalDate])
 									->get();
 				}
 
@@ -74,7 +74,7 @@ class SalesController extends Controller {
 	public function store($article_id, $offer_id)
 	{
 		$offer = Offer::find($offer_id);
-		
+
 		$data = Request::all();
 		$data['user_id'] = $offer->user_id;
 		$data['offer_id'] = $offer_id;
