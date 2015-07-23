@@ -1,0 +1,222 @@
+body {
+	padding-top: 70px;
+	background: #f2f2f2;
+}
+
+#sales {
+	background: transparent;
+	box-shadow: 0 0 0 0 !important;
+	border: 0;
+	padding: 0;
+	border-color: transparent;
+}
+
+#sales-badge > .label {
+	font-size: 15px;
+	margin: 0 20px;
+}
+
+hr.separator {
+	width: 83%;
+	margin: 20px 0;
+	border-color: #ccc;
+}
+
+.button-icon {
+	font-size: 20px;
+	color: #333;
+}
+
+.article-form .form-inline > * {
+	vertical-align: top;
+}
+
+.uploadField:before{
+	content: attr(data-content);
+	position:absolute;
+	top:9px;
+	width:100%;
+	text-align:center;
+}
+
+.uploadField {
+	width: 100px;
+  height: 40px;
+  background: white;
+	border: 1px solid #ccc;
+	position:relative;
+  overflow: hidden;
+}
+
+.uploadField input {
+    width: 157px !important;
+    height: 57px !important;
+    opacity: 0 !important;
+    overflow: hidden !important;
+}
+
+.fixed-top {
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 99999;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+.fixed-top ul {
+	padding: 0;
+	display: inline-block;
+}
+
+.fixed-top ul li {
+	list-style: none;
+}
+
+.article h1 {
+	margin-top:0;
+}
+
+.article .subasta-info {
+	font-weight: bold;
+	font-size: 20px;
+	line-height:40px;
+}
+
+.article .related {
+	margin: 50px auto 20px auto;
+	padding: 0;
+}
+
+.article .subasta-description {
+	margin: 10px auto;
+	color: #707070;
+	font-size: 12px;
+	padding-left:0;
+}
+
+.article .subasta-info > span {
+	font-weight: 400;
+}
+
+.article .img-responsive {
+	margin: auto !important;
+}
+
+.article .img-container {
+	padding-left:0;
+	height:300px;
+	margin: 0 10px 0 0;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.modal-open .modal {
+	display: block;
+}
+
+a {
+	text-decoration: none !important;
+	color: #e20f18;
+}
+
+* {
+	-webkit-border-radius: 0 !important;
+	-moz-border-radius: 0 !important;
+	border-radius: 0 !important;
+}
+
+.background-red {
+	background-color: #e20f18;
+}
+
+.red {
+	color: #e20f18;
+}
+
+.navbar-search-input {
+	margin: 8px 0 0 0;
+}
+
+.navbar-search-input .form-group {
+	margin: auto;
+}
+
+.form-container {
+	margin-top: 70px;
+}
+
+.navbar-nav li a {
+	color: #fff !important;
+}
+
+.navbar-nav li ul li a {
+	color: #333 !important;
+}
+
+.navbar-nav li a.active {
+	border-bottom: 1px solid #e20f18;
+}
+
+.list-group-item {
+	position:relative;
+	height:40px;
+}
+
+.list-group-item a{
+	position:absolute;
+	width:100%;
+	height:100%;
+}
+
+.list-group .active {
+	background: #e20f18;
+	border:0;
+}
+
+.list-group .active:hover {
+	background: #e20f18;
+	border:0;
+}
+
+.active:hover{
+	cursor:pointer;
+}
+
+.list-group .active a {
+	color: #fff;
+}
+
+
+
+.avatar-image {
+	height: 64px;
+	width: 64px;
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	display: block;
+}
+
+.background-logo {
+	background-image: url('../img/logo-bestnid.png');
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+	background-position: center center;
+	width: 55px;
+	margin: 0 10px 0 0 !important;
+}
+
+
+.thumbnail > img, .thumbnail a > img {
+	width: 100%;
+	max-height: 250px;
+	background-size:cover;
+}
+
+.article-buttons {
+	margin-top: 20px;
+}
